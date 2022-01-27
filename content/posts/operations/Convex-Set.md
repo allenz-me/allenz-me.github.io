@@ -2,7 +2,8 @@
 title: "Convex Set"
 date: 2022-01-01
 draft: false
-categories: ["运筹与优化"]
+slug: convex-set
+categories: ["运筹与优化", "凸优化"]
 tags: []
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
