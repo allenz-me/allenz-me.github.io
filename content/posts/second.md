@@ -2,7 +2,9 @@
 title: "SECOND"
 date: 2022-01-26T13:55:14+08:00
 draft: false
+slug: "om"
 # mathjax: true
+tags: ["线性规划", "运营管理"]
 ---
 
 预测总是错的！

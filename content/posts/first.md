@@ -3,6 +3,7 @@ title: "Large-Scale Linear Optimization"
 date: 2022-01-26T12:19:53+08:00
 draft: false
 slug: "Large-Scale"
+tags: ["线性规划", "随机规划"]
 ---
 
 本文介绍大规模线性规划问题的求解思想。内容主要来源自 《Introduction to Linear Optimization》Chapter 6.
