@@ -1,16 +1,16 @@
 ---
 title: "Convex Set"
-date: 2022-01-01
+date: 2021-01-01
 draft: false
 slug: convex-set
 categories: ["运筹与优化", "凸优化"]
-tags: []
+tags: ["凸集", "锥"]
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
 
+<!-- #! https://zhuanlan.zhihu.com/p/441144463
 
-
-# Convex Set
+# Convex Set -->
 
 凸的背后，往往蕴含着非常好的性质，这也就是我们要去研究凸集的原因。凸，在优化理论扮演着非常重要的角色。本文是我的一个注记，不会包含太多证明，主要取自Boyd的 《convex optimization》、GTM 264 《Functional Analysis, Calculus of Variations and Optimal Control》。
 
@@ -82,7 +82,7 @@ $$
 
 **锥不一定是凸的**。如果一个锥是凸的，就称它是一个**凸锥**（convex cone）。比如 $y=|x|$ 的图像就是一个锥，但不是凸锥。但是 $y\ge |x|$ 就是一个凸的锥了。注意到任何锥都包含原点 $\mathbf{0}$。
 
-类似的可以得到锥包（*conic hull* ），它是包含某个集合的最小的凸锥。
+类似的可以得到锥包（conic hull ），它是包含某个集合的最小的凸锥。
 
 $$
 \operatorname{coni}(C) = \{\theta_1 x_1 + \cdots +\theta_k x_k \mid x_i \in C, \theta_i \geq 0, i=1, ..., k\}\\
@@ -97,14 +97,19 @@ $$
 + 超平面和半平面
 
 $\mathrm{R}^n$ 中超平面有形式：
+
 $$
 \left\{x \mid a^{T} x=b\right\}, \quad a \neq 0\\
 $$
+
 $a$ 是这个超平面的法向。也可以写成：
+
 $$
 \left\{x \mid a^{T}\left(x-x_{0}\right)=0\right\} ,\quad a \neq 0\\
 $$
+
 一个超平面将全空间分成了两个半平面，一个半平面有形式：
+
 $$
 \left\{x \mid a^{T} x\leq b\right\}, \quad a \neq 0\\
 $$
@@ -289,9 +294,9 @@ $$
 x \preceq_{K} y \Longleftrightarrow y-x \in K\;\; , \;x \prec_{K} y \Longleftrightarrow y-x \in \mathbf{int}K\\
 $$
 
-如果取 $K=R_+$，那么得到的序关系就是正常的实数比较。
+如果取 $K=\mathrm{R}_+$，那么得到的序关系就是正常的实数比较。
 
-如果取 $K=R^{n}_+$，那么向量 $\vec{x}\preceq\vec{y}$ 当且仅当每个分量  $x_i \leq y_i$。
+如果取 $K=\mathrm{R}^{n}_+$，那么向量 $\vec{x}\preceq\vec{y}$ 当且仅当每个分量  $x_i \leq y_i$。
 
 $\mathrm{S^{n}_+}$ 是 $\mathrm{S^n}$ 中的一个 $\mathrm{proper\; cone}$，$X\preceq_{K} Y$，当且仅当 $Y-X$ 是半正定的；$X\prec_{K} Y$，意味着 $Y-X$是正定的，所以很多时候我们直接简写 $X\succ 0$ 来声明$X$是正定矩阵；同时简写 $x \succ 0$ 声明向量 $x$ 的各个分量都大于0。 
 
@@ -358,7 +363,7 @@ $K=R^2_+$ 的情况如下图，左图的 $x_1$ 是最小点，而右图的 $x_2$
 >\operatorname{dist}(C, D)=\inf \left\{\|u-v\|_{2} | \;u \in C, v \in D\right\}\\
 >$$
 
-乍一看，好像很多的凸集对都是可以被严格分割的。_但注意凸集不一定要是闭的_。
+乍一看，好像很多的凸集对都是可以被严格分割的。**但注意凸集不一定要是闭的**。
 
 两个开的不相交的凸集很容易找到例子说明它们可能不能被严格分割。当两个不相交的凸集都是闭的，比如 $A=\{(x, y) \mid x y \geq 1, x, y>0\}$和 $B=\{(x, y)  \mid x \leq 0\}$，也可能不能被严格分割。
 
@@ -390,10 +395,10 @@ $$
 设 $K$ 是个锥，定义 $K$ 的对偶锥为：
 
 $$
-K^{*}=\left\{y \mid x^{T} y \geq 0 \text { for all } x \in K\right\}\\
+K^{\ast}=\left\{y \mid x^{T} y \geq 0 \text { for all } x \in K\right\}\\
 $$
 
-顾名思义，$K^{*}$ 是一个锥，更有意思的是 $K^*$ 总是凸的，不论 $K$ 是不是凸的。
+顾名思义，$K^{\ast}$ 是一个锥，更有意思的是 $K^\ast$ 总是凸的，不论 $K$ 是不是凸的。
 
 例：
 
@@ -406,45 +411,45 @@ $$
 > \operatorname{tr}(XY) \geq 0 \;\text{ for all} \; X \succeq 0 \Longleftrightarrow Y \succeq 0 \\
 > $$
 
-$p$ 范数锥 $K = \{(x, t) \in \mathrm{R}^{n+1} \mid \| x\|_ p\leq t\}$ 的对偶是 $q$ 范数锥 $K^* = \{(u, v) \in \mathrm{R}^{n+1} \mid \| u \|_{*} \leq v\}$，且 $1/p + 1/q = 2$。
+$p$ 范数锥 $K = \{(x, t) \in \mathrm{R}^{n+1} \mid \| x\|_ p\leq t\}$ 的对偶是 $q$ 范数锥 $K^\ast = \{(u, v) \in \mathrm{R}^{n+1} \mid \| u \|_{\ast} \leq v\}$，且 $1/p + 1/q = 2$。
 
-从几何上看，$K^*$ 中任意一点与 $K$ 中所有点的夹角不超过90°。
+从几何上看，$K^\ast$ 中任意一点与 $K$ 中所有点的夹角不超过90°。
 
 ![](../figures/Convex-Set/dual-cone.png)
 
 对偶锥有以下性质：
 
-+ $K^*$ 闭且凸（closed and convex）
-+ $K_1 \subseteq K_2 \Longrightarrow K_2^*\subseteq K_1^*$
-+ 如果 $K$ 有非空内点，那么 $K^*$ 不包含任何直线（pointed）
-+ $K^{**}$  是 $\operatorname{conv} K$ 的闭包，从而，如果 $K$ 是闭且凸的，那么 $K=K^{**}$。
++ $K^\ast$ 闭且凸（closed and convex）
++ $K_1 \subseteq K_2 \Longrightarrow K_2^\ast\subseteq K_1^\ast$
++ 如果 $K$ 有非空内点，那么 $K^\ast$ 不包含任何直线（pointed）
++ $K^{\ast\ast}$  是 $\operatorname{conv} K$ 的闭包，从而，如果 $K$ 是闭且凸的，那么 $K=K^{\ast\ast}$。
 
 > pointed: if $x\in K, -x \in K$，then $x=0$
 
-这些性质说明如果 $K$ 是一个 proper cone，那么 $K^*$ 也是一个 proper cone，并且 $K=K^{**}$。
+这些性质说明如果 $K$ 是一个 proper cone，那么 $K^\ast$ 也是一个 proper cone，并且 $K=K^{\ast\ast}$。
 
 ### 对偶广义不等式
 
-之前我们已经知道 proper cone $K$ 能诱导出一个偏序关系。现在$K^*$也是一个 proper cone，通过 $K^*$ 也能定义一个偏序关系了。
+之前我们已经知道 proper cone $K$ 能诱导出一个偏序关系。现在$K^\ast$也是一个 proper cone，通过 $K^\ast$ 也能定义一个偏序关系了。
 
 此外，通过对偶性可以给出广义不等式的等价命题：
 
-+ $x \preceq_{K} y \Leftrightarrow \lambda^{T} x \leq \lambda^{T} y ,\; \; \forall \lambda \succeq_{K^{*}} 0$
-+ $x \prec_{K} y \Leftrightarrow  \lambda^{T} x<\lambda^{T} y,\;\;  \forall \lambda \succeq_{K^{*}} 0, \lambda \neq 0 .$
++ $x \preceq_{K} y \Leftrightarrow \lambda^{T} x \leq \lambda^{T} y ,\; \; \forall \lambda \succeq_{K^{\ast}} 0$
++ $x \prec_{K} y \Leftrightarrow  \lambda^{T} x<\lambda^{T} y,\;\;  \forall \lambda \succeq_{K^{\ast}} 0, \lambda \neq 0 .$
 
 通过定义很容易验证上图的结论。
 
 上式的含义是，**对偶锥中的每个元素（向量）可以看成原来锥的一个合法的投影方向，原来锥上两个点在这些合法的投影方向上序不变！** 在锥形式的对偶中就要用到这条性质。
 
-> Since $K=K^{**}$, we have $\lambda \preceq_{K^*} \mu$ if and only if $\lambda^{T} x \leq \mu^{T} x$ for all $x \succeq_K 0$
+> Since $K=K^{\ast\ast}$, we have $\lambda \preceq_{K^\ast} \mu$ if and only if $\lambda^{T} x \leq \mu^{T} x$ for all $x \succeq_K 0$
 
 ### 对偶不等式与最小元/极小元
 
 借助对偶性可以建立起最小元和极小元的相关理论。
 
-对于最小元，$x$ 是 $S$ 的最小元当且仅当，$\forall \lambda \succ_{K^*} 0$， $x$ 是问题 $\min_{z\in S} \;\lambda^T z$ 的最优解。
+对于最小元，$x$ 是 $S$ 的最小元当且仅当，$\forall \lambda \succ_{K^\ast} 0$， $x$ 是问题 $\min_{z\in S} \;\lambda^T z$ 的最优解。
 
-对于极小元，没有充分必要的条件。其充分条件是：如果 $\exists \lambda \succ_{K^*} 0$ 并且 $x$ 是问题 $\min_{z\in S} \;\lambda^T z$ 的最优解，那么 $x$ 就是 $S$ 的极小元。（找到一个方向，在这个方向上的投影是最小的）。如果 $S$ 是凸集，这就是充分必要的。
+对于极小元，没有充分必要的条件。其充分条件是：如果 $\exists \lambda \succ_{K^\ast} 0$ 并且 $x$ 是问题 $\min_{z\in S} \;\lambda^T z$ 的最优解，那么 $x$ 就是 $S$ 的极小元。（找到一个方向，在这个方向上的投影是最小的）。如果 $S$ 是凸集，这就是充分必要的。
 
 （完结撒花）
 
@@ -471,7 +476,7 @@ $$
 
 + 单点集 $\{a_0\}$ 的支撑函数是 $S(y) = a_0^T y$
 + 半径为 1 的单位球的支撑函数是 $S(y) = \| y\|_2$
-+ $\mathcal{U} = \{x \mid \| x - \mu \| \leq 1\}$ 的支撑函数是 $S_{\mathcal{U}} (y) = y^T \mu + \| y\|_*$ （这个在鲁棒优化里面有应用）
++ $\mathcal{U} = \{x \mid \| x - \mu \| \leq 1\}$ 的支撑函数是 $S_{\mathcal{U}} (y) = y^T \mu + \| y\|_\ast$ （这个在鲁棒优化里面有应用）
 
 
 下面这个定理说明，一个闭凸集被它的支撑函数完全刻画：
@@ -508,12 +513,12 @@ $$
 
 ### 对偶范数的进一步理解
 
-当我们在研究 $X = \mathrm{R}^n$ 的时候（此时没有引入范数），我们会发现 $\mathrm{R}^n$ 的对偶空间 $X^*$ 和 $\mathrm{R}^n$ 是线性同构的，如果我们在 $\mathrm{R}^n$ 中引入范数，那么它的对偶空间的元素，也会有随之定义的算子范数！
+当我们在研究 $X = \mathrm{R}^n$ 的时候（此时没有引入范数），我们会发现 $\mathrm{R}^n$ 的对偶空间 $X^\ast$ 和 $\mathrm{R}^n$ 是线性同构的，如果我们在 $\mathrm{R}^n$ 中引入范数，那么它的对偶空间的元素，也会有随之定义的算子范数！
 
 在 $\mathrm{R}^n$ 空间中，范数 $\| \cdot \|$ 的对偶范数被定义为：
 
 $$
-\|z\|_{*}=\sup \left\{z^{T} x \mid\|x\| \leq 1\right\} \\
+\|z\|_{\ast}=\sup \left\{z^{T} x \mid\|x\| \leq 1\right\} \\
 $$
 
 我们知道 $(\mathrm{R}^n, \|\cdot \|)$ 是一个 Banach space，该空间上每一个元素 $z$ 都能诱导出一个 linear functional：
@@ -522,7 +527,7 @@ $$
 f_z(x) = z^T x \\
 $$
 
-这个 linear functional $f_z$ 的算子范数就是 $z$ 的对偶范数！所以，$(\mathrm{R}^n, \| \cdot \|)$ 的对偶空间是 $(\mathrm{R}^n, \|\cdot \|_*)$。
+这个 linear functional $f_z$ 的算子范数就是 $z$ 的对偶范数！所以，$(\mathrm{R}^n, \| \cdot \|)$ 的对偶空间是 $(\mathrm{R}^n, \|\cdot \|_\ast)$。
 
 > $\mathrm{R}^n$ 上的所有线性泛函都具有形式：$f(x) = a^T x$. 
 >
@@ -531,7 +536,7 @@ $$
 根据对偶范数的定义可以得到不等式：
 
 $$
-\|x \| \cdot \|z\|_* \leq |x^T z| \\
+\|x \| \cdot \|z\|_\ast \leq |x^T z| \\
 $$
 
 在矩阵空间 $\mathrm{R}^{m\times n}$ 上，类似的，有限维线性空间与其对偶空间都是线性同构的，假如我们在 $\mathrm{R}^{m\times n}$ 引入谱范数（spectrum norm），即矩阵最大的奇异值，类似可以在矩阵空间上构造线性泛函：
