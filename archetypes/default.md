@@ -1,8 +1,9 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
-date: {{ .Date }}
+title: "title"
+date: Date
 draft: false
+categories: [""]
 tags: []
-# mathjax: true
+# 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
 

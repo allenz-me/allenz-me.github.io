@@ -97,7 +97,7 @@ uglyURLs = false
 # 作者信息
 [author]
     # 名字
-    name = "reuixiy"
+    name = ""
     # 邮箱
     email = "allenz.me@qq.com"
     # 座右铭或简介
@@ -107,7 +107,7 @@ uglyURLs = false
     # 网站（默认值：baseURL）
     website = "https://io-oi.me/"
     # 推特
-    twitter = "reuixiy"
+    twitter = ""
 
 # 相关文章
 [related]
@@ -413,7 +413,7 @@ uglyURLs = false
     # 列表页面
 
     # 宽度
-    listWidth = ""
+    listWidth = 45
     # 说明：如果留空（""），则用 42 作为默认值
     #      单位：em
 
@@ -536,7 +536,7 @@ uglyURLs = false
 
     jsonLD = true
     openGraph = true
-    twitterCards = true
+    twitterCards = false
     # 注意：如果你设置 twitterCards 为 `true`，
     #      请务必开启 openGraph。否则，网页的
     #      Twitter Cards 信息将会不完整。
@@ -819,7 +819,7 @@ uglyURLs = false
     # 分节标题锚点
 
     # 是否开启（全局设置）
-    enableHeadingsAnchor = false
+    enableHeadingsAnchor = true
     # 说明：文章的 Front Matter 中的 `anchor`
     #      的优先级高于此处
 
@@ -1228,10 +1228,10 @@ uglyURLs = false
 
     displayCopyleftSymbol = false
     # 是否显示版权符号（©）
-    displayCopyrightSymbol = true
+    displayCopyrightSymbol = false
 
     # 是否显示站点的创建年份
-    displaySiteCreatedYear = true
+    displaySiteCreatedYear = false
 
     # 年份与作者之间的图标，留空（""）则无
     iconBetweenYearAndAuthor = "heart"
@@ -1244,10 +1244,10 @@ uglyURLs = false
     displayPoweredBy = false
 
     # 是否显示站点的版权信息
-    displaySiteCopyright = true
+    displaySiteCopyright = false
 
     # 自定义页脚（支持 Markdown）
-    customFooter = ""
+    customFooter = "祝您生活愉快！"
 
     displayBusuanziSiteUVAndPV = false
     busuanziSiteUVText = "本站访客数"
@@ -1259,7 +1259,7 @@ uglyURLs = false
     #      https://busuanzi.ibruce.info/
 
     # 社交链接
-    enableSocials = true
+    enableSocials = false
     # 说明：见 data/Socials.toml
 
 

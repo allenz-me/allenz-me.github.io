@@ -4,13 +4,16 @@ date: 2022-01-26T12:19:53+08:00
 draft: false
 slug: "Large-Scale"
 tags: ["线性规划", "随机规划"]
+categories: ["运筹与优化", "线性规划"]
 ---
 
 本文介绍大规模线性规划问题的求解思想。内容主要来源自 《Introduction to Linear Optimization》Chapter 6.
 
 ## Delayed column generation
 
-考虑一个非退化的线性规划的标准问题：
+考虑一个非退化的线性规划的标准问题[^1]：
+
+![名称](../../figures/QR.png)
 
 <div>
 $$
@@ -49,6 +52,8 @@ $$
 $$
 A_j^T  {w} =\sum_{i=1}^m a_{ij} w_i \leq W, \quad a_{ij} \in \mathrm{N}
 $$
+
+---
 
 令矩阵 $A=[A_j]_{1\times n} \in \mathrm{R}^{m\times n}$ 表示所有可行的切割方法，注意到 $n$ 可能非常大，这会给问题带来困难。
 
@@ -389,3 +394,6 @@ $$
 ```python
 import numpy as np
 ```
+
+
+[^1]:啊啊
