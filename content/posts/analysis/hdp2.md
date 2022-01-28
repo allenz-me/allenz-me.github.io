@@ -79,9 +79,9 @@ $E[e^{\lambda X}]$ 是 $X$ 的矩母函数，独立随机变量和的矩母函�
 
 注意到正态分布也成立Hoeffding不等式，但正态分布并不是有界的，这说明Hoeffding不等式可以在某些条件下推广到无界的分布，这也是我们提出次高斯分布的原因。
 
-通过Hoeffding不等式我们知道，有界随机变量的和，以及正态分布的尾巴是以 $e^{-t^2}$ 这一速度趋于0的，但并不是所有的分布都能达到这种速度。比如我们熟知的指数分布，它就是$e^{-t}$级别的收敛速度。
+通过Hoeffding不等式我们知道，有界随机变量的和，以及正态分布的尾巴是以 $e^{-t^2}$ 这一速度趋于0的，但并不是所有的分布都能达到这种速度。比如我们熟知的指数分布，它就是 $e^{-t}$ 级别的收敛速度。
 
-Chernoff不等式对于0-1伯努利分布的和给出了一个更好的界，由二项分布的泊松近似可知参数为$\lambda$的泊松分布的右尾满足：$\forall t > \lambda, \; \mathbb{P}\{X \geq t\} \leq e^{-\lambda}\left(\frac{e \lambda}{t}\right)^{t}$，这说明泊松分布的尾的收敛速度是$e^{-t \ln t}$级别的。这个尾巴也可以从上面提到的技巧来证明。
+Chernoff不等式对于0-1伯努利分布的和给出了一个更好的界，由二项分布的泊松近似可知参数为 $\lambda$ 的泊松分布的右尾满足：$\forall t > \lambda, \; \mathbb{P}\{X \geq t\} \leq e^{-\lambda}\left(\frac{e \lambda}{t}\right)^{t}$，这说明泊松分布的尾的收敛速度是 $e^{-t \ln t}$ 级别的。这个尾巴也可以从上面提到的技巧来证明。
 
 ## Sub-gaussian Distribution
 
@@ -153,7 +153,7 @@ $$
 
 一样可以写出其零均值化后的形式。于是，广义的Hoeffding不等式与之前针对有界随机变量的Hoeffding不等式实现了优美的统一。
 
-*注：有界随机变量的Hoeffding不等式的另一种推广是McDiarmid’s inequality，如果*$f:\mathrm{R}^n \to \mathrm{R}$*是可测函数，*$X$*是*$n$*维随机向量，并且：*
+*注：有界随机变量的Hoeffding不等式的另一种推广是McDiarmid’s inequality，如果* $f:\mathrm{R}^n \to \mathrm{R}$ *是可测函数，* $X$ *是* $n$ *维随机向量，并且：*
 $$
 \left|f\left(x_{1}, \ldots, x_{i}, \ldots, x_{n}\right)-f\left(x_{1}, \ldots, x_{i}^{\prime}, \ldots, x_{n}\right)\right| \leq c_{i}, \forall i =1, 2, ..., n\\
 $$
@@ -164,7 +164,7 @@ $$
 \mathbb{P}\{f(X)-\mathbb{E} f(X) \geq t\} \leq \exp \left(-\frac{2 t^{2}}{\sum_{i=1}^{n} c_{i}^{2}}\right)\\
 $$
 
-*注意到取*$f(X)=\sum_{i=1}^n X_i$*就刚好是Hoeffding不等式。*
+*注意到取* $f(X)=\sum_{i=1}^n X_i$ *就刚好是Hoeffding不等式。*
 
 ## Sub-exponential Distributions
 
@@ -212,14 +212,12 @@ $$
 
 本章主要讲的是如何去刻画随机变量的集中程度，由此提出了次高斯分布和次指数分布的这两个概念，它们是我们熟悉的正态分布和指数分布的推广。
 
-如果一个分布的尾巴比指数分布还要厚，比如它是多项式速度$t^{-k}$衰减到0的，统计学上称它为重尾分布（heavy-tail）。比如柯西分布、对数正态分布、某些帕累托分布。
+如果一个分布的尾巴比指数分布还要厚，比如它是多项式速度 $t^{-k}$ 衰减到0的，统计学上称它为重尾分布（heavy-tail）。比如柯西分布、对数正态分布、某些帕累托分布。
 
 
+（离散）鞅可以由一串零均值独立随机变量相加而得，如果 $X_0=0$，那么鞅差序列 $\{X_n - X_{n-1}, n \geq 1\}$是互不相关的（而不是独立的）。在此基础上有 Azuma 不等式：
 
-
-（离散）鞅可以由一串零均值独立随机变量相加而得，如果$X_0=0$，那么鞅差序列$\{X_n - X_{n-1}, n \geq 1\}$是互不相关的（而不是独立的）。在此基础上有 Azuma 不等式：
-
-如果$| X_i - X_{i-1} | \leq c_i$，那么成立：
+如果 $| X_i - X_{i-1} | \leq c_i$，那么成立：
 
 $$
 P(|X_n - X_0 | \geq a) \leq 2e^{-a^2 / (2 \sum_i c_i^2)}\\
