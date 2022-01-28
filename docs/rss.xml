@@ -23,7 +23,7 @@
         
             <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
         
-        <lastBuildDate>Fri, 28 Jan 2022 19:27:18 &#43;0800</lastBuildDate>
+        <lastBuildDate>Fri, 28 Jan 2022 19:32:16 &#43;0800</lastBuildDate>
         
             <atom:link rel="self" type="application/rss&#43;xml" href="https://allenz-me.github.io/rss.xml" />
         
@@ -1827,7 +1827,7 @@ $$&lt;/p&gt;
 &lt;p&gt;$$
 X = Y_1 + Y_2 + ... + Y_N
 $$&lt;/p&gt;
-&lt;p&gt;这里 $X$ 是一个随机个独立同分布随机变量的和。那么，$X$ 的方差和期望该如何计算呢？&lt;/p&gt;
+&lt;p&gt;这里 $X$ 是随机个独立同分布随机变量的和。那么，$X$ 的方差和期望该如何计算呢？&lt;/p&gt;
 &lt;p&gt;首先，由条件期望公式，我们知道 $E[X] = E[E[X|N]]$，在给定 $N$ 时，$E[X|N] = N E[Y]$，所以：&lt;/p&gt;
 &lt;p&gt;$$
 E[X] = E[N] \cdot E[Y] \

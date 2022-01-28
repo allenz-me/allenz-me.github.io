@@ -43,9 +43,9 @@ enableRobotsTXT = true
 paginate = 5
 
 # URL 相关
-disablePathToLower = false
+disablePathToLower = true
 relativeURLs = false
-uglyURLs = false
+uglyURLs = true
 
 # URL 结构
 [permalinks]
