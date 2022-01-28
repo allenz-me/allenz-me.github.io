@@ -5,7 +5,7 @@ p = pathlib.Path('./content/posts')
 
 md = list(p.rglob("*.md"))
 
-# changeFigure = lambda s: s.replace("../figures", "../../figures")
+changeFigure = lambda s: s.replace("../figures", "../../figures")
 changeFormula = lambda s: s.replace("\\", "\\\\").replace("_", "\\_")
 # def changeFormula(s: str):
 #     ls = s.split("\n$$\n")
@@ -21,7 +21,7 @@ changeFormula = lambda s: s.replace("\\", "\\\\").replace("_", "\\_")
 
 for i in md:
     text = i.open('r').read()
-    # text = changeFigure(text)
+    text = changeFigure(text)
     text = changeFormula(text)
     with i.open('w') as f:
         f.write(text)
