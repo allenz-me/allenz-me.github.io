@@ -27,7 +27,7 @@ tags: ["博弈论"]
 
 对任一 $a_{-i} \in A_{-i}$ 定义 $B_{i}\left(a_{-i}\right)$ 为参与人 $i$ 在给定 $a_{-i}$ 下最佳行动集合（best response）。
 
-对于全体参与者，可以定义集值函数$B=\times_{i=1}^N B_i: A\to A$。对纳什均衡，就是：$a^{*} \in B\left(a^{*}\right)$。翻译过来就是，每个玩家的策略，都是对其他玩家策略的最佳反应。
+对于全体参与者，可以定义集值函数$B=\times_{i=1}^N B_i: A\to A$。对纳什均衡，就是：$a^{\ast} \in B\left(a^{\ast}\right)$。翻译过来就是，每个玩家的策略，都是对其他玩家策略的最佳反应。
 
 > 集值函数，其实就是一个多值函数，这时候我们把它的值域看成是一个集类。
 
@@ -90,7 +90,7 @@ $$
 从数学上说，相关均衡是行动集合$A$上的一个概率分布$\mathcal{D}$，使得对于任何的玩家$i$和行动$a^*_i$，都有：
 
 $$
-\mathrm{E}_{a \sim \mathcal{D}}\left[u_{i}(a) \mid a_i\right] \geq \mathrm{E}_{a \sim \mathcal{D}}\left[u_{i}\left(a_{i}^{*}, a_{-i}\right) \mid a_{i}\right], \quad \forall i, a^*_i\\
+\mathrm{E}_{a \sim \mathcal{D}}\left[u_{i}(a) \mid a_i\right] \geq \mathrm{E}_{a \sim \mathcal{D}}\left[u_{i}\left(a_{i}^{\ast}, a_{-i}\right) \mid a_{i}\right], \quad \forall i, a^\ast_i\\
 $$
 
 ## 粗糙相关均衡
@@ -98,7 +98,7 @@ $$
 如果把对$a_i$取条件期望拿掉，就是粗糙相关均衡（coarse correlated equilibrium）：
 
 $$
-\mathrm{E}_{a \sim \mathcal{D}}\left[u_{i}(a) \right] \geq \mathrm{E}_{a \sim \mathcal{D}}\left[u_{i}\left(a_{i}^{*}, a_{-i}\right) \right], \quad \forall i, a^*_i\\
+\mathrm{E}_{a \sim \mathcal{D}}\left[u_{i}(a) \right] \geq \mathrm{E}_{a \sim \mathcal{D}}\left[u_{i}\left(a_{i}^{\ast}, a_{-i}\right) \right], \quad \forall i, a^\ast_i\\
 $$
 
 相关均衡在收到上帝给的指令后，每个玩家会自发地听从指令。而粗糙相关均衡是知道概率分布之后，哪怕还没接收到一个具体的指令时就表示会服从这个指令。
