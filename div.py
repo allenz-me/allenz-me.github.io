@@ -21,7 +21,7 @@ changeFormula = lambda s: s.replace("\\", "\\\\").replace("_", "\\_")
 
 for i in md:
     text = i.open('r').read()
-    text = changeFigure(text)
+    # text = changeFigure(text)
     text = changeFormula(text)
     with i.open('w') as f:
         f.write(text)
