@@ -4,5 +4,5 @@ hugo --minify
 echo "notes.allenz.me" >> ./docs/CNAME
 git add --all
 git commit -m $1
-git push origin master
+git push -f origin master
 echo "Succeed !"
