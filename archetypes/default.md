@@ -1,6 +1,6 @@
 ---
 title: "title"
-date: Date
+date: 2020-01-01
 draft: false
 slug: none
 categories: [""]

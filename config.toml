@@ -1,7 +1,7 @@
 ##########################################
 # 站点配置
 
-baseURL = "https://example.com/"
+baseURL = "https://allenz-me.github.io"
 # title = "Hugo 主题 MemE"
 title = "主页"
 languageCode = "zh-CN"
