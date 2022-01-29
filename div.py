@@ -1,23 +1,23 @@
 
-import pathlib
+import re, pathlib
 
 p = pathlib.Path('./content/posts')
 
 md = list(p.rglob("*.md"))
 
+# 将图片的相对路径修改为 Hugo 导出时的正确的相对路径。
 changeFigure = lambda s: s.replace("../figures", "../../figures")
-changeFormula = lambda s: s.replace("\\", "\\\\").replace("_", "\\_")
-# def changeFormula(s: str):
-#     ls = s.split("\n$$\n")
-#     if len(ls) == 1:
-#         return s
-    
-#     ls[0] = ls[0] + "\n<div>\n$$\n"
-#     for i in range(1, len(ls) - 1):
-#         if i % 2 == 0:
-#             ls[i] = "\n$$\n</div>\n" + ls[i] + "\n<div>\n$$\n"
-#     ls[-1] = "\n$$\n</div>\n" + ls[-1]
-#     return ''.join(ls)
+
+
+def changeFormula(s: str):
+    """
+    将公式里的 backslash 都换成 backslash，下划线里的 underscore 换成 backslash underscore
+    代码块中的 underscore 保持不变！
+    """
+    f = lambda s: s.replace("\\", "\\\\").replace("_", "\\_")
+    s = re.sub(r"\$(.*?)\$", f, s)
+    s = re.sub(r"\$\$((.|\n)+?)\$\$", f, s)
+    return s
 
 for i in md:
     text = i.open('r').read()
