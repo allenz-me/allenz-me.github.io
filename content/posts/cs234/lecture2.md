@@ -21,6 +21,8 @@ Lecture2 主要介绍了 MRP、MDP 的概念，以及在 model-based 情况下�
 
 
 
+## Basics
+
 + Model: mathematical models of dynamics and reward
 + Policy: function mapping agent’s states to actions
 + Value function: future rewards from being in a state and/or action when following a particular policy
@@ -34,7 +36,10 @@ Markov Reward Process is a Markov Chain + rewards
 discounted sum of rewards
 
 $$
-G_t = r_t + \gamma r_{t+1} + \gamma^2 r_{t+2} + \cdots \;(0 \leq\gamma \leq1)
+\begin{aligned}
+G_t &= r_t + \gamma r_{t+1} + \gamma^2 r_{t+2} + \cdots\\
+ &= r_t + \gamma G_{t+1}\\
+\end{aligned}  \qquad (0 \leq\gamma \leq1) 
 $$
 
 expected returen from starting in state $s$
@@ -42,6 +47,10 @@ expected returen from starting in state $s$
 $$
 V(s) = \mathbb{E} [G_t \mid s_t = s]
 $$
+
+Value function estimates that how good it is to be in a given state.
+
+
 
 对于一个 MRP，我们能够计算出在一个状态的期望收益的折现：
 $$
@@ -89,11 +98,17 @@ $$
 
 Markov Decision Process is Markov Reward Process + actions
 
-这时候转移概率 $P(s^\prime\mid s, a)$ 就变成了现在的状态和行为的函数。
+这时候转移概率 $P(s^\prime\mid s, a)$ 就变成了现在的状态和行为的函数。It defines the dynamics of the MDP.
 
 MDP 是一个六元组 $(T, \mathcal{S}, \mathcal{A}, R, P, \gamma)$
 
 $T= \infty$, infinite horizon; $T < \infty$, finite horizon.
+
+A trajectory of a MDP begins like:
+
+$$
+S_{0}, A_{0}, R_{1}, S_{1}, A_{1}, R_{2}, S_{2}, A_{2}, R_{3}, \ldots
+$$
 
 Policy specifies what action to take in each state. It can be deterministic or stochastic.
 
@@ -110,11 +125,66 @@ P^{\pi}\left(s^{\prime} \mid s\right) &=\sum_{a \in A} \pi(a \mid s) P\left(s^{\
 $$
 这说明，评估 MDP 的 policy 可以用计算 MRP 的状态值一样的方法。
 
-【】
+
+
+State-value function for policy $\pi$
+$$
+v_{\pi}(s) \doteq \mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s\right]
+$$
+Action-value function for policy $\pi$
+$$
+q_{\pi}(s, a) \doteq \mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s, A_{t}=a\right]
+$$
+Their relations
+$$
+\begin{aligned}
+& v_\pi(s) = \sum_{a \in \mathcal{A}} \pi(a\mid s) q_\pi(s, a) \\
+& q_\pi(s, a) = r(s, a) + \sum_{s^{\prime} \in \mathcal{S}} p(s^{\prime} \mid s, a) v_\pi(s^\prime) \\
+\end{aligned} \tag{$\ast$}
+$$
+
+
+## MDP control
+
+Value functions deﬁne a partial ordering over policies.
+$$
+\pi_1 \geq \pi_2 :\; v_{\pi_1}(s) \geq v_{\pi_2}(s) \;\;\forall s \in \mathcal{S}
+$$
+最优的 policy 不一定是唯一的，但是最优的值函数是唯一的。
 
 
 
-### MDP control
+Optimal policy for a MDP in an infinite horizon problem is
+
++ Deterministic
++ Stationary
+
+
+
+### Policy Iteration
+
+分为两步
+
+1. Policy evaluation: evaluate the state value functions of a given policy
+2. Policy improvement: find a better policy
+
+
+
+<img src="../figures/lecture2/pi.png" alt="Policy Iteration" style="zoom:67%;" />
+
+
+
+The core step of improvement:
+$$
+\pi_{i+1}(s) = \underset{a}{\operatorname{argmax}} \; q_{\pi_i}(s, a)
+$$
+
+
+### Value Iteration
+
+
+
+<img src="../figures/lecture2/vi.png" alt="" style="zoom:67%;" />
 
 
 
@@ -122,5 +192,5 @@ $$
 
 
 
-
+PI converges faster than VI.
 
