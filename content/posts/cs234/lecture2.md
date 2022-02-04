@@ -129,17 +129,17 @@ $$
 
 State-value function for policy $\pi$
 $$
-v_{\pi}(s) \doteq \mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s\right]
+v^{\pi}(s) \doteq \mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s\right]
 $$
 Action-value function for policy $\pi$
 $$
-q_{\pi}(s, a) \doteq \mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s, A_{t}=a\right]
+q^{\pi}(s, a) \doteq \mathbb{E}_{\pi}\left[G_{t} \mid S_{t}=s, A_{t}=a\right]
 $$
 Their relations
 $$
 \begin{aligned}
-& v_\pi(s) = \sum_{a \in \mathcal{A}} \pi(a\mid s) q_\pi(s, a) \\
-& q_\pi(s, a) = r(s, a) + \sum_{s^{\prime} \in \mathcal{S}} p(s^{\prime} \mid s, a) v_\pi(s^\prime) \\
+& v^\pi(s) = \sum_{a \in \mathcal{A}} \pi(a\mid s) q_\pi(s, a) \\
+& q^\pi(s, a) = r(s, a) + \sum_{s^{\prime} \in \mathcal{S}} p(s^{\prime} \mid s, a) v_\pi(s^\prime) \\
 \end{aligned} \tag{$\ast$}
 $$
 
@@ -148,7 +148,7 @@ $$
 
 Value functions deﬁne a partial ordering over policies.
 $$
-\pi_1 \geq \pi_2 :\; v_{\pi_1}(s) \geq v_{\pi_2}(s) \;\;\forall s \in \mathcal{S}
+\pi_1 \geq \pi_2 :\; v^{\pi_1}(s) \geq v^{\pi_2}(s) \;\;\forall s \in \mathcal{S}
 $$
 最优的 policy 不一定是唯一的，但是最优的值函数是唯一的。
 
@@ -166,6 +166,16 @@ Optimal policy for a MDP in an infinite horizon problem is
 分为两步
 
 1. Policy evaluation: evaluate the state value functions of a given policy
+
+Dynamic programming for policy evaluation
+
+$$
+V_k^\pi(s) = \sum_{a \in \mathcal{A}}   \pi(a| s)  \left( r(s, a) + \gamma \sum_{a\in \mathcal{A}} p(s^\prime| s, a) V_{k-1}^\pi(s^\prime) \right)
+$$
+$V_k^\pi(s)$ is exact value of $k$-horizon value of state $s$ under policy $\pi$. 
+
+
+
 2. Policy improvement: find a better policy
 
 
@@ -176,7 +186,7 @@ Optimal policy for a MDP in an infinite horizon problem is
 
 The core step of improvement:
 $$
-\pi_{i+1}(s) = \underset{a}{\operatorname{argmax}} \; q_{\pi_i}(s, a)
+\pi_{i+1}(s) = \underset{a}{\operatorname{argmax}} \; q^{\pi_i}(s, a)
 $$
 
 
