@@ -1,5 +1,5 @@
 ---
-title: "Lecture 3: Model-Free Policy Evaluation: Policy Evaluation Without Knowing How the World Works"
+title: "Lecture 3: Model Free Policy Evaluation"
 date: 2022-02-04
 draft: false
 toc: false
@@ -116,7 +116,7 @@ Incremental MC with $\alpha>\displaystyle\frac{1}{N\left(s_{i t}\right)}$ could 
 
 
 
-**Monte Carlo (MC) Policy Evaluation Key Limitations**
+**Monte Carlo Policy Evaluation Key Limitations**
 
 + Generally high variance estimator
   + Reducing variance can require a lot of data
@@ -139,7 +139,7 @@ Aim: estimate *target policy* $\pi$ given episodes generated under *behavior pol
 
 Requirement
 $$
-\pi(a \mid s) \Longrightarrow b(a\mid s)  \tag{coverage}
+\pi(a \mid s)>0 \Longrightarrow b(a\mid s) > 0  \tag{coverage}
 $$
 *Importance-sampling ratio*
 $$
@@ -150,6 +150,17 @@ $$
 \mathbb{E}\left[\rho_{t: T-1} G_{t} \mid S_{t}=s\right]=v_{\pi}(s)
 $$
 Unbiased and consistent.
+
++ Ordinary importance sampling — uausally unbiased; **may not converge**
+
+  $$
+  V(s) \doteq \frac{\sum_{t \in \mathcal{T}(s)} \rho_{t: T(t)-1} G_{t}}{|\mathcal{T}(s)|}
+  $$
+
++ Weighted importance sampling — biased but lower variance
+  $$
+  V(s) \doteq \frac{\sum_{t \in \mathcal{T}(s)} \rho_{t: T(t)-1} G_{t}}{\sum_{t \in \mathcal{T}(s)} \rho_{t: T(t)-1}}
+  $$
 
 
 
