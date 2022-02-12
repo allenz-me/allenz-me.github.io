@@ -9,12 +9,9 @@ tags: [""]
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
 
-
 Lecture3 主要介绍当我们不知道模型的各个参数的时候，如何评价一个 policy.
 
-
 ### Recall
-
 
 + Deﬁnition of Return
 + Deﬁnition of State Value Function
@@ -29,14 +26,9 @@ $$
 <img src="../figures/lecture3/bts.png" alt="" style="zoom: 60%;" />
 
 
-
-
-
 ## Policy Evaluation without a Model
 
 ### Monte Carlo Policy Evaluation
-
-
 
 - If trajectories are all finite, sample set of trajectories \& average returns
 - Does not require MDP dynamics/rewards
@@ -45,7 +37,6 @@ $$
 - Can only be applied to episodic MDPs
 - Averaging over returns from a complete episode
 - Requires each episode to terminate
-
 
 
 Monte Carlo methods can be incremental in an episode-by-episode sense, but not in a step-by-step (online) sense.
@@ -112,7 +103,7 @@ $$
 V^{\pi}(s)=V^{\pi}(s)+\alpha\left(G_{i, t}-V^{\pi}(s)\right)
 $$
 
-Incremental MC with $\alpha>\displaystyle\frac{1}{N\left(s_{i t}\right)}$ could help in non-stationary domains.
+Incremental MC with $\alpha>\displaystyle\frac{1}{N\left(s\right)}$ could help in non-stationary domains.
 
 
 
@@ -127,9 +118,11 @@ Incremental MC with $\alpha>\displaystyle\frac{1}{N\left(s_{i t}\right)}$ could 
 
 **Problem of maintaining exploration**
 
++ Many state–action pairs may never be visited
 
+**Monte Carlo with Exploring Starts**
 
-
+Specify that the episodes start in a state–action pair, and that every pair has a nonzero probability of being selected as the start.
 
 
 
@@ -168,9 +161,7 @@ Unbiased and consistent.
 
 > “If one had to identify one idea as central and novel to reinforcement learning, it would undoubtedly be temporal-difference (TD) learning.”   – Sutton and Barto 2017
 
-
-
-
+Incremental MC
 
 $$
 V^{\pi}(s)=V^{\pi}(s)+\alpha\left(G_{i, t}-V^{\pi}(s)\right)
@@ -191,18 +182,20 @@ $$
 
 + Biased, but generally less high variance than MC
 
-+ TD(0) converges to true value with tabular representation
 
+TD methods are often more e!cient than Monte Carlo methods.
+
+
+
+**Conplex convergence property**
+
++ TD(0) converges in the mean for a small constant $\alpha$
++ TD(0) converges a.s. if $\alpha$ decreases accordingly
 + TD(0) does not always converge with function approximation
 
 
 
-
-
-
-
-TD(0) converges to DP policy $V^\pi$ for the MDP with the maximum likelihood model estimates
-
+**TD(0) converges to DP policy $V^\pi$ for the MDP with the maximum likelihood model estimates** if there is available only a ﬁnite amount of experience.
 
 
 > Maximum likelihood Markov decision process model
@@ -213,8 +206,21 @@ TD(0) converges to DP policy $V^\pi$ for the MDP with the maximum likelihood mod
 \end{gathered}
 > $$
 
-TD exploits Markov structure.
+**TD exploits Markov structure.** As in the AB example
 
+> A, 0, B, 0 
+>
+> B, 1 
+>
+> B, 1 
+>
+> B, 1
+>
+> B, 1 
+>
+> B, 1 
+>
+> B, 1 
+>
+> B, 0
 
-
-Monte Carlo ES
