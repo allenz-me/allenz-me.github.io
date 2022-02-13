@@ -1,12 +1,16 @@
 ---
-title: "Lecture 4.5 $n$-step Bootstrapping"
-date: 2022-01-01
+title: "Lecture 4.5: $n$-step Bootstrapping"
+date: 2022-02-12
 draft: false
 slug: lecture4-cont
 categories: ["算法与程序设计", "cs234"]
 tags: []
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
+
+
+
+### $n$-step TD Prediction
 
 The idea of $n$-step TD
 
@@ -39,4 +43,36 @@ $$
 
 
 <img src="../figures/lecture4.5/image-20220212162104250.png" alt="image-20220212162104250" style="zoom:67%;" />
+
+
+
+The n-step TD methods thus form a family of sound methods, with one-step TD methods and Monte Carlo methods as extreme members.
+
+
+
+### $n$-step Sarsa
+
+
+$$
+G_{t: t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} Q_{t+n-1}\left(S_{t+n}, A_{t+n}\right), n \geq 1,0 \leq t<T-n
+$$
+
+$$
+Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha\left[G_{t: t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right], \quad 0 \leq t<T
+$$
+
+
+
+
+### $n$-step Off-policy Learning
+
+
+
+
+
+
+
+### $n$-step Tree Backup Algorithm
+
+
 
