@@ -2,6 +2,7 @@
 title: "Lecture 4.5: $n$-step Bootstrapping"
 date: 2022-02-12
 draft: false
+toc: false
 slug: lecture4-cont
 categories: ["算法与程序设计", "cs234"]
 tags: []

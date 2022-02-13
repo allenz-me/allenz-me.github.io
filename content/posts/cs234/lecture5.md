@@ -3,6 +3,7 @@ title: "Lecture 5: Value Function Approximation"
 date: 2022-02-13
 draft: false
 slug: lecture5
+toc: false
 categories: ["算法与程序设计", "cs234"]
 tags: []
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
