@@ -118,6 +118,7 @@ $$
 ---
 
 >  Poisson 分布：$P(X=k) = \displaystyle e^{-\lambda} \frac{\lambda^k }{k!}$
+> 
 >  Gamma 分布 $\Gamma (\alpha, \lambda)$：$f(x)=\displaystyle \frac{\lambda^{\alpha} x^{\alpha-1}}{\Gamma (\alpha)}e^{-\lambda x} .\quad (\alpha > 0)$
 
 ---
