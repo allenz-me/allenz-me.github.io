@@ -14,7 +14,7 @@ def changeFormula(s: str):
     将公式里的 backslash 都换成 backslash，下划线里的 underscore 换成 backslash underscore
     代码块中的 underscore 保持不变！
     """
-    f = lambda s: s.group().replace("\\", "\\\\").replace("_", "\\_").replace("\n", "")
+    f = lambda s: s.group().replace("\\", "\\\\").replace("_", "\\_").replace("\n\n", "\n")
     s = re.sub(r"\$(.*?)\$", f, s)
     s = re.sub(r"\$\$((.|\n)+?)\$\$", f, s)
     return s
