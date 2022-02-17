@@ -1,5 +1,5 @@
 ---
-title: "Lecture 4.5: $n$-step Bootstrapping"
+title: "Lecture 4.5: n-step Bootstrapping"
 date: 2022-02-12
 draft: false
 toc: false

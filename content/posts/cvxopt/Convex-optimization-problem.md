@@ -1,9 +1,9 @@
 ---
 title: "Convex Optimization Problem"
-date: 2022-02-05
+date: 2022-01-03
 draft: true
 slug: convex-opt-problem
-categories: ["运筹与优化"]
+categories: ["运筹与优化", "凸优化"]
 tags: []
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---

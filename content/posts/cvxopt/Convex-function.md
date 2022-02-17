@@ -1,6 +1,6 @@
 ---
 title: "Convex Function"
-date: 2021-01-01
+date: 2022-01-02
 draft: false
 slug: convex-function
 categories: ["运筹与优化", "凸优化"]

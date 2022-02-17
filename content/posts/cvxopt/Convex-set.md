@@ -1,6 +1,6 @@
 ---
 title: "Convex Set"
-date: 2021-01-01
+date: 2022-01-01
 draft: false
 slug: convex-set
 categories: ["运筹与优化", "凸优化"]
@@ -327,7 +327,7 @@ $$
 + 多项式锥（cone of polynomials）：
 
 $$
-K=\left\{c \in \mathrm{R}^{n} \mid c_{1}+c_{2} t+\cdots+c_{n} t^{n-1} \geq 0 \text { for } t \in[0,1]\right\}\\
+K=\left\{c \in \mathrm{R}^{n} \mid c_{1}+c_{2} t+\cdots+c_{n} t^{n-1} \geq 0 \;\; \text { for } t \in[0,1]\right\}\\
 $$
 
 ### 最大和最小元素
