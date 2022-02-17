@@ -49,7 +49,7 @@ $$
 相对内点准确的定义是：
 
 $$
-\text { relint } C=\{x \in C \mid B(x, r) \cap \text { aff } C \subseteq C \text { for some } r>0\}\\
+\text { relint } C=\{x \in C \mid B(x, r) \cap \text { aff } C \subseteq C \; \text { for some } r>0\}\\
 $$
 
 其中 $B(x, r)=\{y \mid\|y-x\| \leq r\}$。通过相对内点还可以引出相对边界这一概念。还是上面那两个例子，正方形的相对边界就是正方形的四条边，球面的相对边界就是自己。
@@ -395,7 +395,7 @@ $$
 设 $K$ 是个锥，定义 $K$ 的对偶锥为：
 
 $$
-K^{\ast}=\left\{y \mid x^{T} y \geq 0 \text { for all } x \in K\right\}\\
+K^{\ast}=\left\{y \mid x^{T} y \geq 0 \;\; \text { for all } x \in K\right\}\\
 $$
 
 顾名思义，$K^{\ast}$ 是一个锥，更有意思的是 $K^\ast$ 总是凸的，不论 $K$ 是不是凸的。
@@ -408,7 +408,7 @@ $$
 
 > 在 $\mathrm{S}^n$ 上定义 Frobenius 范数，$\mathrm{S}^n_+$ 的自对偶性源自
 > $$
-> \operatorname{tr}(XY) \geq 0 \;\text{ for all} \; X \succeq 0 \Longleftrightarrow Y \succeq 0 \\
+> \operatorname{tr}(XY) \geq 0 \;\; \text{ for all} \; X \succeq 0 \Longleftrightarrow Y \succeq 0 \\
 > $$
 
 $p$ 范数锥 $K = \{(x, t) \in \mathrm{R}^{n+1} \mid \| x\|_ p\leq t\}$ 的对偶是 $q$ 范数锥 $K^\ast = \{(u, v) \in \mathrm{R}^{n+1} \mid \| u \|_{\ast} \leq v\}$，且 $1/p + 1/q = 2$。
