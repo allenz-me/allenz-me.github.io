@@ -23,17 +23,15 @@ tags: ["MAB"]
 
 **问题分类：**
 
-根据 Feedback：
-+ bandit feedback: 做出选择之后只能得到该行为回报的信息。
-+ partial feedback. 做出选择之后能得到该行为回报的信息，和其它行为回报的部分信息。
-+ full feedback. 做出选择之后能得到全部行为的信息。
-
-
-根据 Rewards:
-+ IID rewards: 不同行为的回报相互独立且服从一个固定的概率分布。
-+ Adversarial rewards: 对手可以随意更改回报。
-+ Constrained adversary: 对手每轮只能有限制地更改回报。
-+ Stochastic rewards: 回报服从一个随机过程。比如，两个行为的回报服从一个二维的布朗运动。
++ 根据 Feedback：
+  + bandit feedback: 做出选择之后只能得到该行为回报的信息。
+  + partial feedback. 做出选择之后能得到该行为回报的信息，和其它行为回报的部分信息。
+  + full feedback. 做出选择之后能得到全部行为的信息。
++ 根据 Rewards:
+  + IID rewards: 不同行为的回报相互独立且服从一个固定的概率分布。
+  + Adversarial rewards: 对手可以随意更改回报。
+  + Constrained adversary: 对手每轮只能有限制地更改回报。
+  + Stochastic rewards: 回报服从一个随机过程。比如，两个行为的回报服从一个二维的布朗运动。
 
 The simplest setting: bandit feedback + IID rewards.
 
