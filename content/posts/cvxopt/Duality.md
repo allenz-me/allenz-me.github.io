@@ -831,3 +831,12 @@ $$
 强对偶性的Slater's condition可以推广到锥形式的对偶下。即，如果问题是凸的，即 $f_0$ 凸、$f_i$ 关于 $K_i$ 凸，且存在一点 $\tilde x$ 严格可行，那么强对偶成立，对偶间隙为0。
 
 锥规划依然成立互补松弛条件、KKT条件、替代定理，在此从略。
+
+---
+
+### minimax theorem
+
+
+$$
+\max _{\boldsymbol{z} \in \cap Z_{i}} \boldsymbol{x}^{\prime} \boldsymbol{z}=\min _{\boldsymbol{x}_{i}, i \in[I]}\left\{\sum_{i \in[I]} \max _{\boldsymbol{z} \in Z_{i}} \boldsymbol{x}_{i}^{\prime} \boldsymbol{z} \mid \sum_{i \in[I]} \boldsymbol{x}_{i}=\boldsymbol{x}\right\}
+$$
