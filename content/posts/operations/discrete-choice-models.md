@@ -10,6 +10,10 @@ tags: ["Choice Model"]
 
 ## Discrete Choice Models
 
+离散选择模型已成为研究消费者面对多种产品的购买行为的重要工具，并已广泛应用于经济、营销、交通和运营等多个领域。
+
+
+
 
 记 $q_i(S)$ 为选择 item $i \in S$ 的概率
 
