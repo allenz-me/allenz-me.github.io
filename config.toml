@@ -417,7 +417,7 @@ uglyURLs = false
     # 列表页面
 
     # 宽度
-    listWidth = 45
+    listWidth = 48
     # 说明：如果留空（""），则用 42 作为默认值
     #      单位：em
 
@@ -676,6 +676,7 @@ uglyURLs = false
     ######################################
     # Google Site Verification
 
+    # googleSiteVerification = "QJFwI7e22xlixwos55BGrW2rvOzFk19g5cplGFjO7-0"
     googleSiteVerification = ""
 
 
@@ -999,7 +1000,7 @@ uglyURLs = false
     ## 两端对齐
 
     # 是否开启（全局设置）
-    enableJustify = true
+    enableJustify = false
     # 说明：文章的 Front Matter 中的 `align`
     #      的优先级高于此处
 

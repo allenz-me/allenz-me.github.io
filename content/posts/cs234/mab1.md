@@ -35,3 +35,8 @@ tags: ["MAB"]
 
 The simplest setting: bandit feedback + IID rewards.
 
+算法的Regret: 
+
+$$
+R(T)=\mu^{*} \cdot T-\sum_{t=1}^{T} \mu\left(a_{t}\right)
+$$

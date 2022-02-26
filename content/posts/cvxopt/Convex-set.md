@@ -191,7 +191,7 @@ $$
 
 对一个任意的集合 $C$，它的 **barrier cone** 被定义为集合 $\{y \mid |y^T x| < +\infty, \; \forall x \in C\}$。即非零向量 $y$ 是包含 $C$ 的半平面 $\{x \mid y^T x \leq \alpha\}$ 的法向。不论集合 $C$ 是什么，它的 barrier cone 也是一个凸锥！
 
-对一个任意的集合 $C$，它的 **recession cone** 被定义为集合 $\{y \mid x - ty \in C, \;  \forall x \in C, \; \forall t \geq 0\}$。$C$ 的回收锥可以理解为是所有可以无限延伸的方向生成的锥。凸集的 recession cone 是一个凸锥；特别地，多面体 $\{x \mid Ax = b\}$ 的 recession cone 是 $\{y \mid Ay=0\}$。
+对一个任意的集合 $C$，它的 **recession cone** 被定义为集合 $\{y \mid x - ty \in C, \;  \forall x \in C, \; \forall t \geq 0\}$。$C$ 的回收锥可以理解为是 $C$ 内所有可以无限延伸的方向生成的锥。凸集的 recession cone 是一个凸锥；特别地，多面体 $\{x \mid Ax = b\}$ 的 recession cone 是 $\{y \mid Ay=0\}$。
 
 如果 $C$ 是一个非空的闭凸集，那么 $C$ 的 recession cone 是它的 barrier cone 的对偶锥。
 
@@ -206,9 +206,36 @@ $$
 
 此外，KL散度 $D_{KL}(p \lVert q)=\displaystyle\sum_{i=1}^n p_i \log \displaystyle\frac{p_i}{q_i}$ 对 $(p, q)$ 是凸的。
 
+### 极点
+
+称 $x$ 是凸集 $C$ 的极点，如果不存在两点 $x_1, x_2\;(x_1 \neq x_2)$，使得
+$$
+x = \frac{1}{2}(x_1 + x_2)
+$$
+
++ 闭区间 $[a, b]$ 的极点是 $a$ 和 $b$
+
++ 单位球的任意一点都是极点
+
++ 半平面、仿射集没有极点
+
+一般用 $\operatorname{ext} C$ 来表示 $C$ 的极点集。
+
+凸紧集必然存在极点。令 $\bar{x}$ 是连续函数 $x \to \| x \|^2$ 在 $C$ 上的最小值点，容易验证 $\bar{x}$ 是极点。
+
+**H. Minkowski** 对凸紧集 $C \subset \mathrm{R}^n$ 满足：$C = \operatorname{conv} (\operatorname{ext} C)$
+
+
+
+
+
+
+
 ### 凸集的表示
 
-**Caratheodory’s theorem**：$S$ 是 $\mathrm{R}^n$ 的子集，那么， $x \in \operatorname{conv} S$，当且仅当存在一个至多包含 $S$ 中 $n+1$ 个点的 $A \subset S$，使得 $x$ 是 $A$ 中点的凸组合。
+**Caratheodory’s theorem**：
+
+$S$ 是 $\mathrm{R}^n$ 的子集，那么， $x \in \operatorname{conv} S$，当且仅当存在一个至多包含 $S$ 中 $n+1$ 个点的 $A \subset S$，使得 $x$ 是 $A$ 中点的凸组合。
 
 这个定理反过来是显然的，如果 $x$ 是 $A$ 中点的凸组合，那么必然 $x \in \operatorname{conv} S$。
 
@@ -218,11 +245,17 @@ $$
 
 关于 $\operatorname{coni} S$ 成立一个类似的定理，只不过点数从 $n+1$ 减少到了 $n$ 个。
 
+**W. Fenchel and L. Bunt**：
+
+如果 $S \subset \mathrm{R}^n$ 是一个**连通**的凸集，则 $x \in \operatorname{conv} S$ 可以被表示成 $S$ 中 $n$ 个点的凸组合；这个结论可以被放宽至 $S$ 有不超过 $n$ 个连通分量。
+
+
+
 **Minkowski and Weyl**：polyhedron representation
 
-有界多面体可由其极点唯一决定。对于无界的多面体，可以由极点和方向来决定（extreme points and extreme rays）。这写下来就是：
+有界多面体可由其极点唯一决定。对于无界的多面体，可以由极点和方向来决定（extreme points and extreme rays）。
 
-对任何 $P = \{x \mid Ax \leq b\}$，总能找到两个点集 $V, R$ ，使得：
+这写下来就是：对任何 $P = \{x \mid Ax \leq b\}$，总能找到两个点集 $V, R$ ，使得：
 $$
 P = \operatorname{conv}(V) + \operatorname{coni}(R)\\
 $$
