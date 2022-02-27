@@ -17,14 +17,14 @@ tags: []
 在数值分析或者优化方法中，我们经常能看到如下这一段话：
 
 $$
-\lim _{k \rightarrow \infty} \frac{\left\|x^{(k+1)}-x^{*}\right\|}{\left\|x^{(k)}-x^{*}\right\|}=C
+\lim _{k \rightarrow \infty} \frac{\left\|x^{(k+1)}-x^{\ast}\right\|}{\left\|x^{(k)}-x^{\ast}\right\|}=C
 $$
 
-+ 如果 $C=1$, 我们就说序列 $x^{(k)}$ 是次线性收敛 (sublinear convergence) 到 $x^{*}$ 的。
++ 如果 $C=1$, 我们就说序列 $x^{(k)}$ 是次线性收敛 (sublinear convergence) 到 $x^{\ast}$ 的。
 + 如果 $0<C<1$, 那么就说是线性收敛 (linear convergence) 。
 + 如果 $C=0$ ， 那么就说是超线性收敛 (superlinear convergence)。
 
-在超线性收敛的基础上, 如果对 $p>1$ 成立 $\lim\limits_{k \rightarrow \infty} \displaystyle\frac{\left\|x^{(k+1)}-x^{*}\right\|}{\left\|x^{(k)}-x^{*}\right\|^{p}}=C$ 为常数, 就说序列 $x^{(k)}$ 是 $p$ 阶收敛到 $x^{*}$ 的。
+在超线性收敛的基础上, 如果对 $p>1$ 成立 $\lim\limits_{k \rightarrow \infty} \displaystyle\frac{\left\|x^{(k+1)}-x^{\ast}\right\|}{\left\|x^{(k)}-x^{\ast}\right\|^{p}}=C$ 为常数, 就说序列 $x^{(k)}$ 是 $p$ 阶收敛到 $x^{\ast}$ 的。
 
 此处 $\|\cdot\|$ 表示一种范数, 若范数具有等价性, 则通常选取为 2 范数。
 
@@ -66,17 +66,17 @@ plt.legend([r"$1/k$", r"$1/k^2$", r"$1/2^k$", r"$1/2^{2^k}$"])
 
 
 
-### 收敛速度的其它表示方法
+#### 收敛速度的其它表示方法
 
 优化里面，很多算法都还不能达到线性收敛（指数速度收敛）这样的速度，为了比较各种次线性收敛，就必须要**引入更精细的表示收敛速度的方式**！
 
 比如, 在某一条件下, 以 $t$ 为固定学习率的梯度下降法的函数值序列满足:
 $$
-f\left(x^{(k)}\right)-f^{\star} \leq \frac{\left\|x^{(0)}-x^{\star}\right\|_{2}^{2}}{2 t k}
+f\left(x^{(k)}\right)-f^{\ast} \leq \frac{\left\|x^{(0)}-x^{\ast}\right\|_{2}^{2}}{2 t k}
 $$
-这时候我们就会说序列 $f\left(x^{(k)}\right)$ 收敛到 $f^{*}$ 的速度是 $O(1 / k)$ 的，这里的 $1 / k$ 表示误差 $k$ 越大，误差越小；如果 $k$ 扩大2倍, 也就是迭代步数乘以 2 , 误差缩小为原来的一半。
+这时候我们就会说序列 $f\left(x^{(k)}\right)$ 收敛到 $f^{\ast}$ 的速度是 $O(1 / k)$ 的，这里的 $1 / k$ 表示误差 $k$ 越大，误差越小；如果 $k$ 扩大2倍, 也就是迭代步数乘以 2 , 误差缩小为原来的一半。
 
-另一种表示这种收敛速度的方式是 $O(1 / \epsilon), \; 1 / \epsilon$ 的意思是, 如果我们希望将误差控制在 $\epsilon$ 内，令 $\displaystyle\frac{\left\|x^{(0)}-x^{\star}\right\|_{2}^{2}}{2 t k} \leq \epsilon$，得到迭代次数 $k \geq \displaystyle\frac{\left\|x^{(0)}-x^{\star}\right\|_{2}^{2}}{2 t \epsilon}$ 是 $O(1 / \epsilon)$ 阶的。**换句话说, 要让误差减少为原来的一半, 就必须将迭代次数扩大一倍!**
+另一种表示这种收敛速度的方式是 $O(1 / \epsilon), \; 1 / \epsilon$ 的意思是, 如果我们希望将误差控制在 $\epsilon$ 内，令 $\displaystyle\frac{\left\|x^{(0)}-x^{\ast}\right\|_{2}^{2}}{2 t k} \leq \epsilon$，得到迭代次数 $k \geq \displaystyle\frac{\left\|x^{(0)}-x^{\ast}\right\|_{2}^{2}}{2 t \epsilon}$ 是 $O(1 / \epsilon)$ 阶的。**换句话说, 要让误差减少为原来的一半, 就必须将迭代次数扩大一倍!**
 
 更好一点的算法, 比如 $O\left(1 / k^{2}\right)$ 的 (对应是 $O(1 / \sqrt{\epsilon})$ ), 它也是次线性收敛的, 但是速度要 比 $O(1 / k)$ 快很多。
 
