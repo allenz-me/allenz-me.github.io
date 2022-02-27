@@ -38,7 +38,7 @@ $$
 （ps： 如果 $X$ 取全体整数，通过式 (1) 可以很容易得到相似结论）
 
 
-一般地，对于随机变量 $X$，如果它的 $n$ 阶矩存在（即 $X\in L(p)^{n}$ ）
+一般地，对于随机变量 $X$，如果它的 $n$ 阶矩存在（即 $X\in L^n(p)}$ ）
 
 $$
 \mathrm{E}X^n=\int_0^{\infty}nx^{n-1}[1-F(x)]\mathrm{d}x-\int_{-\infty}^0 nx^{n-1}F(x)\mathrm{d}x  \tag{2}

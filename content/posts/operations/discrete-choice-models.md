@@ -22,6 +22,7 @@ tags: ["Choice Model"]
 记 $q_i(S)$ 为选择 item $i \in S$ 的概率
 
 **Regularity Condition**
+
 the choice probability for any product in the offer set decreases as the offer set enlarges.
 
 **choice axiom**
@@ -47,7 +48,7 @@ $$
 U_i = u_i + \xi_i
 $$
 
-其中 $u_i$ 是常数，$\xi_i$ 是参数为 $\mu$ 的 Gumbel 随机变量。
+其中 $u_i$ 是常数，$\xi_i$ 是 i.i.d. 参数为 $\mu$ 的 Gumbel 随机变量。
 
 > $F_{\xi_i}(x)=\mathrm{P}\left(\xi_{i} \leq x\right)=\exp (-\exp (-(x / \mu+\gamma)))$，其中 $\gamma$ 是欧拉常数。
 
@@ -72,14 +73,28 @@ MNL/Luce 模型有一个局限性，那就是不能描述具有相关性商品�
 > The basic idea of IIA is that the ratio of any two products' shares should be independent of all other products.
 >
 > **“red bus/blue bus” paradox**
->
+> 
+>  {red bus, car} vs {red bus, blue bus, car}
+> 
 > 假设市场上有 cars 和 red buses 两种商品，各占50%市场份额，现在增加 blue buses 这种商品，它的效用跟 red buses 是一样的，MNL 模型会把 cars 的份额调低成 33%，但这很明显是不符合实际的。
 
 
+**Substitution Effect**
 
-<!-- **Substitution Effect**
+The choice probability decreases as any other alternative becomes more appealing
 
-The choice probability decreases as any other alternative becomes more appealing -->
+MNL 也满足 substitution effect.
+
+
+### Nested Logit Model
+
+NL 将商品的相关性加入到 MNL 中。
+
+
+
+### MNL with Network Effects
+
+一个人的购买行为会受到身边的人的影响，这其实构成了一个网络。
 
 
 
@@ -89,11 +104,11 @@ The choice probability decreases as any other alternative becomes more appealing
 $$
 u_i = \alpha_i - \beta_i p_i
 $$
-这时候的选择模型：
+并令 no-purchase option $a_0=1$，这时候的选择模型：
 $$
 q_{i}\left(S^{+}, \mathbf{p}\right)=\frac{\exp \left(\alpha_{i}-\beta_{i} p_{i}\right)}{1+\sum_{j \in S} \exp \left(\alpha_{j}-\beta_{j} p_{j}\right)}, \quad \forall i \in S,  \quad (S^+ = S \cup \{0\})\quad
 $$
-以最大化期望收益为目标，定价优化问题可表示为：
+以最大化期望收益为目标，多产品定价优化问题可表示为：
 
 $$
 \max _{\mathbf{p}} R(S, \mathbf{p}):=\sum_{i \in S}\left(p_{i}-c_{i}\right) \cdot q_{i}\left(S^{+}, \mathbf{p}\right)
@@ -111,13 +126,19 @@ $$
 \max _{S \subseteq N} R(S):=\sum_{i \in S}\left(p_{i}-c_{i}\right) \cdot q_{i}\left(S^{+}\right)
 $$
 
-
 更进一步地，如果商品种类和价格都是可以变化的，这时商家面临 Joint Assortment and Price Optimization。
 
-> 
 
 
+### Constrained Assortment Optimization
 
+当可以展示的商品数量是有限的的情况下，问题变成：
+$$
+\begin{array}{ll}
+\max\limits_{S \subseteq N} & R(S):=\displaystyle\sum_{i \in S}\left(p_{i}-c_{i}\right) \cdot \frac{a_{i}}{1+\sum_{j \in S} a_{j}} \\
+\text { s.t. } & |S| \leq C
+\end{array}
+$$
 
 
 
