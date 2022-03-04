@@ -36,13 +36,33 @@ $$
 
 类比非齐次线性方程组的解是一个仿射子集而对应的齐次线性方程组的解是一个线性子空间。
 
-对任意一个集合$C$，我们可以定义它的仿射包 （affine hull）：
+定义 $x_1, x_2, \dots, x_n$ 的 **affine combination** 为：
+$$
+\theta_1 x_1 + \cdots + \theta_n x_n \qquad \text{where } \; \sum_{i=1}^n \theta_i = 1
+$$
+对任意一个集合$C$，我们可以定义它的仿射包 （affine hull）为其所有点的 affine combination：
 
 $$
 \text { aff } C=\left\{\theta_{1} x_{1}+\cdots+\theta_{k} x_{k} \mid x_{1}, \ldots, x_{k} \in C, \theta_{1}+\cdots+\theta_{k}=1\right\}\\
 $$
 
-仿射包是包含这个集合的最小仿射集。通过仿射包可以定义相对内点（relative interior）这一概念。仿射集可以认为是一个平移后的子空间，所以仿射包能揭示一个集合真正的维度。
+仿射包是包含这个集合的最小仿射集。
+
+> affine hull、convex hull、conic hull 可以由内向外来定义（各个点的组合），也可以由外向内定义（所有包含该集合的xx的交）。
+
+例：
+
++ 
+
+
+
+affine independence
+
+
+
+
+
+通过仿射包可以定义相对内点（relative interior）这一概念。仿射集可以认为是一个平移后的子空间，所以仿射包能揭示一个集合真正的维度。
 
 相对内点与内点是有所不同的，比如考虑一个三维空间中的正方形。这个正方形内部的点，不是内点，但是是相对内点，只要我们把空间缩小为一个特定的二维空间，其相对内点就会变成真正的内点。再考虑三维空间中的一个球面，它的相对内点集是空集。
 
@@ -265,9 +285,9 @@ $$
 
 ### 保持凸性的操作
 
-+ 凸集的交、和、差
++ 凸集的交、和、差、直积
 
-如果 $C_1, C_2$ 是凸集，那么 $C_1 \bigcap C_2, \;C_1 + C_2, \; C_1 - C_2$ 是凸集。
+如果 $C_1, C_2$ 是凸集，那么 $C_1 \bigcap C_2, \;C_1 + C_2, \; C_1 - C_2, \; C_1 \times C_2$  是凸集。
 
 例：
 
@@ -296,6 +316,7 @@ $$
 例：
 
 形如 $A(x)=x_{1} A_{1}+\cdots+x_{n} A_{n} \preceq B$ 的叫做线性矩阵不等式（linear matrix inequality)，其中 $A_i, B \in \mathrm{S}^m$，其解集 $\{x \mid A(x) \preceq B\}$ 是一个凸集，它是 $\mathrm{S}^n_{+}$ 在仿射函数 $f: \mathrm{R}^n \to \mathrm{S}^m_+,\;\; f(x)=B-A(x)$ 下的逆像。
+
 
 + 透视函数（perspective functions）
 

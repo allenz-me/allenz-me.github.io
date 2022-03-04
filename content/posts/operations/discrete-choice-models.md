@@ -126,9 +126,13 @@ $$
 \max _{S \subseteq N} R(S):=\sum_{i \in S}\left(p_{i}-c_{i}\right) \cdot q_{i}\left(S^{+}\right)
 $$
 
-更进一步地，如果商品种类和价格都是可以变化的，这时商家面临 Joint Assortment and Price Optimization。
+**Revenue-Ordered Assortment**
+
+假定商品索引按利润排序，即 $p_{1}-c_{1} \geq p_{2}-c_{2} \geq \cdots \geq p_{n}-c_{n}$，则 $S_i = \{1, 2, \dots, i\}, i = 1, \dots n$ 被称为 *revenue-ordered assortment*
 
 
+
+对 MNL 模型来说，最优的 assortment 在 revenue-ordered assortments 中取到。时间复杂度是 $O(n)$。
 
 ### Constrained Assortment Optimization
 
@@ -139,6 +143,25 @@ $$
 \text { s.t. } & |S| \leq C
 \end{array}
 $$
+
+
+
+
+
+更进一步地，如果商品种类和价格都是可以变化的，这时商家面临 Joint Assortment and Price Optimization。
+
+
+
+
+
+## Summary
+
+总的来说，对于 discrete choice model 的研究主要分为以下两块：
+
+1. 如何从数据中拟合出一个好的选择模型
+2. 给定一类选择模型，如何设计高效的算法解决 pricing / assortment 等问题
+
+
 
 
 

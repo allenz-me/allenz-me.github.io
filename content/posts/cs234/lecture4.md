@@ -9,7 +9,8 @@ tags: [""]
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
 
-Lecture 4 主要介绍无模型的 control。
+Lecture 4 主要介绍无模型的 control，包含 MC control 和 TD control。
+
 
 
 
@@ -26,6 +27,10 @@ Lecture 4 主要介绍无模型的 control。
 ### Monte Carlo with Exploring Starts
 
 <img src="../figures/lecture4/mces.png" alt="" style="zoom:67%;" />
+
+
+
+A Blackjack game is presented to elucidate MCES.
 
 
 
@@ -90,5 +95,7 @@ $$
 
 
 
-
 ### Maximization Bias
+
+
+

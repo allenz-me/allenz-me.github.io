@@ -155,6 +155,8 @@ Unbiased and consistent.
   V(s) \doteq \frac{\sum_{t \in \mathcal{T}(s)} \rho_{t: T(t)-1} G_{t}}{\sum_{t \in \mathcal{T}(s)} \rho_{t: T(t)-1}}
   $$
 
+The estimates of ordinary importance sampling will typically have inﬁnite variance, and thus unsatisfactory convergence properties, whenever the scaled returns have inﬁnite variance.
+
 
 
 ### Temporal Difference Learning
@@ -183,7 +185,7 @@ $$
 + Biased, but generally less high variance than MC
 
 
-TD methods are often more e!cient than Monte Carlo methods.
+TD methods are often more efficient than Monte Carlo methods.
 
 
 
