@@ -1,0 +1,1003 @@
+\documentclass[twoside]{cctart}
+\usepackage{headrule,vatola,amssymb}
+\usepackage{graphicx,multirow,bm}
+\usepackage{booktabs,dcolumn}%关于小数点对齐
+\newcolumntype{z}[1]{D{.}{.}{#1}}%关于小数点对齐
+\usepackage{tabularx}%关于表自动折行
+\usepackage{slashbox}%表格加斜线
+%\usepackage{footmisc,perpage}
+%\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}% 放在导言区
+%=========================Page Format (此部分定义请勿修改)================================
+\setlength{\voffset}{-5mm} \headsep 0.3 true cm \topmargin 0pt
+\oddsidemargin 0pt \footskip 2mm \evensidemargin 0pt \textheight
+24.5 true cm \textwidth 16.5 true cm \setcounter{page}{1}
+\parindent 2\ccwd
+\nofiles
+
+\TagsOnRight\baselineskip 12pt
+
+\catcode`@=11 \long\def\@makefntext#1{\parindent 1em\noindent
+\hbox to 0pt{\hss$^{}$}#1} \catcode`\@=12
+
+\catcode`@=11
+\def\evenhead{}
+\def\oddhead{}
+\headheight=8truemm
+% \footheight=0pt
+\def\@evenhead{\pushziti
+  \vbox{\hbox to\textwidth{\rlap{\rm\thepage}\hfil{\evenhead}\llap{}}
+    \protect\vspace{2truemm}\relax
+    \hrule depth0pt height0.15truemm width\textwidth
+  }\popziti}
+\def\@oddhead{\pushziti
+  \vbox{\hbox to\textwidth{\rlap{}{\oddhead}\hfil\llap{\rm\thepage}}
+    \protect\vspace{2truemm}\relax
+    \hrule depth0pt height0.15truemm width\textwidth
+  }\popziti}
+\def\@evenfoot{}
+\def\@oddfoot{}
+\catcode`@=12
+
+\renewcommand{\baselinestretch}{1.2}
+\def\d{\displaystyle} \def\n{\noindent}
+\def\ST{\songti\rm\relax}
+\def\HT{\heiti\bf\relax}
+\def\FS{\fangsong\relax}
+\def\KS{\kaishu\relax}
+\def\sz{\small \zihao{-5}}
+\def\vs{\vspace{0.3cm}}
+\def\ay{\arraycolsep=1.5pt}
+
+\def\SEC#1#2#3{\vspace*{.2in} \begin{center}
+{\LARGE\zihao{3}\HT #1}\\[.2in]
+\zihao{4}\fangsong#2\\[.1in]
+\small\zihao{-5}#3 \end{center}}
+
+\def\ESEC#1#2#3{\vskip.2in \begin{center}
+{\Large \HT #1}\\[.2in]
+\normalsize #2\\[.1in]
+\footnotesize #3 \end{center}}
+
+\def\SUB#1{\vspace{.15in} \leftline{\large\bf\heiti\zihao{-4}#1}
+\vspace{.07in}}
+\def\sub#1{\leftline{\bf\heiti\zihao{5}#1}}
+
+\def\REFERENCE{\vspace*{.2in}
+{\noindent\bf\heiti\zihao{5}参考文献} \vspace*{.1in}}
+%=========================================================================
+
+\begin{document}
+
+%--------------------------页眉-------------------------------------
+\def\evenhead{{\protect\small{\zihao{-5}\songti \hfill 系~统~工~程~理~论~与~实~践}
+\hfill{\zihao{-5}\songti 第} \,XX\,{\zihao{-5}\songti 卷}}}
+\def\oddhead{{\protect{\zihao{-5}\songti 第}\small \,\,X\,{\zihao{-5}\songti 期}
+\hfill {\small\zihao{-5}\songti{杨建,等:需求不确定下的半导体企业长期产能规划研究}
+ }\hfill}}
+
+%---------------------------首页页眉---------------------------------
+\vspace*{-13mm} \thispagestyle{empty} \noindent \hbox to
+\textwidth{\small{\zihao{-5}\songti 第}\,\,X\,{\zihao{-5}\songti
+卷 第}\,\,X\,{\zihao{-5}\songti 期}\hfill {\zihao{5}
+系统工程理论与实践}\hfill Vol.X, No.X} \vskip -0.2mm
+\par\noindent
+\hbox to \textwidth{\small 2022 {\zihao{-5}\songti 年}\,\,X
+{\zihao{-5}\songti 月}\hfill Systems Engineering --- Theory \&
+Practice\hfill XXX., 2022} \vskip -0.3mm
+\par\noindent
+\rule[2mm]{\textwidth}{0.5pt}\hspace*{-\textwidth}\rule[1.5mm]{\textwidth}{0.5pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ziju{0.025} \vskip -7mm  \noindent {\small doi:\
+XXX \qquad \qquad {中图法分类号:}\ \ F273 %中图分类号从《中国图书馆分类法》(第四版)中查得。
+\qquad\qquad{文献标志码:\ \ A}}
+
+%-----------------------脚注--------------------------------------------------
+\footnotetext{{\HT 收稿日期:}\ 2022-XX-XX}
+\footnotetext{{\HT
+作者简介:}\ 杨建(1976--),男,博士研究生,研究方向:企业管理,战略管理.董纪昌(1974--),男,山东聊城人,教授,博士,研究方向:决策分析.高随祥(1962--),男,陕西延川县人,教授,博士,研究方向:运筹学与控制论.贺舟(1986--),男,湖南益阳人,副教授,博士,研究方向:供应链管理.}
+\footnotetext{{\HT 基金项目:}\
+中国科学院(E1E90802A2, E1EG4401X2)}
+\footnotetext{{\HT Foundation item:}\ Chinese Academy of Sciences (E1E90802A2, E1EG4401X2)}
+\footnotetext{{\HT 中文引用格式:}\
+杨建, 董纪昌, 高随祥, 贺舟. 需求不确定下的半导体企业长期产能规划研究.[J].系统工程理论与实践,
+2022, X(X): 1--10.} \footnotetext{{\HT 英文引用格式:}\ Yang J,
+Dong J C, Gao, S X, He Z. Long-term Capacity Planning of Semiconductor Enterprises under Uncertain Demand[J]. Systems
+Engineering --- Theory \& Practice, 2022, XX(X): 1--10.}
+
+%---------------------题目、作者、单位、摘要、关键词, 中图分类号(必须提供)------------------
+%\SEC{中文题目}{作者}{单位}
+\SEC{需求不确定下的半导体企业长期产能规划研究}
+{杨建$^1$, 董纪昌$^{1,2}$, 高随祥$^3$, 贺舟$^{1,2,*}$} {(1. 中国科学院大学经济与管理学院, 北京, 100190; 2. 中国科学院大数据挖掘与知识管理重点实验室, 北京, 100190; 3. 中国科学院大学数学科学学院, 北京, 100190)}
+
+
+\vskip.05in {\narrower\zihao{5}\fangsong\noindent {\heiti 摘\quad
+要}\ \半导体企业长期产能规划具有资金投入大、技术更新换代速度快、制造设备交付时间长以及市场环境不稳定等一系列特征，导致需求的不确定性；如何应对这种不确定性成为长期产能规划的研究重点。本文结合了随机规划与鲁棒优化两种应对不确定性的方法，考虑不同产品类型之间产能的转换，构建了以企业净利润最大化为目标的二阶段数学规划模型。通过对规划模型的等价转换将其转变为MILP，利用MATLAB软件编程并调用CPLEX求解器求解；手工构造算例证明问题的可解性以及对模型参数进行了敏感性分析。
+
+
+\vskip.05in \noindent {\heiti 关键词}\ \半导体企业； 长期产能规划； 不确定性； 随机规划； 鲁棒优化； 产能转换
+
+}
+
+
+
+%%%%%%%%%%%%%%%英文部分%%%%%%%%%%%%%%%%%%%%%%%
+%\ESEC{英文题目}{作单}{单位}
+\ESEC{Long-term Capacity Planning of Semiconductor Enterprises under Uncertain Demand} {Yang Jian$^1$, Dong Jichang$^{1,2}$, Gao Suixiang$^3$, and He Zhou$^{1,2}$} {(1. School of Economics and Management, University of Chinese Academy of Sciences, Beijing 100190，China; 2. Key Laboratory of Big Data Mining and Knowledge Management, Chinese Academy of Sciences, Beijing 100190，China; 3. School of Mathematical Sciences, University of Chinese Academy of Sciences, Beijing 100190，China.)}
+
+
+
+\vskip.05in \rm \noindent {\narrower\small {\bf Abstract}\ \ The long-term production capacity planning of semiconductor enterprises has a series of characteristics, such as large capital investment, fast technology upgrading, long lead-time of manufacturing equipment and unstable market environment, which leads to the uncertainty of demand. How to deal with this uncertainty has become an important research problem of long-term production capacity planning. This paper combines two methods (stochastic programming and robust optimization) to deal with uncertainty, considering the conversion of capacity between different product types. We also construct a two-stage mathematical planning model maximizing the net profit of enterprises. Through the equivalent conversion of the planning model, it was transformed into a MILP, which was programmed using MATLAB software and solved with CPLEX; the numerical experiments showed the solvability of the problem, and the sensitivity analysis of the model parameters was reported.
+
+
+
+
+\vskip.05in \noindent{\bf Keywords}\ \ Semiconductor company;  Long-term capacity planning;  uncertainty;
+Stochastic programming;  Robust optimization;   Capacity conversion
+
+
+
+
+}
+
+
+\normalsize \normalsize \abovedisplayskip=2.0pt plus 2.0pt minus
+2.0pt \belowdisplayskip=2.0pt plus 2.0pt minus 2.0pt \baselineskip
+16pt
+
+%%%%%%%%%%%%%%%%%%%%%%%注意事项%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 全文所有的标点符号(包括括号、冒号、分号、逗号、句号等)都用``英文"中的标点符号, 即``半角"加空格.
+
+%%%%%%%%%%%%%%%%%%%%%%正文%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\SUB{1\ \ 引言}%一级标题
+产能规划是提供一种方法来确定由资本密集型资源--设备、工具、设施和总体劳动力规模等--综合形成的总体生产能力的大小，从而为实现企业的长期竞争战略政策提供有力的支持。产能规划对于半导体企业的竞争力至关重要。虽然许多行业也有着产能规划高资本的要求，但很少的行业像半导体行业具有产品生命周期短、持续不断的技术创新以及制造机器具有较长交付时间等特点$^{[1]}$。这些特点给企业的产能规划带来了很多的不确定性，导致半导体企业产能规划的结果与预期目标有较大的偏差，进而带来资源的浪费或是产能不足等问题，因此制造商迫切需要找到一种可行的产能规划方法$^{[2,3]}$。
+
+产能规划按规划期的长短可以分为：长期生产能力规划，中期生产能力规划和短期生产能力规划$^{[4]}$。当前，半导体制造业之中较为常用的产能规划方法，主要包括电子表格法$^{[5]}$、仿真法$^{[6]}$、线性规划$^{[7]}$、随机规划$^{[8]}$等。而在产能规划之中，以电子表格法的运用为主，往往可用于简单生产环境中的计算，如设备数量等；而若当工作指标以加工周期作为关键时，则可运用仿真方式。但是电子表格和仿真技术需要通过大量的试验以求得较好的解。用线性规划来构建目标函数及其约束，不但可以求得所需要的设备数量，而且可以优化产品组合使得利润最大化。Bermon等$^{[7]}$描述了一种解决产能规划的线性规划模型。这种基于线性规划的优化系统从1996年开始成为IBM最大半导体生产线产能规划的决策支持系统。Zhang等$^{[9]}$认为半导体制造中的产能规划问题涉及大量的决策变量、约束和目标函数，在比较各种产能规划方法的基础上指出线性规划是解决该问题有效方法之一。虽然线性规划方法简单，易操作，但是要求建立在需求预测已知，或是需求预测有较高的精度的基础之上。而在半导体行业中，需求存在着很大的不确定性，对需求的点预测十分困难，这种不确定性在长期产能规划中表现得更为突出。
+
+为了应对需求的不确定性，在半导体行业的产能规划研究中，随机规划得以广泛应用。Robert$^{[10]}$等考虑了产能的不确定性和需求的不确定性，提出了一个多阶段的随机规划模型并采用场景表示的方法描述不确定性，用以最小化产品需求与实际产能之间的差距。Catay$^{[11]}$采用多周期随机混合整数线性规划模型用于处理半导体制造的产能规划，考虑了需求和产能可变性、多阶段生产、产能利用等情况。为了解决应用中描述不确定性所需的大量场景和大量第一阶段整数变量，开发了两种新型可伸缩分布式并行优化算法来加快模型的求解。Barahona与Bermon$^{[5]}$通过引入机群的概念，将产品需求与生产设备的需求连接起来，直接对设备数量进行决策。考虑不同产品之间技术的转换，以最小化产能不足以及生产机群的数量为目标，构建了单阶段的设备数量决策模型。耿娜等$^{[12]}$针对于晶圆制造过程中产能与需求的高度不确定性问题，提出基于场景的随机规划方法进行设备购置决策。未来需求的不确定性用多个以发生概率相联系的预测场景来模拟，目标是尽量满足各个阶段各场景的需求，结果表明，当未来产品需求在一定范围内变动时，基于随机规划的决策优于基于线性规划的决策。Wu等$^{[13]}$指出需求满足和产能利用率直接影响客户满意度、市场增长和公司在半导体行业的盈利能力，提出了一种二阶段的随机规划模型用以决策晶圆的生产规划，保证在需求不确定下对订单的满足率。Suleyman等$^{[14]}$指出半导体企业产能规划问题两个独特的特征：(1)晶片需求和生产能力都是不确定性的主要来源,和(2)容量规划必须考虑到产品的营销和制造。基于该特征，建立了一个具有需求和容量不确定性的多阶段随机规划，同时，为了协调市场营销和制造的观点，考虑类似分散决策的分解规划问题。
+
+除随机规划外，鲁棒优化也是应对不确定性的有效优化工具。为了应对不确定性，提高晶圆厂产能计划的鲁棒性，Chen$^{[15]}$等建立了鲁棒生产能力规划问题的数学模型；同时，为了求解这一模型提出了一种启发式算法，并进行了数值实验来评估解决方案的鲁棒性。Zheng等$^{[16]}$将最小最大后悔值法应用到半导体企业产能扩建的研究当中，目标是使产能不足和产能过剩最小化。该文献指出产能扩建不仅包括新建产品生产线，还包括不同产品之间产能的转换，在考虑不同类型产品的产能时，产能之间的相互转换能够提高产能规划的鲁棒性，同时减少资本的投入。另外，除了上述主要方法以外，还有学者从设备的投资规划$^{[17]}$、资源组合规划$^{[18]}$、基于案例推理的方法$^{[19]}$以及产量的博弈模型$^{[20]}$对半导体企业产能规划和产能调配问题进行研究。
+
+从已有的文献来看，很少有学者关注半导体企业的长期产能规划。虽然中期的产能规划决策模型同样适用于长期产能规划，但长期产能规划的时间跨度更长，具有更强的不确定性。同时，在长期产能规划中，逐步投产方式可以应对需求的不确定性，提高产能决策的鲁棒性，但该方式在半导体企业的长期产能规划研究中鲜有学者考虑。基于上述分析，本文提出考虑两阶段投产的产能规划决策，依据时间跨度对需求预测准确性的影响，结合随机规划与鲁棒优化，分别刻画第一、第二阶段的产能规划决策模型，帮助半导体企业进行长期产能规划的决策。
+
+\vspace{10mm}
+\SUB{2\ \ 问题的描述与建模}%一级标题
+\sub{2.1\ \ 问题的描述}%二级标题命令
+长期产能规划过程中的关键问题是生产能力需求的预测和在此基础上的决策。需求的预测是产能规划的基础，但需求面临着许多的不确定性，尤其在长期产能规划中较为突出。目前，应对不确定性的决策方法有随机规划和鲁棒优化。随机规划通过历史数据拟合不确定参数的概率分布函数或是基于情景生成的方法，以一定数量的情景表征决策时的不确定性，将不确定性优化问题转化为一定概率下的确定性优化问题。在半导体企业长期规划的产能决策中，对于不确定参数的概率分布估计较为困难，因此基于随机规划的产能决策模型多以情景生成方法为主$^{[15]}$。
+
+以情景生成的目标最小化单阶段随机规划决策模型如下所示：
+$$
+\mathop{Min}\limits_{x \in X} E_{s \in S}[g(x,s)]
+$$
+在单阶段随机规划模型中，$x$为决策变量，$X$为决策变量$x$的可行集，$S$为可能的情景集合。该决策模型中，对决策变量$x$进行决策后不再进行任何其他调整，不能反映实际的决策层次情况，因此多采用二阶段随机规划模型，以反映决策的“多层次”情况，二阶段随机规划模型数学形式如下所示：
+$$
+\mathop{Min}\limits_{x \in X} E_{s \in S}[g(y_s)]
+$$
+$$
+F(x,s,y_s)\leq d  \qquad  \forall s\in S
+$$
+
+二阶段随机规划决策模型包含两个层次的决策，第一层是“上层决策”，该决策会首先决策且会对后续决策以及决策结果产生影响，如上述二阶段随机规划模型中，决策$x \in X$为上层决策；第二阶段是“下层决策”，即依据上层决策结果$x$以及实际的情景$s$做出决策，如上述二阶段随机规划模型中$y_s$为下层决策，且$y_s$满足$F(x,s,y_s)\leq d$。以企业的生产决策为例，在企业完全明确需求情景之前，需要完成对产线的规划选址决策，该决策为上层决策；在完成对产线的规划选址决策后，依据实际的产品需求，调整产品的生产计划，该实际生产决策即为下层决策。
+
+随机规划广泛应用于半导体产能规划决策研究中，但其存在两大缺陷：一是情景发生的概率难获取；二是随着不确定因素的增多，表征情景数或以指数形式增长，而长期产能规划存在较长的跨度，不确定性突出。不同于随机规划，鲁棒优化将优化问题中的不确定参数表征为具有边界的不确定集，或是将不确定性表征为可能的极端情景集合，在最不利的情况下做出决策，以确保最优解在任意情景下的可行性与鲁棒性。
+
+以情景生成的单阶段鲁棒优化决策模型如下所示：
+$$
+\mathop{Min}\limits_{x \in X}\mathop{Max}\limits_{s \in S} f(x,s)
+$$
+
+与单阶段随机规划模型类似，单阶段鲁棒优化模型中，$s \in S$用以表征不确定性，在对决策变量$x$进行决策后不再进行任何其他调整，模型依据决策变量$x$的决策结果选择最不利的情景。同样，在实际决策中，一旦这种不确定性被明确，即情景已知，决策者会采取相应的调整方式用以缓和或是降低情景确定后带来的影响，由此构成自适应鲁棒优化模型，也称二阶段鲁棒优化模型，其数学形式如下所示：
+$$
+\mathop{Min}\limits_{x \in X}\mathop{Max}\limits_{s \in S}\mathop{Min}\limits_{y \in Y(x,s)}f(x,s,y)
+$$
+
+在自适应鲁棒优化模型中，第一层表征“规划”决策，该决策先于不确定情景的明确，以最小化目标函数，该层决策的变量为$x$，其满足$x \in X$；第二层则表征“不确定情景”的明确，依据规划决策结果，明确该决策结果下不确定情景集合$S$下最不利情景$s$，因此该层的决策方向与第一层决策方向相反，为最大化目标函数；第三层表征“运行”决策，一旦明确了情景，则利用“运行”决策以降低最不利情景带来的影响，因此该阶段为最小化目标函数，需要注意的是，运行决策取决于规划决策结果与最不利情景，因此满足$y \in Y(x,s)$。
+
+鲁棒优化不需要处理难以获取的概率分布且能够很好的表征不确定性，但同时，决策的保守性使得企业加大投资用以保证订单的满足，或是为了防止产能过剩，减少资金的投入，从而导致产能严重不足。
+
+本文考虑随机规划与鲁棒优化的优缺点，结合两种方法进行长期产能规划决策模型的建模，同时，实际生产存在“多阶段”、“多层”决策，因此本文以二阶段下随机规划和鲁棒优化模型为建模基础，构建产能决策模型。
+
+（1）半导体企业属于资本密集型企业，行业技术更新换代快，制造设备存在较长的交付时间，同时，长期的产能规划具有较长的时间跨度，考虑采用分阶段投资建设的方式，即逐步投入，有助于提高企业应对需求不确定性的能力。具体研究采用前后两阶段投产方式，第一阶段先行投入一定的产能；在经历一定的时间跨度后，在第二阶段决策点选择对产能的再决策。
+
+（2）在基于分阶段投资建设的基础上，结合随机规划与鲁棒优化建模。需要注意的是，第一阶段决策结果会影响第二阶段的决策；在需求预测方面，第一阶段的预测准确性高于第二阶段。这是因为长时间的需求预测比短时间的需求预测相对更容易。例如，长期来看我国半导体的市场需求处于较快增长趋势，但短期市场需求可能受到各项政策、国内外环境、上下游订单波动等影响，预测难度更大。因此，在第一阶段，情景发生概率相对易获得，故采用随机规划的方式；在第二阶段，作为第一阶段产能调整与再决策，为保证决策的鲁棒性，采用鲁棒优化对第二阶段的决策建模。
+
+（3）半导体企业需求来源于订单，而不是过于市场化的自由交易，在这种前提下，订单能否得到完全满足就显得格外的重要。半导体制造企业面临着非常严格的顾客要求，需求是不确定的且一旦在高需求的情况下未能及时满足需求就会丢失订单$^{[17]}$。针对于半导体制造企业，未满足需求的边际成本显著高于过剩产能的边际成本，许多半导体企业常常保持过剩的产能和设备的冗余来确保顾客的意愿和忠诚$^{[21]}$。然而，在第二阶段时，有可能会因为在第一阶段过多追求降低未满足的需求量导致产能过剩和亏损，因此也需要将产能过剩的成本纳入到决策目标当中。
+
+（4）企业在对产能进行决策后，不是保持产能的不变而是根据实际需求进行产能调整。当实际需求发生时，不同产品之间的产能会过剩或是不足，为了协调不同产品之间的产能，引入产能转换。不同产品的产能允许相互转换，即某些类型的产品的产能可以转化为一些指定类型产品的产能。
+
+（5）模型不考虑产品的库存。
+
+\sub{2.2\ \ 相关参数，集合，变量定义}%二级标题命令
+集合
+
+$I$ : 产品类型集合;
+
+$i\in I$ : 产品类型$i$;
+
+$j\in J(i)$ : 产品类型$i$产能允许转换到的产品类型的集合;
+
+$k\in K(i)$ : 可转换给产品类型$i$产能的产品类型集合;
+
+$T_1$ : 第一阶段实际生产决策时间点集合;
+
+$t_1\in T_1$ : 第一阶段实际生产决策时间点;
+
+$T_2$ : 第二阶段实际生产决策时间点集合;
+
+$t_2\in T_2$ : 第二阶段实际生产决策时间点;
+
+$S_1$ : 第一阶段场景集合;
+
+$s_1\in S_1$ : 第一阶段场景;
+
+$S_2$ : 第二阶段场景集合;
+
+$s_2\in S_2$ : 第二阶段场景;
+
+参数
+
+$\alpha_i$ : 产品类型$i$的超额生产系数;
+
+$e_i$ : 产品类型$i$的现有产能;
+
+$\gamma_i$ : 产品类型$i$允许的最大产能转换系数;
+
+$\beta_i$ : 产品类型$i$允许的最大产能缩减系数;
+
+$\delta_{k,i}$ : 产品类型$k$的产能转换到产品类型$i$的产能的效率系数;
+
+$p_i$ : 第一阶段产品类型$i$一单位产能的投资费用;
+
+$q_i$ : 第二阶段产品类型$i$一单位产能的投资费用;
+
+$g_i$ : 产品类型$i$的单位净利润;
+
+$h_i$ : 产品类型$i$的单位缺货成本;
+
+$f_i$ : 产品类型$i$的单位产能过剩成本;
+
+$b_1$ : 第一阶段投资总费用上限;
+
+$b_2$ : 第二阶段投资总费用上限;
+
+$P_s$ : 第一阶段场景的概率分布;
+
+$d_{i,t_1}^{s_1}$ : 在场景$s_1$，第一阶段实际决策时间点$t_1$时对产品$i$的需求;
+
+$d_{i,t_2}^{s_2}$ : 在场景$s_2$，第二阶段实际决策时间点$t_2$时对产品$i$的需求;
+
+$\omega_1$ : 第一阶段目标值权重系数;
+
+$\omega_2$ : 第一阶段目标值权重系数;
+
+决策变量
+
+$x_i$ : 第一阶段产品类型$i$初始投资建设产能;
+
+辅助决策变量
+
+$o_{i,t_1}^{s_1}$ : 场景$s_1$，第一阶段实际决策时间点$t_1$时产品类型$i$可供投入到生产的产能;
+
+$c_{i,t_1}^{s_1}$ : 场景$s_1$，第一阶段实际决策时间点$t_1$时产品类型$i$产能转换后的剩余产能;
+
+$m_{i,j,t_1}^{s_1}$ : 场景$s_1$，第一阶段实际决策时间点$t_1$时产品类型$i$的产能转换到产品类型j的产能;
+
+$r_{i,t_1}^{s_1}$ : 场景$s_1$，第一阶段实际决策时间点$t_1$时产品类型$i$在产能转换调整后的实际生产产能;
+
+$u_{i,t_1}^{s_1}$ : 场景$s_1$，第一阶段实际决策时间点$t_1$时产品类型$i$的产能不足量;
+
+$v_{i,t_1}^{s_1}$ : 场景$s_1$，第一阶段实际决策时间点$t_1$时产品类型$i$的产能过剩量;
+
+$y_i^{s_2}$ : 场景$s_2$，产品类型$i$在第二阶段初始时扩建产能;
+
+$w_i^{s_2}$ : 场景$s_2$，产品类型$i$在第二阶段初始时对第一阶段产能缩减后的调整产能;
+
+$o_{i,t_2}^{s_2}$ : 场景$s_2$，第二阶段实际决策时间点$t_2$时产品类型$i$可供投入到生产的产能（产能调整后）;
+
+$c_{i,t_2}^{s_2}$ : 场景$s_2$，第二阶段实际决策时间点$t_2$时产品类型$i$产能转换后的剩余产能;
+
+$m_{i,j,t_2}^{s_2}$ : 场景$s_2$，第二阶段实际决策时间点$t_2$时产品类型$i$的产能转换到产品类型$j$的产能;
+
+$r_{i,t_2}^{s_2}$ : 场景$s_2$，第二阶段实际决策时间点$t_2$时产品类型$i$在产能转换调整后的实际生产产能;
+
+$u_{i,t_2}^{s_2}$ : 场景$s_2$，第二阶段实际决策时间点$t_2$时产品类型$i$的产能不足量;
+
+$v_{i,t_2}^{s_2}$ : 场景$s_2$，第二阶段实际决策时间点$t_2$时产品类型$i$的产能过剩量;
+
+\newpage
+\sub{2.3\ \ 数学模型}%二级标题命令
+第一阶段决策
+
+1.目标函数
+\begin{equation}
+\begin{aligned}
+\mathop{Max}\limits_x\{-\sum\limits_{i=1}^{I} p_i\times x_i + \sum\limits_{s_1\in S_1}P_s\times\sum\limits_{t_1=1}^{T_1}(\sum\limits_{i=1}^{I}g_i\times r_{i,t_1}^{s_1}-h_i\times u_{i,t_1}^{s_1})\}
+\end{aligned}
+\end{equation}
+
+目标函数（1）中，最大化第一阶段的期望净利润，第一阶段的净利润计算方式为收益减去产能建设成本以及缺货惩罚成本。
+
+2.产能决策
+\begin{equation}
+\begin{aligned}
+\sum\limits_{i=1}^{I}p_i\times x_i\leq b_1
+\end{aligned}
+\end{equation}
+
+第一阶段的产能决策中，考虑产能建设投资预算对决策的约束，即约束（2），其表示对不同产品类型的投资建设不超过第一阶段投资总预算。
+
+3.实际生产决策:
+\begin{equation}
+\begin{aligned}
+x_i + e_i \leq o_{i,t_1}^{s_1}\leq \alpha_i\times x_i + e_i\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+o_{i,t_1}^{s_1} = c_{i,t_1}^{s_1} + \sum\limits_{j\in J(i)}m_{i,j,t_1}^{s_1}\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+\sum\limits_{j\in J(i)}m_{i,j,t_1}^{s_1}\leq \gamma_i\times(x_i+e_i)\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+r_{i,t_1}^{s_1} = c_{i,t_1}^{s_1} + \sum\limits_{k\in K(i)}\delta_{k,i}\times m_{k,i,t_1}^{s_1}\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+r_{i,t_1}^{s_1} + u_{i,t_1}^{s_1} - v_{i,t_1}^{s_1} = d_{i,t_1}^{s_1}\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+0 \leq u_{i,t_1}^{s_1} \leq d_{i,t_1}^{s_1}\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+0\leq v_{i,t_1}^{s_1}\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+\end{aligned}
+\end{equation}
+
+实际生产决策中，会依据实际需求的变化对不同类型产品的产能进行实际调整。约束（3）表征产品的实际可用生产产能，该约束允许新建或扩建的产能进行超额生产，不允许既有产能进行超额生产，同时新建或扩建的产能超额生产存在上限，由超额生产系数$\alpha_i$决定。约束（4）表示对实际可用生产产能的分配，可用产能可以直接用于实际生产，或是以产能转换的方式，将其转变为奇特类型产品的产能，因此实际可用生产产能等于直接生产产能（剩余产能），加上转换出的总产能。同时，对产能的转换存在上限，即约束（5），单一类型产品转出的总产能不能超过额定产能下由最大产能转换系数$\gamma_i$给出的上限。在实际生产产能调整后，不同类型产品的实际生产产能为剩余产能加上转入该类型产品的产能总和，即约束（6）。约束（7）为产能的平衡方程，实际生产加上缺货减去产能的过剩量等于实际需求量。约束（8）表示对产能短缺的限制，产能的短缺不会小于$0$但也不会超过对该产品的实际需求量；约束（9）则表示对产能过剩量的限制，产能过剩量不可能为负数。
+
+第二阶段投资决策
+
+1.目标函数:
+\begin{equation}
+\begin{aligned}
+\mathop{Max}\limits_{x \in X}\mathop{Min}\limits_{s_2\in S_2}\mathop{Max}\limits_Y\{-\sum\limits_{i=1}^{I} q_i\times y_i^{s_2} + \sum\limits_{t_2=1}^{T_2}(\sum\limits_{i=1}^{I}g_i\times r_{i,t_2}^{s_2}-h_i\times u_{i,t_2}^{s_2}-f_i\times v_{i,t_2}^{s_2})\}
+\end{aligned}
+\end{equation}
+
+目标函数（10）中，最大化第二阶段在最不利需求情景下的净利润，第二阶段的净利润计算方式为收益减去产能调整成本以及缺货与产能过剩惩罚成本。需要注意的是，第二阶段的决策依赖于第一阶段的产能规划决策，因为该阶段为第一阶段产能决策后的产能调整，其调整决策同时受到第一阶段产能决策后的最不利需求情景。因此，目标函数（10）的层次结构中，第一层仍为第一阶段的产能规划决策，其决策仍由约束（2）表征，该层为最大化净利润；第二层为最不利情景的确定，其中$S_2$为不同需求情景构建的不确定集，该层最小化净利润；第三层为第二阶段需求情景明确下的产能调整与实际生产决策，该层为最大化净利润。需要注意的是，在上述数学模型的表述中，本文仍将第一、第二阶段视为独立决策，后续统一为多阶段决策。
+
+2.产能调整
+\begin{equation}
+\begin{aligned}
+\sum\limits_{i=1}^{I}q_i\times y_i^{s_2}\leq b_2\qquad \forall s_2\in S_2
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+\beta_i\times (x_i + e_i)\leq w_i^{s_2}\leq x_i + e_i\qquad \forall i\in I, \forall s_2\in S_2
+\end{aligned}
+\end{equation}
+
+在第二阶段的产能调整决策中，可以预先对产能进行调整。如果未来需求或将继续增长，则考虑继续扩建产能，产能扩建仍存在预算限制，即约束（11）。如果未来需求因技术的变革与更新或是市场的不确定性，导致需求锐减，则会对产能进行缩减，即约束（12）。但由于产能无法做到完全缩减或大规模缩减，所以存在最大产能缩减限制，该限制由允许的最大产能缩减系数$\beta_i$决定。
+
+3.实际生产决策:
+\begin{equation}
+y_i^{s_2} + w_i^{s_2} \leq o_{i,t_2}^{s_2}\leq \alpha\times y_i^{s_2} + w_i^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+\end{equation}
+
+\begin{equation}
+o_{i,t_2}^{s_2} = c_{i,t_2}^{s_2} + \sum\limits_{j\in J(i)}m_{i,j,t_2}^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+\end{equation}
+
+\begin{equation}
+\sum\limits_{j\in J(i)}m_{i,j,t_2}^{s_2}\leq \gamma_i\times(y_i^{s_2} + w_i^{s_2})\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+\end{equation}
+
+\begin{equation}
+r_{i,t_2}^{s_2} = c_{i,t_2}^{s_2} + \sum\limits_{k\in K(i)}\delta_{k,i}\times m_{k,i,t_2}^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+\end{equation}
+
+\begin{equation}
+r_{i,t_2}^{s_2} + u_{i,t_2}^{s_2} - v_{i,t_2}^{s_2} = d_{i,t_2}^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+\end{equation}
+
+\begin{equation}
+0\leq u_{i,t_2}^{s_2} \leq d_{i,t_2}^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+\end{equation}
+
+\begin{equation}
+0 \leq v_{i,t_2}^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+\end{equation}
+
+第二阶段的实际生产决策约束与第一阶段实际生产决策约束表征含义一致，因此本文不再赘述。
+
+多阶段决策模型
+
+第一阶段与第二阶段的最外层决策均为首次产能的规划决策，即第一阶段的产能新建与扩建，该决策会对第一阶段的实际生产决策以及第二阶段产能的调整以及实际生产决策有影响，且均为最大化不同阶段的净利润，因此，第一阶段的产能规划决策可以表述为目标函数（20）：
+
+\begin{equation}
+\begin{aligned}
+\mathop{Max}\limits_{x \in X}\{\qquad
+-\sum\limits_{i=1}^{I} p_i\times x_i + \sum\limits_{s_1\in
+ S_1}P_s\times\sum\limits_{t_1=1}^{T_1}(\sum\limits_{i=1}^{I}g_i\times r_{i,t_1}^{s_1}-h_i\times u_{i,t_1}^{s_1}),
+ \\\mathop{Min}\limits_{s_2\in S_2}\mathop{Max}\limits_Y[-\sum\limits_{i=1}^{I} q_i\times y_i^{s_2} + \sum\limits_{t_2=1}^{T_2}(\sum\limits_{i=1}^{I}g_i\times r_{i,t_2}^{s_2}-h_i\times u_{i,t_2}^{s_2}-f_i\times v_{i,t_2}^{s_2})]\qquad\}
+\end{aligned}
+\end{equation}
+
+在目标函数（20）中，外层决策，即第一阶段的产能规划决策，会影响两个阶段的净利润，第一阶段的产能投入的过度可能会引起第二阶段的产能过剩或是第一阶段的产能投入较少会引起第二阶段的产能不足，因此，本文采取线性加权方法，$\omega_1$和$\omega_2$用于对不同阶段的净利润的重要度表征，同时将多个目标整合为单一目标，即目标函数（21）：
+\begin{equation}
+\begin{aligned}
+\mathop{Max}\limits_{x \in X}\{\omega_1 \times [
+-\sum\limits_{i=1}^{I} p_i\times x_i + \sum\limits_{s_1\in
+ S_1}P_s\times\sum\limits_{t_1=1}^{T_1}(\sum\limits_{i=1}^{I}g_i\times r_{i,t_1}^{s_1}-h_i\times u_{i,t_1}^{s_1})]
+ \\+\omega_2 \times \mathop{Min}\limits_{s_2\in S_2}\mathop{Max}\limits_Y[-\sum\limits_{i=1}^{I} q_i\times y_i^{s_2} + \sum\limits_{t_2=1}^{T_2}(\sum\limits_{i=1}^{I}g_i\times r_{i,t_2}^{s_2}-h_i\times u_{i,t_2}^{s_2}-f_i\times v_{i,t_2}^{s_2})]\}
+\end{aligned}
+\end{equation}
+
+由目标函数（21）以及约束（2-9），（11-19）构成多阶段决策模型，即长期产能规划模型。
+%\mathop{Max}\limits_{x \in X}
+%\left{
+%\begin{array}{c}
+%-\sum\limits_{i=1}^{I} p_i\times x_i + \sum\limits_{s_1\in
+% S_1}P_s\times\sum\limits_{t_1=1}^{T_1}(\sum\limits_{i=1}^{I}g_i\times %r_{i,t_1}^{s_1}-h_i\times u_{i,t_1}^{s_1}) \\
+%\mathop{Min}\limits_{s_2\in S_2}\mathop{Max}\limits_Y[-\sum\limits_{i=1}^{I} q_i\times %y_i^{s_2} + \sum\limits_{t_2=1}^{T_2}(\sum\limits_{i=1}^{I}g_i\times r_{i,t_2}^{s_2}-h_i\times %u_{i,t_2}^{s_2}-f_i\times v_{i,t_2}^{s_2})]
+%\end{array}\right}
+%\end{equation}
+
+\SUB{3\ \ 模型求解}%一级标题
+该模型为二阶段的随机规划与鲁棒优化结合的数学模型，且在第二阶段决策中，为不同决策方向的多层决策结构，因此无法直接求解。同时，在数学模型中，产能的转换可能会导致求解中出现产能转换的循环，使得决策结果无法反映实际的产能过剩情况。为了求解该模型同时消除产能的转换循环，本文引入辅助变量，同时将模型分层，将原有模型转化为可求解的混合整数线性规划模型（Mixed Integer Linear Programming, MILP)。
+
+\sub{3.1\ \ 引入$0-1$辅助决策变量}%二级标题命令
+在原有模型中，集合$j\in J(i),k\in K(i)$，无法直接表述，且无法直接利用定义的变量$m_{i,j,t_1}^{s_1}$,$m_{i,j,t_2}^{s_2}$构建约束防止产能的转换循环。引入$0-1$变量的目的是为了方便对$j\in J(i),k\in K(i)$进行数学表达：$z_{i,j,t}^s=0$或$1$，等于$0$表示不允许将产品类型$i$的产能转换为产品类型$j$的产能，等于$1$则允许转换。同时，利用$0-1$变量的性质，构建线性约束如下：
+\begin{equation}
+m_{i,j,t}^s \leq M \times z_{i,j,t}^s\qquad  \forall i,j\in I, \forall t\in T, \forall s\in S
+\end{equation}
+
+约束（22）中，$M$为足够大的正数，该约束表示对产能转换的限制，若$z_{i,j,t}^s=0$，则无法实现由产品类型$i$到产品类型$j$的产能转换。同时，为了防止出现产能转换的循环，本文采用“禁圈法”构建防止产能转换循环的约束，即禁止所有产品类型循环内的$z_{i,j,t}^s$都等于$1$。约束的具体形式如下所示：
+\begin{equation}
+z_{i,i,t}^s = 0\qquad  \forall i\in I, \forall t\in T, \forall s\in S
+\end{equation}
+
+约束（23）表示禁止同种产品类型的转换；
+\begin{equation}
+z_{i,j,t}^s + z_{j,i,t}^s \leq 1\qquad  \forall n_m\in I, \forall t\in T, \forall s\in S
+\end{equation}
+
+约束（24）表示对于任意两种产品类型最多允许一个方向的产能转换；
+\begin{equation}
+z_{n_1,n_2,t}^s + z_{n_2,n_3,t}^s + z_{n_3,n_1,t}^s \leq 2\qquad  \forall n_m\in I, \forall t\in T, \forall s\in S
+\end{equation}
+
+\begin{equation}
+z_{n_1,n_2,t}^s + z_{n_2,n_3,t}^s + z_{n_3,n_4,t}^s + z_{n_4,n_1,t}^s \leq 3\qquad  \forall n_m\in I, \forall t\in T, \forall s\in S
+\end{equation}
+
+\[......\] %不带编号的行间公式
+
+\begin{equation}
+z_{n_1,n_2,t}^s + z_{n_2,n_3,t}^s + ...... + z_{N-1,N,t}^s  + z_{N,1,t}^s \leq N - 1\qquad  \forall n_m\in I, \forall t\in T, \forall s\in S
+\end{equation}
+
+约束（25）至约束（27）表示3个及以上的产品类型之间禁止产能的转换循环，其中$N$为集合$I$的基数。由此，可构建对$j\in J(i),k\in K(i)$的表征约束，同时防止出现产能的转换循环，且引入的所有约束均为线性约束。
+
+\sub{3.2\ \ 引入目标函数的辅助变量$\lambda, \eta$}%二级标题命令
+第二阶段的决策为最不利需求情景下的决策，因此考虑用辅助决策变量将最不利情景的决策以数学形式表示，进而将多层决策结构转化为单层决策结构。
+
+原有模型的目标函数为一下结构：
+$$
+\mathop{Max}\{\mathop{Min}[\mathop{Max}(profit)]\}
+$$
+
+在该结构中，最外层的主要决策为第一阶段的投资决策，该决策对于第一阶段需求下的实际生产决策而言，不存在多层结构，为单阶段最大化数学模型。而对于第二阶段而言，不论是产能调整决策还是实际生产决策，都依赖于第一阶段的产能投资决策结果，因此后续深层结构无法消除。但是，若将第一阶段的投资决策结果视为已知，则可消去最外层的$Max$，将第二阶段的决策转为$Min{Max(profit)}$,降低决策模型的结构层数，进而利用模型性质，使得$Min{Max(profit)}$可以直接求解。
+
+第一阶段决策模型：在该模型中，仅考虑第一阶段的实际生产决策，将产能投入决策$x \in X$视为已知变量，如下所示：
+$$
+f_1(x)=\mathop{Max}(\lambda)
+$$
+
+$$
+s.t.\qquad \lambda = -  p_i\times x_i + \sum\limits_{s_1\in S_1}P_s\times\sum\limits_{t_1=1}^{T_1}(\sum\limits_{i=1}^{I}g_i\times r_{i,t_1}^{s_1}-h_i\times u_{i,t_1}^{s_1})
+$$
+
+$$
+x_i + e_i \leq o_{i,t_1}^{s_1}\leq \alpha_i\times x_i + e_i\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+$$
+
+$$
+o_{i,t_1}^{s_1} = c_{i,t_1}^{s_1} + \sum\limits_{j\in J(i)}m_{i,j,t_1}^{s_1}\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+$$
+
+$$
+\sum\limits_{j\in J(i)}m_{i,j,t_1}^{s_1}\leq \gamma_i\times(x_i+e_i)\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+$$
+
+$$
+r_{i,t_1}^{s_1} = c_{i,t_1}^{s_1} + \sum\limits_{k\in K(i)}\delta_{k,i}\times m_{k,i,t_1}^{s_1}\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+$$
+
+$$
+r_{i,t_1}^{s_1} + u_{i,t_1}^{s_1} - v_{i,t_1}^{s_1} = d_{i,t_1}^{s_1}\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+$$
+
+$$
+0 \leq u_{i,t_1}^{s_1} \leq d_{i,t_1}^{s_1}\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+$$
+
+$$
+0\leq v_{i,t_1}^{s_1}\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+$$
+
+第一阶段决策模型$f_1(x)$为可直接求解的MILP模型。
+
+第二阶段决策模型：在第二阶段的决策模型中，将第一阶段的产能投资决策结果视为已知变量，以$x$表示。在第二阶段的$Min{Max(profit)}$决策结构中，外层为最小化净利润，其决策为最不利需求情景的选择，即在$x$已知的情况下，选择最不利的需求情景，使得内层$Max(profit)$最小化。基于上述分析，引入辅助决策变量$\eta$，其约束形式如下：
+$$
+\eta \leq -\sum\limits_{i=1}^{I} q_i\times y_i^{s_2} + \sum\limits_{t_2=1}^{T_2}(\sum\limits_{i=1}^{I}g_i\times r_{i,t_2}^{s_2}-h_i\times u_{i,t_2}^{s_2}-f_i\times v_{i,t_2}^{s_2})\qquad \forall s_2\in S_2
+$$
+
+即$\eta$小于等于所有需求情景下的决策结果，该约束可表征外层最小化决策，引入$\eta$后，最大化$\eta$即可表征$Min{Max(profit)}$决策结构。因此，第二阶段决策模型如下所示：
+$$
+f_2(x)=Max(\eta)
+$$
+
+$$
+s.t.\qquad \eta \leq -\sum\limits_{i=1}^{I} q_i\times y_i^{s_2} + \sum\limits_{t_2=1}^{T_2}(\sum\limits_{i=1}^{I}g_i\times r_{i,t_2}^{s_2}-h_i\times u_{i,t_2}^{s_2}-f_i\times v_{i,t_2}^{s_2})\qquad \forall s_2\in S_2
+$$
+
+$$
+\sum\limits_{i=1}^{I}q_i\times y_i^{s_2}\leq b_2\qquad \forall s_2\in S_2
+$$
+
+$$
+\beta_i\times (x_i + e_i)\leq w_i^{s_2}\leq x_i + e_i\qquad \forall i\in I, \forall s_2\in S_2
+$$
+
+$$
+y_i^{s_2} + w_i^{s_2} \leq o_{i,t_2}^{s_2}\leq \alpha\times y_i^{s_2} + w_i^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+$$
+
+$$
+o_{i,t_2}^{s_2} = c_{i,t_2}^{s_2} + \sum\limits_{j\in J(i)}m_{i,j,t_2}^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+$$
+
+$$
+\sum\limits_{j\in J(i)}m_{i,j,t_2}^{s_2}\leq \gamma_i\times(y_i^{s_2} + w_i^{s_2})\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+$$
+
+$$
+r_{i,t_2}^{s_2} = c_{i,t_2}^{s_2} + \sum\limits_{k\in K(i)}\delta_{k,i}\times m_{k,i,t_2}^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+$$
+
+$$
+r_{i,t_2}^{s_2} + u_{i,t_2}^{s_2} - v_{i,t_2}^{s_2} = d_{i,t_2}^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+$$
+
+$$
+0\leq u_{i,t_2}^{s_2} \leq d_{i,t_2}^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+$$
+
+$$
+0 \leq v_{i,t_2}^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+$$
+
+\sub{3.3\ \ 可求解的MILP模型}%二级标题命令
+由上述对模型的分解与转换表示，可将长期产能规划模型表述为：
+$$
+\mathop{Max}\{\omega_1 \times f_1(x) + \omega_2 \times f_2(x)\}
+$$
+
+该决策的目标函数均为最大化决策，外层最大化多阶段净利润，第一阶段$f_1(x)$，第二阶段$f_2(x)$最大化各阶段的净利润，因此可以消除冗余最大化结构，进而将整个模型转化为单一最大化的数学优化模型，其数学形式如下所示：
+$$
+\mathop{Max}\{\omega_1 \times \lambda + \omega_2 \times \eta\}
+$$
+
+$$
+s.t.\qquad \lambda = -  p_i\times x_i + \sum\limits_{s_1\in S_1}P_s\times\sum\limits_{t_1=1}^{T_1}(\sum\limits_{i=1}^{I}g_i\times r_{i,t_1}^{s_1}-h_i\times u_{i,t_1}^{s_1})
+$$
+
+$$
+x_i + e_i \leq o_{i,t_1}^{s_1}\leq \alpha_i\times x_i + e_i\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+$$
+
+$$
+o_{i,t_1}^{s_1} = c_{i,t_1}^{s_1} + \sum\limits_{j\in J(i)}m_{i,j,t_1}^{s_1}\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+$$
+
+$$
+\sum\limits_{j\in J(i)}m_{i,j,t_1}^{s_1}\leq \gamma_i\times(x_i+e_i)\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+$$
+
+$$
+r_{i,t_1}^{s_1} = c_{i,t_1}^{s_1} + \sum\limits_{k\in K(i)}\delta_{k,i}\times m_{k,i,t_1}^{s_1}\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+$$
+
+$$
+r_{i,t_1}^{s_1} + u_{i,t_1}^{s_1} - v_{i,t_1}^{s_1} = d_{i,t_1}^{s_1}\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+$$
+
+$$
+0 \leq u_{i,t_1}^{s_1} \leq d_{i,t_1}^{s_1}\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+$$
+
+$$
+0\leq v_{i,t_1}^{s_1}\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1
+$$
+
+$$
+z_{i,i,t_1}^{s_1} = 0\qquad  \forall i\in I, \forall t_1\in T_1, \forall s_1\in S_1.
+$$
+
+$$
+z_{i,j,t_1}^{s_1} + z_{j,i,t_1}^{s_1} \leq 1\qquad  \forall i, j\in I, \forall t_1\in T_1, \forall s_1\in S_1.
+$$
+
+$$
+z_{n_1,n_2,t_1}^{s_1} + z_{n_2,n_3,t_1}^{s_1} + z_{n_3,n_1,t_1}^{s_1} \leq 2\qquad  \forall n_m\in I, \forall t_1\in T_1, \forall s_1\in S_1.
+$$
+
+\[......\] %不带编号的行间公式
+
+$$
+z_{n_1,n_2,t_1}^{s_1} + z_{n_2,n_3,t_1}^{s_1} + ...... + z_{N-1,N,t_1}^{s_1}  + z_{N,1,t_1}^{s_1} \leq N - 1\qquad  \forall n_m\in I, \forall t_1\in T_1, \forall s_1\in S_1.
+$$
+
+$$
+m_{i,j,t_1}^{s_1} \leq M \times z_{i,j,t_1}^{s_1}\qquad  \forall i,j\in I, \forall t_1\in T_1, \forall s_1\in S_1.
+$$
+
+$$
+\eta \leq -\sum\limits_{i=1}^{I} q_i\times y_i^{s_2} + \sum\limits_{t_2=1}^{T_2}(\sum\limits_{i=1}^{I}g_i\times r_{i,t_2}^{s_2}-h_i\times u_{i,t_2}^{s_2}-f_i\times v_{i,t_2}^{s_2})\qquad \forall s_2\in S_2
+$$
+
+$$
+\sum\limits_{i=1}^{I}q_i\times y_i^{s_2}\leq b_2\qquad \forall s_2\in S_2
+$$
+
+$$
+\beta_i\times (x_i + e_i)\leq w_i^{s_2}\leq x_i + e_i\qquad \forall i\in I, \forall s_2\in S_2
+$$
+
+$$
+y_i^{s_2} + w_i^{s_2} \leq o_{i,t_2}^{s_2}\leq \alpha\times y_i^{s_2} + w_i^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+$$
+
+$$
+o_{i,t_2}^{s_2} = c_{i,t_2}^{s_2} + \sum\limits_{j\in J(i)}m_{i,j,t_2}^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+$$
+
+$$
+\sum\limits_{j\in J(i)}m_{i,j,t_2}^{s_2}\leq \gamma_i\times(y_i^{s_2} + w_i^{s_2})\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+$$
+
+$$
+r_{i,t_2}^{s_2} = c_{i,t_2}^{s_2} + \sum\limits_{k\in K(i)}\delta_{k,i}\times m_{k,i,t_2}^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+$$
+
+$$
+r_{i,t_2}^{s_2} + u_{i,t_2}^{s_2} - v_{i,t_2}^{s_2} = d_{i,t_2}^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+$$
+
+$$
+0\leq u_{i,t_2}^{s_2} \leq d_{i,t_2}^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+$$
+
+$$
+0 \leq v_{i,t_2}^{s_2}\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2
+$$
+
+$$
+z_{i,i,t_2}^{s_2} = 0\qquad  \forall i\in I, \forall t_2\in T_2, \forall s_2\in S_2.
+$$
+
+$$
+z_{i,j,t_2}^{s_2} + z_{j,i,t_2}^{s_2} \leq 1\qquad  \forall i, j\in I, \forall t_2\in T_2, \forall s_2\in S_2.
+$$
+
+$$
+z_{n_1,n_2,t_2}^{s_2} + z_{n_2,n_3,t_2}^{s_2} + z_{n_3,n_1,t_2}^{s_2} \leq 2\qquad  \forall n_m\in I, \forall t_2\in T_2, \forall s_2\in S_2.
+$$
+
+\[......\] %不带编号的行间公式
+
+$$
+z_{n_1,n_2,t_2}^{s_2} + z_{n_2,n_3,t_2}^{s_2} + ...... + z_{N-1,N,t_2}^{s_2}  + z_{N,1,t_2}^{s_2} \leq N - 1\qquad  \forall n_m\in I, \forall t_2\in T_2, \forall s_2\in S_2.
+$$
+
+$$
+m_{i,j,t_2}^{s_2} \leq M \times z_{i,j,t_2}^{s_2}\qquad  \forall i,j\in I, \forall t_2\in T_2, \forall s_2\in S_2.
+$$
+
+该决策模型转化为MILP，可直接求解，其整数变量均为$0-1$变量，该种变量的数量取决于不同阶段的需求情景数量，时间跨度以及产品类型数量。该模型可以用编程软件python，matlab调用求解器Gurobi 或Cplex 进行直接求解。
+
+\SUB{4\ \ 算例分析}%一级标题
+由于半导体行业相关数据匮乏，故选择手工构建算例来验证模型的可求解性并进行敏感性分析。
+手工算例考虑两个阶段的决策时间节点数量均为6，此外，允许所有产品类型之间的产能的相互转换。其他参数具体见表1，由于需求参数过多，将其放在附表。本算例分析采用MATLAB编程，调用CPLEX求解器求解。（运行条件——CPU：i7-9700KF；RAM：16GB）。
+
+\begin{center}{\sz
+{\textbf{表1\ \  参数表}}\\
+\begin{tabular}{lccccccc} \toprule
+参数 &  值 &  备注 \\
+\hline
+$\alpha_{i}$ & $1.2$   & 该数值赋给所有产品类型\\
+$\gamma_{i}$ & $0.25$   & 该数值赋给所有产品类型\\
+$\beta_{i}$ & $0.8$   & 该数值赋给所有产品类型\\
+$\delta_{k,i}$ & $0.65$   & 该数值赋给任意两个产品类型之间的转换\\
+$p_{i}$ & $6$   & 该数值赋给所有产品类型\\
+$q_{i}$ & $6$   & 该数值赋给所有产品类型\\
+$g_{i}$ & $1$   & 该数值赋给所有产品类型\\
+$h_{i}$ & $2$   & 该数值赋给所有产品类型\\
+$f_{i}$ & $2$   & 该数值赋给所有产品类型\\
+$b_{1}$ & $75000$   & \\
+$b_{2}$ & $21000$   & \\
+$\omega_1,\omega_2$ & $1$   & \\
+$e_1,e_2,e_3,e_4$ & $1000,0,500,0$   & \\
+\bottomrule
+\end{tabular}}
+\end{center}\vspace{2mm}
+\vspace{2mm}
+\begin{center}{\sz
+{\textbf{表2\ \  运行结果（基础算例）}}\\
+\begin{tabular}{lcccccccc} \toprule
+ $x_1$ & $x_2$ & $x_3$ & $x_4$  & $\sum\limits_{i\in I}x_i$ & $\lambda$ & $\eta$  & 最优值 &运行时间$(s)$ \\
+\hline
+ $4188$ & $3016$ & $3463$ & $1833$ & $12500$ & $22611$ &$78402$ &$101013$&$56.48$ \\
+\bottomrule
+\end{tabular}}
+\end{center}\vspace{2mm}
+
+敏感性分析将基于上述算例对4个关键参数实现，包括超额生产系数、最大产能缩减系数、最大产能转换系数、产能转换效率系数。
+\begin{center}{\sz
+{\textbf{表3\ \  超额生产系数敏感性分析（其余参数不变）}}\\
+\begin{tabular}{lccccccccc} \toprule
+ $\alpha_i$ & $x_1$ & $x_2$ & $x_3$ & $x_4$  & $\sum\limits_{i\in I}x_i$ & $\lambda$ & $\eta$  & 最优值 &运行时间$(s)$ \\
+\hline
+ $1.1$&$3770$ & $3280$ & $3624$ & $1826$ & $12500$ & $11382$ &$76506$ &$87888$&$57.76$ \\
+ $1.15$&$4077$ & $3137$ & $3534$ & $1752$ & $12500$ & $17522$ &$77564$ &$95086$&$57.29$ \\
+ $1.2$&$4188$ & $3016$ & $3463$ & $1833$ & $12500$ & $22611$ &$78402$ &$101013$&$56.48$ \\
+ $1.25$&$4141$ & $2996$ & $3439$ & $1924$ & $12500$ & $27140$ &$78959$ &$106099$&$55.59$ \\
+ $1.3$&$4131$ & $2996$ & $3425$ & $1848$ & $12500$ & $31130$ &$79466$ &$110596$&$58.97$ \\
+\bottomrule
+\end{tabular}}
+\end{center}
+\vspace{2mm}
+\begin{center}{\sz
+{\textbf{表4\ \最大产能缩减系数敏感性分析（其余参数不变）}}\\
+\begin{tabular}{lccccccccc} \toprule
+ $\beta_i$ & $x_1$ & $x_2$ & $x_3$ & $x_4$  & $\sum\limits_{i\in I}x_i$ & $\lambda$ & $\eta$  & 最优值 &运行时间$(s)$ \\
+\hline
+ $0.7$ & $4188$ & $3016$ & $3463$ & $1833$ & $12500$ & $22611$ &$78402$ &$101013$ & $58.93$ \\
+ $0.75$ & $4188$ & $3016$ & $3463$ & $1833$ & $12500$ & $22611$ &$78402$ &$101013$ & $57.80$ \\
+ $0.8$ & $4188$ & $3016$ & $3463$ & $1833$ & $12500$ & $22611$ &$78402$ &$101013$ & $56.48$ \\
+ $0.85$ & $4188$ & $3016$ & $3463$ & $1833$ & $12500$ & $22611$ &$78402$ &$101013$ & $57.88$ \\
+ $0.9$ & $4188$ & $3016$ & $3463$ & $1833$ & $12500$ & $22611$ &$78402$ &$101013$ & $58.62$ \\
+\bottomrule
+\end{tabular}}
+\end{center}\vspace{5mm}
+
+基于基础算例的超额生产系数敏感性分析与最大产能缩减系数的敏感性分析结果如表3、表4所示。表3中，随着超额生产系数的不断增大，最优值在不断的增大，出现正相关的原因来自两方面，一方面超额生产系数的增大，使得第一阶段的实际可投入最大产能增大，减少第一阶段的产能不足；另一方面，第二阶段对第一阶段现有产能的利用不存在超额生产的可能，所以当超额生产系数较大时，保留到第二阶段的产能相对而言是减小了的，但第二阶段也可能出现产能调整，存在产能的新建情况，也会导致产能过剩情况的减少；同时，有了超额生产的存在，不需要投入过量的产能，也可以满足需求，因此产能过剩的有所降低，第二阶段最大利润增加。而在表4中，最大产能缩减系数的变化并没有带来产能投入与最优值的变化，原因在于最大产能缩减系数只作用于第二阶段的决策，而第二阶段决策是在最不利情形中选取，在该情形下，需求是增加，或是总体超过第一阶段产能的。在上述情况下，不会出现产能缩减的情况，相反，会考虑产能的新建来弥补产能不足，因此，最大产能缩减系数的变化，不会带来最优值和最优解的变化。
+\vspace{2mm}
+\begin{center}{\sz
+{\textbf{表5\ \最大产能转换系数敏感性分析（其余参数不变）}}\\
+\begin{tabular}{lccccccccc} \toprule
+ $\gamma_i$ & $x_1$ & $x_2$ & $x_3$ & $x_4$  & $\sum\limits_{i\in I}x_i$ & $\lambda$ & $\eta$  & 最优值 &运行时间$(s)$ \\
+\hline
+ $0$    & $4176$ & $3078$ & $3244$ & $2002$ & $12500$ & $19243$ &$71864$ &$91107$  & $54.65$ \\
+ $0.15$ & $4073$ & $3237$ & $3277$ & $1913$ & $12500$ & $21950$ &$77572$ &$99522$  & $55.85$ \\
+ $0.2$  & $4187$ & $3016$ & $3188$ & $1979$ & $12500$ & $22234$ &$78209$ &$100443$ & $57.79$ \\
+ $0.25$ & $4188$ & $3016$ & $3463$ & $1833$ & $12500$ & $22611$ &$78402$ &$101013$ & $56.48$ \\
+ $0.3$  & $4186$ & $3009$ & $3610$ & $1695$ & $12500$ & $22842$ &$78567$ &$101409$ & $57.17$ \\
+ $0.35$ & $4015$ & $3009$ & $3798$ & $1678$ & $12500$ & $22931$ &$78571$ &$101502$ & $55.34$ \\
+\bottomrule
+\end{tabular}}
+\end{center}
+\vspace{10mm}
+\begin{center}{\sz
+{\textbf{表6\ \产能转换效率系数敏感性分析（其余参数不变）}}\\
+\begin{tabular}{lccccccccc} \toprule
+ $\beta_i$ & $x_1$ & $x_2$ & $x_3$ & $x_4$  & $\sum\limits_{i\in I}x_i$ & $\lambda$ & $\eta$  & 最优值 &运行时间$(s)$ \\
+\hline
+ $0.55$ & $4186$ & $3016$ & $3336$ & $1962$ & $12500$ & $21633$ &$78725$ &$100358$ & $57.47$ \\
+ $0.6$  & $4188$ & $3016$ & $3389$ & $1907$ & $12500$ & $22122$ &$78577$ &$100699$ & $57.29$ \\
+ $0.65$ & $4188$ & $3016$ & $3463$ & $1833$ & $12500$ & $22611$ &$78402$ &$101013$ & $56.48$ \\
+ $0.7$  & $4186$ & $3009$ & $3533$ & $1772$ & $12500$ & $22982$ &$78247$ &$101229$ & $56.59$ \\
+ $0.75$ & $4186$ & $3009$ & $3600$ & $1705$ & $12500$ & $23248$ &$78066$ &$101314$ & $56.40$ \\
+\bottomrule
+\end{tabular}}
+\end{center}\vspace{2mm}
+
+在对最大产能转化系数的敏感性分析中，考虑不同产品类型之间产能的转换可以使企业的净利润增大，如表5所示。这是由于产能的转换可以使得企业能够依据实际需求进行产能的调整，将产能由产能过剩的产品类型转移到产能不足的产品类型，这样不仅不需要过多的产能来应对产能的不足，还可以通过调整产能来降低产能过剩，同时，产能转换规模的增大，会使得净利润增大。表5、表6同时反映出最大产能转换规模的扩大与产能转换效率的提高都可以带来净利润的增大。最大产能转换规模的扩大使得产能可调整的空间增大，进而降低产能的不足与过剩；而转换效率的提高能够进一步的弥补实际生产时的产能不足，从而减少产能不足量。
+
+另外，为了验证该数学模型在大规模算例的可求解性，考虑4种产品类型，第一阶段的场景数为4，且发生概率相同，第二阶段的场景数为8，两个阶段的决策时间节点数量均为8，构造手工算例验证。表7为大规模算例求解结果。
+\vspace{2mm}
+\begin{center}{\sz
+{\textbf{表7\ \大规模算例运行结果}}\\
+\begin{tabular}{lcccccccc} \toprule
+ 产品类型数 & 时间跨度数 & 第一阶段情景数 & 第二阶段情景数  & 运行时间$(s)$ \\
+\hline
+ $4$ & $6$ & $4$ & $5$ & $56.48$ \\
+ $4$ & $8$ & $4$ & $5$ & $76.16$ \\
+ $5$ & $6$ & $4$ & $5$ & $804.20$ \\
+ $5$ & $8$ & $4$ & $5$ & $1460.71$ \\
+ $6$ & $6$ & $4$ & $5$ & $>3600$ \\
+ $6$ & $8$ & $4$ & $5$ & $>3600$ \\
+\bottomrule
+\end{tabular}}
+\end{center}\vspace{2mm}
+
+从大规模算例的运行求解时间可以看出，随着产品类型数和时间跨度数的增加，求解时间会增长，且产品类型数的增加导致求解时间增长的作用明显强于时间跨度数的增加，这是由于产品类型数量的增加，不仅会增加模型中$0-1$变量的数量，且为了保证产能的非循环转换，$0-1$变量形成约束或以阶乘形式增加。而$0-1$ 变量在求解时十分困难，导致求解时间增加十分明显。在实际应用中，半导体企业的生产的晶圆产品类型数量不会过多，且不同类型之间产能的转换并不是完全可行的，因此实际应用该决策模型时，求解时间可以缩短。
+
+\SUB{5\ \结语}%一级标题
+
+在需求不确定的情况下，本文对半导体企业长期产能规划问题进行了描述与建模，提出了基于随机规划与鲁棒优化结合的二阶段数学规划模型，从逐步投产的思路出发，考虑分阶段决策产能投入量，降低由于需求下降过快带来的产能过剩，以此减少企业在长期产能建设中的风险。同时，考虑不同产品类型之间产能的转换，对手工构造的算例进行敏感性分析可以看出，产能转换的存在、转换规模的扩大以及转换效率的提高能够降低产能的不足与过剩，进而提高企业的最大净利润。
+
+本文尽管考虑了不同阶段的关联性（体现在目标函数与产能的联系上），但是没有考虑需求的关联性（即将不同阶段的需求看作是独立的）。在实际中，这种需求的关联性是客观存在的。同时，在实际的产能转换过程中产能转换是十分复杂的操作，本文模型对于产能转换的表述过于简单，未能充分反映实际情况，而对于产能转换的表述，需要了解更多的实际生产情况，做出更加合理的模型表述。
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%插入图片%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{2mm}\begin{center}
+%\includegraphics[scale=1]{1r.eps}\\
+%{\bf \sz 图1\ \
+%沪深股市指数对数收益率用正态核密度估计方法积分变换后的序列Q-Q图}
+\end{center}\vspace{2mm}
+
+
+%%%%%%%%%%%%%%%%%%%%%参考文献%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\REFERENCE
+
+{\small \baselineskip 12pt
+
+%为反映论文的学术水平和创新程度,请主要引用最近3年以内发表的文献(最好引用期刊类文献).
+%作者可在本刊网站: http://www.sysengi.com免费下载查阅创刊以来的所有论文全文.
+%参考文献列表必须按正文中引用的先后顺序排序,所有被引用的文献须在正文中标明引用位置:
+%不做句子成份的文献以上角标形式标引,直接用$^{[1]}$形式标引即可,做句子成份的文献则与正文平排.
+%对于中外文的个人著者,一律采用姓前名后的著录方式.用汉语拼音书写的中国著者姓用全拼,名用缩写;欧美著者的名用缩写字母;缩写名后不用缩写点,
+%例如: Zhang J T, Calms R B. 作者数量多于三个人时，在第三个作者后面加``,等" 或``, et al".作者名之间用逗号分隔,不用``and".
+
+\REF{[1]}
+石丹, 李勇建.
+不同激励机制下供应商产能投资问题研究[J].
+系统工程理论与实践, 2015, 35(1): 86-94. \\
+Shi D, Li Y J. Capacity investment decisions of supplier under different incentive mechanism[J]. Systems Engineering — Theory \& Practice, 2015, 35(1) : 86-94.
+
+\REF{[2]}
+Chien C F, Dou R, Fu W. Strategic Capacity Planning for Smart Production: Decision Modeling under Demand Uncertainty[J]. Applied Soft Computing, 2018, 68 : 900-909.
+
+\REF{[3]}
+乐存.
+半导体企业产能规划过程的不确定度,灵敏度分析[D].
+电子科技大学, 2007. \\
+Le C. Analysis of Uncertainty and Sensitivity in the Production Capacity Planning Process of Semiconductor Enterprises[D]. University of Electronic Science and Technology of China, 2007.
+
+\REF{[4]}
+曹阳.
+半导体制造企业产能规划风险评估与控制研究[D].
+电子科技大学, 2010. \\
+Cao Y. Research on Risk Assessment and Control of Capacity Planning of Semiconductor Manufacturing Enterprises[D]. University of Electronic Science and Technology of China, 2010.
+
+\REF{[5]}
+Barahona F, Bermon S, Guenluek O, et al. Robust Capacity Planning in Semiconductor Manufacturing[J]. Naval Research Logistics, 2005, 52(5): 459-468.%期刊著录格式%期刊著录格式
+\REF{[6]}
+Robert C, Leachman S, Tali F. On Capacity Modeling for Production Planning with Alternative Machine Types[J]. IIE Transactions, 1992, 24(4): 62-72.%期刊著录格式%期刊著录格式
+\REF{[7]}
+Hood S J, Bermon S, Barahona F. Capacity Planning Under Demand Uncertainty for Semiconductor Manufacturing[J]. IEEE Transactions on Semiconductor Manufacturing, 2003,16(2): 273-280.%期刊著录格式%期刊著录格式
+\REF{[8]}
+Swamnathan J M.Tool Procurement Planning for Wafer Fabrication Facilities:A Scenario-based Approach[J]. IIE Transactions, 2002,34(2): 145-155.%期刊著录格式%期刊著录格式
+\REF{[9]}
+Zhang Z C, Zheng L, Zhang T.Capacity Planning in Semiconductor Manufacturing[J]. Semiconductor Technology, 2004,9(9): 39-44.
+\REF{[10]}
+Robert, David Wu. Semiconductor Capacity Planning: Stochastic Modelingand Computational Studies[J]. IIE Transactions, 2002,34(2): 131-142.
+\REF{[11]}
+Catay B, Seluk E, Vakharia A J. Tool Capacity Planning in Semiconductor Manufacturing[J]. Computers \& Operations Research, 2003,30(9): 1349-1366.
+\REF{[12]}
+耿娜, 江志斌.
+一种基于随机规划的晶圆制造产能规划方法[J].
+上海交通大学学报, 2006,（11): 1935--1938. \\
+Geng N, Jiang Z B. Stochastic-Programming-Based Capacity Planning for Wafer Fabrication[J]. Journal of Shanghai Jiao Tong University, 2006,（11): 1935--1938.%期刊著录格式
+\REF{[13]}
+Chien C F, Wu J Z, CC Wu. A Two-stage Stochastic Programming Approach for New Tape-out Allocation Decisions for Demand Fulfillment Planning in Semiconductor Manufacturing[J]. Flexible Services \& Manufacturing Journal, 2013, 25(3):286-309.
+\REF{[14]}
+Suleyman K, David Wu. Coordinating Strategic Capacity Planning in the Semiconductor Industry[J]. Operations Research, 2003, 51(6): 839-849.
+\REF{[15]}
+Chen W , Wang Z , Chan F . Robust Production Capacity Planning of a Wafer Fabrication System with Uncertain Wafer Lots Transfer Probabilities[J]. IFAC PapersOnLine, 2015, 48(3):1586-1591.
+\REF{[16]}
+Chien C F, Zheng J N. Mini–max Regret Strategy for Robust Capacity Expansion Decisions in Semiconductor Manufacturing[J]. Journal of Intelligent Manufacturing, 2012, 23(6):2151-2159.
+\REF{[17]}
+Swamnathan J M. Tool Capacity Planning for Semiconductor Fabrication Facilities Under Demand Uncertainty[J]. European Journal of Operational Research, 120(3), 545-558[J]. European Journal of Operational Research, 2000, 120(3):545-558.
+\REF{[18]}
+Chou Y C, You R C. Resource Portfolio Planning Methodology for Semiconductor Wafer Manufacturing[J]. International Journal of Advanced Manufacturing Technology, 2001, 18(1):12-19.
+\REF{[19]}
+胡官钦, 朱兰娟.
+基于案例推理的半导体生产规划优化方法[J]
+微计算机信息, 2009, 25(18): 1--3. \\
+Hu G Q, Zhu L J. Case-based Reasoning Capacity Planning in Semiconductor Manufactuing[J]. Microcomputer Information, 2009, 25(18): 1--3.%期刊著录格式
+\REF{[20]}
+吉清凯, 胡祥培, 赵达.
+有限产能下智能电子产品供应链的产量博弈模型[J]
+系统工程理论与实践, 2018, 38(10): 2578-2586. \\
+Ji Q K, Hu P X, Zhao D. Quantity competition in intelligent electronics supply chains with limited capacity[J]. Systems Engineering — Theory \& Practice, 2018, 38(10) : 2578-2586.
+\REF{[21]}
+Peng C, Erhun F, Hertzler E F, et al. Capacity Planning in the Semiconductor Industry: Dual-Mode Procurement with Options[J]. Manufacturing \& Service Operations Management, 2012, 14(2): 170-185.
+
+}
+\vspace{2mm}
+\begin{center}{\sz
+{\textbf{附表1\ \第一阶段需求参数}}\\
+\begin{tabular}{lcccccccc} \toprule
+场景 & 产品类型 & 时间节点1 & 时间节点2 & 时间节点3 & 时间节点4 & 时间节点5 & 时间节点6\\
+\hline
+ $1$ & $1$ & $4995$ & $5465$ & $6023$ & $6514$ & $6025$ & $6012$ \\
+ $1$ & $2$ & $3015$ & $3002$ & $3017$ & $2989$ & $3014$ & $2996$ \\
+ $1$ & $3$ & $3982$ & $4421$ & $4786$ & $5194$ & $4777$ & $4806$ \\
+ $1$ & $4$ & $2013$ & $1889$ & $1786$ & $1697$ & $1601$ & $1489$ \\
+\hline
+ $2$ & $1$ & $4994$ & $4967$ & $4998$ & $4955$ & $5003$ & $5036$ \\
+ $2$ & $2$ & $2994$ & $3291$ & $3611$ & $3917$ & $3619$ & $3608$ \\
+ $2$ & $3$ & $3985$ & $3982$ & $3969$ & $4033$ & $3988$ & $4000$ \\
+ $2$ & $4$ & $2016$ & $2208$ & $2405$ & $2607$ & $2403$ & $2402$ \\
+\hline
+ $3$ & $1$ & $4994$ & $4967$ & $4998$ & $4955$ & $5003$ & $5036$ \\
+ $3$ & $2$ & $2994$ & $3291$ & $3611$ & $3917$ & $3619$ & $3608$ \\
+ $3$ & $3$ & $3982$ & $4421$ & $4786$ & $5194$ & $4777$ & $4806$ \\
+ $3$ & $4$ & $1999$ & $1994$ & $2000$ & $2012$ & $2008$ & $1999$ \\
+\hline
+ $4$ & $1$ & $4994$ & $4967$ & $4998$ & $4955$ & $5003$ & $5036$ \\
+ $4$ & $2$ & $2994$ & $3291$ & $3611$ & $3917$ & $3619$ & $3608$ \\
+ $4$ & $3$ & $3998$ & $4379$ & $4802$ & $5231$ & $5624$ & $5978$ \\
+ $4$ & $4$ & $1999$ & $1994$ & $2000$ & $2012$ & $2008$ & $1999$ \\
+\bottomrule
+\end{tabular}}
+\end{center}\vspace{2mm}
+
+\begin{center}{\sz
+{\textbf{附表2\ \第二阶段需求参数}}\\
+\begin{tabular}{lcccccccc} \toprule
+场景 & 产品类型 & 时间节点1 & 时间节点2 & 时间节点3 & 时间节点4 & 时间节点5 & 时间节点6\\
+\hline
+ $1$ & $1$ & $7018$ & $6714$ & $6506$ & $6220$ & $6030$ & $5470$ \\
+ $1$ & $2$ & $3580$ & $3765$ & $3910$ & $4048$ & $4215$ & $3899$ \\
+ $1$ & $3$ & $2991$ & $2995$ & $2817$ & $2806$ & $2577$ & $2619$ \\
+ $1$ & $4$ & $2393$ & $2310$ & $2211$ & $2091$ & $2011$ & $1888$ \\
+\hline
+ $2$ & $1$ & $7018$ & $6714$ & $6506$ & $6220$ & $6030$ & $5470$ \\
+ $2$ & $2$ & $3581$ & $3443$ & $3307$ & $3144$ & $3014$ & $2840$ \\
+ $2$ & $3$ & $4777$ & $5005$ & $5186$ & $5387$ & $5613$ & $5226$ \\
+ $2$ & $4$ & $2393$ & $2310$ & $2211$ & $2091$ & $2011$ & $1888$ \\
+\hline
+ $3$ & $1$ & $6003$ & $6235$ & $6504$ & $6718$ & $6980$ & $6509$ \\
+ $3$ & $2$ & $2226$ & $2243$ & $2105$ & $2102$ & $1966$ & $1967$ \\
+ $3$ & $3$ & $4008$ & $4003$ & $4006$ & $4023$ & $4027$ & $3993$ \\
+ $3$ & $4$ & $2811$ & $2707$ & $2582$ & $2506$ & $2386$ & $2207$ \\
+\hline
+ $4$ & $1$ & $6031$ & $5763$ & $5499$ & $5231$ & $4983$ & $4733$ \\
+ $4$ & $2$ & $3010$ & $2996$ & $3004$ & $2996$ & $2985$ & $3001$ \\
+ $4$ & $3$ & $4777$ & $5005$ & $5186$ & $5387$ & $5613$ & $5226$ \\
+ $4$ & $4$ & $2811$ & $2707$ & $2582$ & $2506$ & $2386$ & $2207$ \\
+\hline
+ $5$ & $1$ & $7018$ & $6714$ & $6506$ & $6220$ & $6030$ & $5470$ \\
+ $5$ & $2$ & $3010$ & $2996$ & $3004$ & $2996$ & $2985$ & $3001$ \\
+ $5$ & $3$ & $4799$ & $4595$ & $4396$ & $4174$ & $4015$ & $3817$ \\
+ $5$ & $4$ & $2393$ & $2310$ & $2211$ & $2091$ & $2011$ & $1888$ \\
+\bottomrule
+\end{tabular}}
+\end{center}\vspace{2mm}
+
+\end{document}
