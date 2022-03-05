@@ -71,10 +71,12 @@ Require that the behavior policy be soft, to ensure each pair of state and actio
 ### On-policy SARSA
 
 Quintuple of events $(S_t, A_t, R_t, S_{t+1}, A_{t+1}) \to \text{SARSA}$  
+
 $$
 Q\left(S_{t}, A_{t}\right) \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\left[R_{t+1}+\gamma Q\left(S_{t+1}, A_{t+1}\right)-Q\left(S_{t}, A_{t}\right)\right]
 $$
-SARSA for finite-state and finite-action MDPs converges to the optimal action-value, $Q(s, a) \rightarrow Q^{*}(s, a)$, under the following conditions:
+
+SARSA for finite-state and finite-action MDPs converges to the optimal action-value, $Q(s, a) \rightarrow Q^{*}(s, a)$, under the following conditions (*Robbins-Munro sequence*)
 
 1. The policy sequence $\pi_{t}(a \mid s)$ satisfies the condition of GLIE
 2. The step-sizes $\alpha_{t}$ satisfy the Robbins-Munro sequence such that
@@ -85,6 +87,8 @@ SARSA for finite-state and finite-action MDPs converges to the optimal action-va
   \end{aligned}
   $$
 
+A typical selection is $\alpha_t = o(1/t)$ .
+
 
 
 ### Off-policy Q-learning
@@ -93,9 +97,52 @@ $$
 Q\left(S_{t}, A_{t}\right) \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\left[R_{t+1}+\gamma \max _{a} Q\left(S_{t+1}, a\right)-Q\left(S_{t}, A_{t}\right)\right]
 $$
 
+Directly approximates $q^\ast$, the optimal state-action value function.
+
+Converges to optimal $q^\ast$ if visit all $(s, a)$ pairs infinitely often and $\alpha_t$ satisfy Robbins-Munro sequence. 
+
+
+
+### Expected Sarsa
+
+$$
+\begin{aligned}
+Q\left(S_{t}, A_{t}\right) & \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\left[R_{t+1}+\gamma \mathbb{E}_{\pi}\left[Q\left(S_{t+1}, A_{t+1}\right) \mid S_{t+1}\right]-Q\left(S_{t}, A_{t}\right)\right] \\
+& \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\left[R_{t+1}+\gamma \sum_{a} \pi\left(a \mid S_{t+1}\right) Q\left(S_{t+1}, a\right)-Q\left(S_{t}, A_{t}\right)\right]
+\end{aligned}
+$$
+
+Expected Sarsa eliminates the variance due to the random selection of $A_{t+1}$, thus outperforms Sarsa by and large.
+
+It can safely set $\alpha=1$ without suffering any degradation of asymptotic performance.
+
+If $\pi$ is a greedy policy, expected sarsa is exactly Q-learning.
+
+**In a nutshell, expected Sarsa subsumes and generalizes Q-learning while reliably improving over Sarsa.**
+
 
 
 ### Maximization Bias
+
+Consider single-state MDP $(|S|=1)$ with 2 actions, and both actions have 0-mean random rewards, ie. $\mathbb{E}\left(r \mid a=a_{1}\right)=\mathbb{E}\left(r \mid a=a_{2}\right)=0$.
+
+Then $Q\left(s, a_{1}\right)=Q\left(s, a_{2}\right)=0=V(s)$ for any policy.
+
+However, the esimate can be biased
+$$
+\hat{V}^{\hat{\pi}}(s)=\mathbb{E}\left[\max \{ \hat{Q}\left(s, a_{1}\right), \hat{Q}\left(s, a_{2}\right)\} \right] > \max \left\{ \mathbb{E}\left[\hat{Q}\left(s, a_{1}\right)\right],\left[\hat{Q}\left(s, a_{2}\right)\right]\right\} =\max [0,0]=V^{\pi}
+$$
+The greedy policy w.r.t. estimated $Q$ values can yield a maximization bias during finite-sample learning.
+
+
+
+
+
+### Double Q-learning
+
+<img src="../figures/lecture4/image-20220305161630917.png" alt="" style="zoom:50%;" />
+
+
 
 
 
