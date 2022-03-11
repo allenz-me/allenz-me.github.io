@@ -9,7 +9,37 @@ tags: []
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
 
+## 绝对连续 Absolute Continuity
 
+A function $f:[a, b] \rightarrow \mathbb{R}$ is said to be absolutely continuous on $[a, b]$ if, given $\varepsilon>0$, there exists some $\delta>0$ such that
+$$
+\sum_{i=1}^{n}\left|f\left(y_{i}\right)-f\left(x_{i}\right)\right|<\varepsilon
+$$
+whenever $\left\{\left[x_{i}, y_{i}\right]: i=1, \ldots, n\right\}$ is a finite collection of mutually disjoint subintervals of $[a, b]$ with $\sum_{i=1}^{n}\left|y_{i}-x_{i}\right|<\delta$.
+
+绝对连续函数一定一致连续。Cantor 函数是一致连续的，但不绝对连续。
+
+绝对连续最重要的是与积分的联系，对于可积的函数 $f$
+$$
+F(x):=\int_{a}^{x} f(t) d t, \quad a \leq x \leq b
+$$
+在 $[a, b]$ 上是绝对连续的。
+
+绝对连续函数一定是有界变差的，所以绝对连续函数几乎处处可微。
+
+<br>
+
+## 一致连续 Uniform Continuity
+
+Given metric spaces $\left(X, d_{1}\right)$ and $\left(Y, d_{2}\right)$, a function $f: X \rightarrow Y$ is called uniformly continuous if for every real number $\varepsilon>0$ there exists real $\delta>0$ such that for every $x, y \in X$ with $d_{1}(x, y)<\delta$, we have that $d_{2}(f(x), f(y))<\varepsilon$.
+
+对应到一元函数，区间 $X$ 上的函数 $f$ 一致连续，如果 $\forall \epsilon > 0, \exist \delta > 0, \text{s.t. } \; |x - y| < \delta \Rightarrow |f(x) - f(y) | < \epsilon$
+
+Heine–Cantor theorem 说明了紧集上的连续函数一定是一致连续的。
+
+不一致连续的函数的例子，如 $f(x) = 1/x, \; x\in (0, 1)$、$f(x) = e^x , x \in \mathrm{R}$ .
+
+<br>
 
 ## 半连续 Semi-Continuity
 
@@ -68,7 +98,7 @@ $f: X \to \mathrm{\bar{R}}$ 是下半连续的等价于：
 + $f$ 连续当且仅当它是上半连续和下半连续的。
 + 下半连续函数的和是下半连续的；上半连续函数的和是下半连续的。
 + $f$ 下半连续当且仅当 $-f$ 是上半连续的。
-+ 紧集上的下半连续函数存在最小值；紧集上的上半连续函数存在最大值。两个联系起来就是紧集上的连续函数存在最值。
++ 紧集上的下半连续函数存在最小值；紧集上的上半连续函数存在最大值。两个联系起来就是紧集上的连续函数存在最值。(Weierstrass extreme value theorem)
 
 
 
