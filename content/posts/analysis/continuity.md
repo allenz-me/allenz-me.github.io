@@ -27,19 +27,16 @@ $$
 
 绝对连续函数一定是有界变差的，所以绝对连续函数几乎处处可微。
 
-<br>
-
 ## 一致连续 Uniform Continuity
 
 Given metric spaces $\left(X, d_{1}\right)$ and $\left(Y, d_{2}\right)$, a function $f: X \rightarrow Y$ is called uniformly continuous if for every real number $\varepsilon>0$ there exists real $\delta>0$ such that for every $x, y \in X$ with $d_{1}(x, y)<\delta$, we have that $d_{2}(f(x), f(y))<\varepsilon$.
 
-对应到一元函数，区间 $X$ 上的函数 $f$ 一致连续，如果 $\forall \epsilon > 0, \exist \delta > 0, \text{s.t. } \; |x - y| < \delta \Rightarrow |f(x) - f(y) | < \epsilon$
+对应到一元函数，区间 $X$ 上的函数 $f$ 一致连续，如果 $\forall \epsilon > 0, \exists \delta > 0, \text{s.t. } \; |x - y| < \delta \Rightarrow |f(x) - f(y) | < \epsilon$
 
 Heine–Cantor theorem 说明了紧集上的连续函数一定是一致连续的。
 
 不一致连续的函数的例子，如 $f(x) = 1/x, \; x\in (0, 1)$、$f(x) = e^x , x \in \mathrm{R}$ .
 
-<br>
 
 ## 半连续 Semi-Continuity
 

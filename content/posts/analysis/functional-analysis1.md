@@ -1,7 +1,7 @@
 ---
 title: "泛函分析小结（一）"
 date: 2022-02-26
-draft: true
+draft: false
 toc: false
 slug: functional-1
 categories: ["分析与概率"]
@@ -11,7 +11,7 @@ tags: []
 
 <!-- 这一节主要应该涵盖度量空间的基本内容 -->
 
-> There are only two kinds of math books: those you cannot read beyond the ﬁrst sentence, and those you cannot read beyond the ﬁrst page.
+> There are only two kinds of math books: those you cannot read beyond the first sentence, and those you cannot read beyond the first page.
 > 
 > —— C. N. Yang
 
@@ -105,7 +105,7 @@ $$
 
 可定义范数 $\| x\| = \rho(x, 0)$，度量空间可以成为一个赋范线性空间。
 
-#### 赋范线性空间的例子
+### 赋范线性空间的例子
 
 + 在所有 $[a, b]$ 上的连续函数 $C[a, b]$ 可定义范数：
 $$
@@ -118,5 +118,75 @@ $$
 $$
 
 
+### $L^p$ 空间
 
-<!-- ## 一般拓扑 -->
+$L^p$空间是连接实变函数与泛函分析的钥匙。
+
+任意给定一个 measure space $(X, \mathcal{B}, \mu)$，那些 $p$ 次幂 Lebesgue 可积的函数组成的全体就构成了 $L^p$ 空间。
+
+因为
+
+$$
+|f+g|^{p} \leqslant(|f|+|g|)^{p} \leqslant 2^{p}\left(|f|^{p}+|g|^{p}\right)
+$$
+
+$L^p$ 空间可以成为一个线性空间。如果函数是实值函数那么对应的数域就是 $\mathrm{R}$；如果是复值函数，那么数域就是$\mathrm{C}$。
+
+进一步我们可以定义这些函数的范数：
+
+$$
+\lVert f\rVert_p=\int_X |f|^p \mathrm{d}\mu \quad (p\geq 1)
+$$
+
+> 在证明范数的过程中，要用到 Hölder 不等式 $\|f g\|_{1} \leqslant\|f\|_{p}\|g\|_{q}$ 和 Minkowski 不等式 $\|f+g\|_{p} \leqslant\|f\|_{p}+\|g\|_{p}$
+
+但这个范数只是半范数，几乎处处为0值的函数构成了 $L^p$ 的一个子空间，由此我们可以得到一个商空间，半范数也就成了范数。 $f$ 与 $g$ 几乎处处相等是这里的等价关系。
+
+对 $p = \infty$，此时定义函数的本性上确界 $\mathrm{ess\,sup} f{}$ 为除去一个零测集外的最大的上确界
+
+$$
+\|f\|_{L^{\infty}}=\inf \{M:|f(x)| \leqslant M, x \in X\, \text { a.e. }\}
+$$
+
+这个空间记作 $L^\infty$ 。
+
+特别地，取 $X=N$ 表示全体自然数，$\mu$ 是 counting measure，这样就得到了 $p$ 次幂有界数列空间 $l^p$。
+
+有了范数之后就能够讨论收敛性了
+
+$L^p$ 下的依范数收敛：$\int_X|f_n(x)-f(x)|^p\mathrm{d}\mu\to 0, \,\; \text{as} \;\;n \to \infty$，在概率论里面叫做 converges in the r-th mean.
+
+> 特别地，令 $1 \leq r \leq s$，$X_{n} \stackrel{L^{s}}{\longrightarrow} X \Rightarrow X_{n} \stackrel{L^{r}}{\longrightarrow} X$.
+
+$L^\infty$ 下的依范数收敛：$\sup\limits _{X-E,\, \mu(E)=0}\left|f_{n}(x)-f(x)\right| \rightarrow 0$，其实就是除去一个零测集外的一致收敛。
+
+这两种意义下的收敛都要强于依测度收敛（依概率收敛 converge in probability）。
+
+对于 $1 \leq p \leq \infty$ 的情况，$L^p$ 空间是完备的。
+
+对于 $0 < p < 1$ 的情况，Minkowski 不等式不再成立，因此不能藉此定义范数。
+
+> $L^p$空间是可分的
+
+
+### 由度量诱导的拓扑
+
+$X$ 上的一个拓扑指的是满足如下条件的集类 $\mathcal{T} \subseteq 2^X$:
++ $\emptyset, X \in \mathcal{T}$
++ $\mathcal{T}$ 中任意个集合的并在 $\mathcal{T}$ 中
++ $\mathcal{T}$ 中有限个集合的交在 $\mathcal{T}$ 中
+
+$(X, \mathcal{T})$ 成为拓扑空间，$\mathcal{T}$ 中的集合称为开集，$X$ 中的元素称为点，任何开集的补集称为闭集。
+
+如果对任何 $x, y \in X$，都能找到开集 $U, V$ 使得：
+
+$$
+x \in U, y \in V, \, U \cap V = \emptyset
+$$
+
+则称 $(X, \mathcal{T})$ 为 Hausdorff 空间。
+
+最简单的拓扑是 $\{\emptyset, X\}$，称为 discrete topology / trivial topology。当 $X$ 包含至少两点时，它不是 Hausdorff 的。
+
+显然在一个集合上不止一种定义拓扑的方法，拓扑也有粗细之分，如果两个拓扑 $\mathcal{T}, \mathcal{T}^\prime$ 满足 $\mathcal{T} \subseteq \mathcal{T}^\prime$，就说 $\mathcal{T}$ 比 $\mathcal{T}^\prime$ 粗，$\mathcal{T}^\prime$ 比 $\mathcal{T}$ 细。
+

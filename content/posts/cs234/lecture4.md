@@ -129,12 +129,12 @@ Consider single-state MDP $(|S|=1)$ with 2 actions, and both actions have 0-mean
 Then $Q\left(s, a_{1}\right)=Q\left(s, a_{2}\right)=0=V(s)$ for any policy.
 
 However, the esimate can be biased
+
 $$
 \hat{V}^{\hat{\pi}}(s)=\mathbb{E}\left[\max \{ \hat{Q}\left(s, a_{1}\right), \hat{Q}\left(s, a_{2}\right)\} \right] > \max \left\{ \mathbb{E}\left[\hat{Q}\left(s, a_{1}\right)\right],\left[\hat{Q}\left(s, a_{2}\right)\right]\right\} =\max [0,0]=V^{\pi}
 $$
+
 The greedy policy w.r.t. estimated $Q$ values can yield a maximization bias during finite-sample learning.
-
-
 
 
 
