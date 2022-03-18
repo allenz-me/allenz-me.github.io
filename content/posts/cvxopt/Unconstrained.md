@@ -8,35 +8,53 @@ tags: []
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
 
+这一章介绍无约束的优化问题
 
-无约束优化问题是最基本的优化问题。当目标函数比较复杂的情况下，我们无法求出解析形式的一阶、二阶条件，因此可以考虑选取一个可行的初始点 $x^{(0)}$，再不断迭代逼近问题的最优解，使得 $f(x^{(k)}) - p^* \leq \epsilon$，达到我们需要的精度。
+## Unconstrained minimization problems
 
-在以下的讨论中，我们都假定目标函数是闭（*closed* ）的。即，它的任意 $\alpha-\mathrm{sublevel}$集都是闭的，或者说，$f$ 的 $\operatorname{epigraph}$是闭集。一般而言，闭集上的连续函数都是闭的。
+无约束优化问题是最基本的优化问题。这一章讨论怎么求无约束的凸函数的最小值，特别地，假设 $f$ 总是二阶可微的。
+
+如果 $x^\ast$ 是 $f$ 的最小值点，那么必然 $\nabla f(x^\ast) = 0$，这说明我们可以解一个可能是非线性的方程组来计算函数的最值。
+
+当然，更多的情况下，我们会使用迭代的方法。选取一个可行的初始点 $x^{(0)}$，再不断迭代逼近问题的最优解，使得 $f(x^{(k)}) - p^* \leq \epsilon$，达到我们需要的精度。
+
+在以下的讨论中，我们都**假定目标函数是闭（closed ）的**。函数的闭性等价于它的下半连续性，或者任意 $\alpha-\mathrm{sublevel}$ 都是闭的，或者说其 $\operatorname{epigraph}$ 是闭集。一般而言，连续函数都是闭的（闭集的原像是闭的）。
 
 无约束优化的例子非常的多，比如：
 
-###### Analytic center of linear inequalities
-
+**Analytic center of linear inequalities**
 $$
 \operatorname{minimize} \quad f(x)=-\sum_{i=1}^{m} \log \left(b_{i}-a_{i}^{T} x\right)
 $$
 
-###### Analytic center of a linear matrix inequality
+上述问题的解叫做这个多面体的 analytic center。
 
+**Analytic center of a linear matrix inequality**
 $$
-\operatorname{minimize} \quad f(x)=\log \operatorname{det} F(x)^{-1}\\
-\Large\mathrm{where} \quad F(x)=F_{0}+x_{1} F_{1}+\cdots+x_{n} F_{n}
+\begin{aligned}
+& \operatorname{minimize} \quad f(x)=\log \operatorname{det} F(x)^{-1}\\
+& \mathrm{where} \quad F(x)=F_{0}+x_{1} F_{1}+\cdots+x_{n} F_{n}
+\end{aligned}
 $$
 
-#### Strong convexity and implications
+### Strong convexity
 
-在讨论无约束凸优化问题的时候，我们会假设$f:R^n\to R$是一个凸二次可微的函数。在这里，我们再加上一个**强凸（strong convex）**的条件：存在$m > 0$，使得：
+强凸 (strong convex) 是一个比严格凸更强的性质。$f$ 是强凸的，如果存在 $m > 0$，使得
+$$
+f(y) \geq f(x)+\nabla f(x)^{T}(y-x)+\frac{m}{2}\|y-x\|_{2}^{2}
+$$
+对于任意的 $x, y \in \operatorname{dom} f$ 都成立。容易发现强凸的函数一定是严格凸的。
 
+强凸函数不一定需要可微，对不可微的函数，可以把上面的梯度换成次微分。也有不用到微分的等价定义：
+$$
+f(t x+(1-t) y) \leq t f(x)+(1-t) f(y)-\frac{1}{2} m t(1-t)\|x-y\|_{2}^{2}, \quad t \in [0, 1]
+$$
+如果 $f$ 二阶可微，那么强凸意味着存在 $m > 0$，使得
 $$
 \nabla^2 f \succeq mI, \;\;\forall x \in \operatorname{dom}f
 $$
 
-> 强凸是比严格凸更强的条件，严格凸只要求 $\nabla^2 f >0$， 像 $\frac{1}{x}$ 这种函数大于0，但是不存在 $m >0 \;\;\mathrm{s.t.} \frac{1}{x} \geqslant m $。
+
 
 简而言之，**$f$的Heisen矩阵的特征值有下确界**$m>0$。在这个条件下，由Taylor展开：
 
@@ -127,19 +145,27 @@ $$
 
 下水平集的形状会对无约束的凸优化问题某些算法的收敛性产生巨大影响。就那梯度下降法来说，当条件数非常大的时候，梯度下降法的效率很低（zig-zag现象十分严重）。
 
-### 凸优化问题的下降方法
 
-下降方法（descent method），指的是，找一列$x^k$，使得函数值慢慢下降，最终收敛的一种算法。具体说是，每次迭代，我们想找到一个方向$\Delta x^k$，然后在这个方向上前进$t^k$，达到一个使函数值更小的点。
 
+## Descent methods
+
+下降方法的目标是找一列 $x^{(k)}$，使得函数值慢慢下降，最终收敛的一种算法。具体说是，每次迭代，我们想找到一个方向 (direction/step) $\Delta x^{(k)}$，然后在这个方向上前进步长(step size) $t^{(k)}$，达到一个使函数值更小的点：
 $$
-x^{(k+1)}=x^{(k)}+t^{(k)} \Delta x^{(k)}\quad \text{and} \quad f\left(x^{(k+1)}\right)<f\left(x^{(k)}\right)
+x^{(k+1)}=x^{(k)}+t^{(k)} \Delta x^{(k)}\quad \text{and} \quad f(x^{(k+1)})<f(x^{(k)})
 $$
 
-搜索方向 $\Delta x^k$ 是下降方向，这就要求 $\nabla f\left(x^{(k)}\right)^{T} \Delta x^{(k)}<0$。
+如何下降方向 $\Delta x^k$ 都要满足 $\nabla f\left(x^{(k)}\right)^{T} \Delta x^{(k)}<0$ .
 
-下图是下降算法的基本流程。
+下降算法的基本流程是：
 
-![](../figures/Unconstrained/1240-20211206145241543.png)
++ given a starting point $x \in \mathbf{d o m} f$.
++ repeat
+  1. Determine a descent direction $\Delta x$.
+  2. *Line search*. Choose a step size $t>0$.
+  3. Update. $x:=x+t \Delta x$.
++ until stopping criterion is satisfied.
+
+
 
 ##### 线搜索 
 
@@ -155,15 +181,28 @@ $$
 
 ![](../figures/Unconstrained/1240-20211206145241573.png)
 
-#### Steepest decent method
 
-这种方法企图寻找一个方向
 
+## Gradient descent method
+
+梯度下降法是一种直接用梯度作为下降方向的方法。
+
+
+
+## Steepest decent method
+
+$f(x+v)$ 在 $x$ 处的 Taylor 展开是：
 $$
-\Delta x_{\mathrm{nsd}}=\operatorname{argmin}\left\{\nabla f(x)^{T} v |\;\|v\|=1\right\}
+f(x+v) \approx \widehat{f}(x+v)=f(x)+\nabla f(x)^{T} v
+$$
+最速下降法企图找到一个方向
+$$
+\Delta x_{\mathrm{nsd}}=\operatorname{argmin}\left\{\nabla f(x)^{T} v \mid \|v\|=1\right\}
 $$
 
-注意，因为选取的范数不一样，情况是会发生变化的。如果取欧几里得范数（也就是二范数），这就是梯度下降法了。
+注意，因为选取的范数不一样，情况是会发生变化的。如果取欧几里得范数（也就是二范数），就是梯度下降法了。因此，可以认为最速下降法的思想是梯度下降法自然的推广。
+
+
 
 这种方法的经常会取一个 ***quadratic norm***：
 
@@ -186,31 +225,25 @@ $$
 
 如果我们可以估计出在最优点$x^*$的Hessian矩阵$\hat{H}$，那么取$P=\hat{H}$，这时候的***steepest decent method*** 就可以取得很好的效果！
 
-#### 次梯度 subgradient
 
-当优化问题的目标函数不可微的时候，我们就会去考虑梯度的替代品：**次梯度**。
 
-凸函数有一个很好的性质，那就是任意一点的切平面都位于函数图形的下方。
 
-对于凸函数，如果$\forall y$，都有
+
+## Newton’s method
 
 $$
-f(y) \geq f(x)+g^{T}(y-x)
+\Delta x_{\text{nt}}=-\nabla^{2} f(x)^{-1} \nabla f(x)
 $$
 
-就说$g$是$x$这点的次梯度。函数的梯度是一个向量，注意次梯度方向可能不唯一，所以次梯度是一个**向量的集合**。$x$点的次梯度集记为$\partial f(x)$
-
-> 对偶函数是凹函数，自然也可以对凹函数定义次梯度了。
-
-如果要把次梯度的概念推广到一般函数的话，那么会发现，一般函数可能再某个点不存在次梯度（次梯度为空集），而凸函数不会存在这样的问题。在凸函数的定义域的**相对内点集**上，次梯度集总是非空（凸函数在定义域的边界的连续性比较复杂）。
-
-以一维为例，$f$在$x_0$不一定可导，但是有左导数$a$，右导数$b$，那么$[a,b]$就是$f$在$x_0$这点的次梯度。比如$f=|x|$在$0$处的次梯度就是$[-1, 1]$。
-
-> 一元的凸函数，在定义域的内点上左右导数一定存在！
-
-**通过次梯度可以得到一个函数（不管是不是凸的）全局最优解的性质。**如果$0\in \partial f(x^*)$，那么$x^*$是全局最小点。
+叫做 $f$ 的 Newton step。如果 $\nabla^2 f$ 是正定的，那么
+$$
+\nabla f(x)^{T} \Delta x_{\mathrm{nt}}=-\nabla f(x)^{T} \nabla^{2} f(x)^{-1} \nabla f(x)<0
+$$
+Newton 方向自然成为了一个下降方向。
 
 
 
-参考：
-[【凸优化笔记5】-次梯度方法（Subgradient method）
+
+
+## Self-concordance
+

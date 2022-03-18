@@ -8,10 +8,7 @@ tags: ["凸函数", "拟凸函数"]
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
 
-
-<!-- #! https://zhuanlan.zhihu.com/p/452821674
-
-# Convex function -->
+<!-- #! https://zhuanlan.zhihu.com/p/452821674 -->
 
 说完了凸集，下一个要介绍的肯定就是凸函数啦~
 
@@ -111,8 +108,6 @@ $$
 + $f(x)=(\Pi_{i=1}^n x_i)^{\frac{1}{n}},x_i>0$ 是凹函数，容易证明 $\nabla^2f$ 是半负定的。
 + $f(X)=\log \det X$ 是 $\mathrm{S}_{++}^n$ 上的凹函数。它是一个定义在矩阵空间上的函数。它的证明要用到线性空间中凸性的性质，即凸函数限制在任意一条直线都是凸的。
 
-
-
 ### 下水平集（sublevel sets）
 
 定义 $f: \mathbf{R}^n \to \mathbf{R}$ 的 $\alpha-\text{sublevel\; set}$ 为：
@@ -174,8 +169,6 @@ $$
 $$
 \sum_{i=1}^{n} x_{i} y_{i} \leq\left(\sum_{i=1}^{n}\left|x_{i}\right|^{p}\right)^{1 / p}\left(\sum_{i=1}^{n}\left|y_{i}\right|^{q}\right)^{1 / q}\\
 $$
-
-
 
 ## 保持函数凸性的操作
 
@@ -269,8 +262,6 @@ $$
 \operatorname{dist}(x, S)=\inf _{y \in S}\|x-y\|\\
 $$
 当 $S$ 是凸集时，$\operatorname{dist}(x, S)$ 是凸函数。
-
-
 
 
 ### 函数的透视

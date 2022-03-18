@@ -1,7 +1,8 @@
 ---
 title: "Convex Optimization Problem"
 date: 2022-01-03
-draft: true
+draft: false
+toc: true
 slug: convex-opt-problem
 categories: ["运筹与优化", "凸优化"]
 tags: []
@@ -9,7 +10,7 @@ tags: []
 ---
 
 
-# Convex optimization problem
+<!-- # Convex optimization problem -->
 
 凸集和凸函数，都是为了解决凸优化问题做的铺垫。当然，在这之前，我们还应当对整个优化问题的概念体系有一个大致的了解。
 

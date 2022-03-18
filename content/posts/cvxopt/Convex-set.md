@@ -8,9 +8,8 @@ tags: ["凸集", "锥"]
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
 
-<!-- #! https://zhuanlan.zhihu.com/p/441144463
+<!-- #! https://zhuanlan.zhihu.com/p/441144463 -->
 
-# Convex Set -->
 
 凸的背后，往往蕴含着非常好的性质，这也就是我们要去研究凸集的原因。凸，在优化理论扮演着非常重要的角色。本文是我的一个注记，不会包含太多证明，主要取自Boyd的 《convex optimization》、GTM 264 《Functional Analysis, Calculus of Variations and Optimal Control》。
 
@@ -648,5 +647,4 @@ $$
 ### 近似的凸集表示定理
 
 > HDP
-
 

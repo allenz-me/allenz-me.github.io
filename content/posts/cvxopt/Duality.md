@@ -1,12 +1,14 @@
 ---
 title: "Duality"
 date: 2022-01-04
-draft: true
+draft: false
 slug: duality
 categories: ["运筹与优化", "凸优化"]
 tags: []
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
+
+对偶是优化里非常重要的一个工具。
 
 ## 拉格朗日对偶函数
 

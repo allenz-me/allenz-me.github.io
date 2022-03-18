@@ -13,6 +13,15 @@ tags: []
 <!-- 这一节应该包括巴拿赫空间中的有界线性算子的基本理论 -->
 
 
+### 有界线性算子 (Bounded linear operators)
+
+如果数域 $\mathbf{F}$ 上的两个线性空间 $V \to W$ 的映射 $T$ 满足：
+
++ additivity: $T(u+v)=T u+T v$ for all $u, v \in V$
++ homogeneity: $T(\lambda v)=\lambda(T v)$ for all $\lambda \in \mathbf{F}$ and all $v \in V$
+
+那么就说它是一个线性算子。如果 $W=\mathbf{F}$，就说 $T$ 是 $V$ 的线性泛函。
+
 ### Operator Topologies
 
 在算子空间上可以定义不同强弱的拓扑
