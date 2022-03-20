@@ -17,8 +17,8 @@ def changeFormula(s: str):
     f = lambda s: s.group().replace("\\", "\\\\").replace("_", "\\_").replace("\n\n", "\n").replace('*', "\\ast")
     s = re.sub(r"\$(.*?)\$", f, s)
     s = re.sub(r"\$\$((.|\n)+?)\$\$", f, s)
-    return s.replace("\n\n\n\n", "<br>")
-
+    return s
+    
 for i in md:
     text = i.open('r').read()
     text = changeFigure(text)

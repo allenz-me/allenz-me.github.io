@@ -309,9 +309,3 @@ plt.xlim([0, np.ceil(t.max())])
 
 <img src="../figures/Possion/image-20211130171016681.png" style="zoom: 67%;" />
 
-
-
-
-
-
-

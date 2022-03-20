@@ -540,11 +540,14 @@ $$
 
 
 
-## 最优性条件
+## Optimality conditions
 
-### 互补松弛定理
+### Complementary slackness
 
-对于任意的问题，**如果强对偶性成立**，记 $x^*$ 和 $(\lambda^*, \nu^*)$ 分别是原问题和对偶问题的最优解，那么：
+<!-- 可以认为这一小节写完了。 -->
+
+对于任意的问题，**如果强对偶性成立**，记 $x^\star$ 和 $(\lambda^\star, \nu^\star)$ 分别是原问题和对偶问题的最优解，那么：
+
 $$
 \begin{aligned}
 f_{0}\left(x^{\star}\right) &=g\left(\lambda^{\star}, \nu^{\star}\right) \\
@@ -553,6 +556,7 @@ f_{0}\left(x^{\star}\right) &=g\left(\lambda^{\star}, \nu^{\star}\right) \\
 & \leq f_{0}\left(x^{\star}\right)
 \end{aligned}
 $$
+
 这意味着：
 
 $$
@@ -565,9 +569,13 @@ $$
 \lambda_{i}^{\star} f_{i}\left(x^{\star}\right)=0, \quad i=1, \ldots, m
 $$
 
-这就是互补松弛性！（complementary slackness）如果 $\lambda_i^*>0$，就有 $f_i(x^*)=0$；如果 $f_i(x^*)<0$，那么 $\lambda_i^*=0$。
+这就是互补松弛性！(complementary slackness)
 
-> 线性规划必然成立互补松弛定理，它可以看成是强对偶性下的互补松弛的一个特例。并且，因为线性规划的对偶的对偶就是它本身，这两重对偶的互补松弛性可以揭示线性规划 primal and dual optimality。
+如果 $\lambda_i^*>0$，就有 $f_i(x^*)=0$；如果 $f_i(x^*)<0$，那么 $\lambda_i^*=0$。每一个约束都有与它对应的对偶变量（乘子），如果乘子大于0，那么约束必然是紧的 (binding)；如果约束不是紧的 (unbinding)，那么乘子必然为0。
+
+> *有解* 的线性规划必然成立互补松弛定理，它可以看成是强对偶性下的互补松弛的一个特例。
+> 
+> 并且，因为线性规划的对偶的对偶就是它本身，这两重对偶的互补松弛性可以揭示线性规划 primal and dual optimality。这是线性规划的 primal-dual method 的思想。
 
 ### KKT 最优性条件
 
