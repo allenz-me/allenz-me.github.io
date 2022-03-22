@@ -24,7 +24,7 @@ $$
 & \mathbf{u} \text { unrestricted }
 \end{array}\right.\right.
 $$
-给定如上的原问题和对偶问题，$\mathbf{b} \geq 0$ 是一个 WLOG 但是有意义的条件。
+给定如上的原问题和对偶问题，$\mathbf{b} \geq \mathbf{0}$ 是一个 WLOG 但是有意义的条件。
 
 线性规划的 complementary slackness 给出了可行解 $(\bar{\mathbf{x}}, \bar{\mathbf{u}})$ 是一组最优解的充要条件：
 

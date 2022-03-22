@@ -95,17 +95,15 @@ $$
 
 **锥不一定是凸的**。如果一个锥是凸的，就称它是一个**凸锥**（convex cone）。比如 $y=|x|$ 的图像就是一个锥，但不是凸锥。但是 $y\ge |x|$ 就是一个凸的锥了。注意到任何锥都包含原点 $\mathbf{0}$。
 
-
-
 一个锥 $K$ 是凸锥的充分必要条件：$K + K \subset K$
 
-
-
-类似的可以得到锥包（conic hull ），它是包含某个集合的最小的凸锥。
+类似的可以得到锥包（conic hull ），**它是包含某个集合的最小的凸锥**。
 
 $$
-\operatorname{coni}(C) = \{\theta_1 x_1 + \cdots +\theta_k x_k \mid x_i \in C, \theta_i \geq 0, i=1, ..., k\}\\
+\operatorname{cone}(C) = \{\theta_1 x_1 + \cdots +\theta_k x_k \mid x_i \in C, \theta_i \geq 0, i=1, ..., k\}\\
 $$
+
+称一个锥 *pointed*（尖锐的），如果它不包含任何的直线。
 
 ### 示例
 
@@ -215,6 +213,11 @@ $$
 
 此外，KL散度 $D_{KL}(p \lVert q)=\displaystyle\sum_{i=1}^n p_i \log \displaystyle\frac{p_i}{q_i}$ 对 $(p, q)$ 是凸的。
 
++ Spectrahedron
+
+$$
+\operatorname{conv}\left\{u u^{T} \in \mathbb{S}^{n} \mid u \in \mathbb{R}^{n},u^T u=1\right\} = \{M \in \mathbb{S}^n \mid \operatorname{tr} (M) = 1\}
+$$
 
 ### 保持凸性的操作
 
@@ -449,41 +452,6 @@ $p$ 范数锥 $K = \{(x, t) \in \mathrm{R}^{n+1} \mid \| x\|_ p\leq t\}$ 的对�
 
 这是一条分割线，如果有时间，我会在下面继续补充一些重要的知识。
 
-### Relative topology
-
-
-
-
-
-### More on affine
-
-#### 仿射无关 (affinely independent)
-
-定义 $x_{1}, x_{2}, \ldots, x_{k}$ 仿射无关，当且仅当 $x_{2}-x_{1}, \ldots, x_{k}-x_{1}$ 线性无关。否则就称是线性相关的。
-
-关于仿射更多的性质：
-
-+ $x_{0}+\operatorname{span}\left\{x_{1}-x_{0}, \ldots, x_{k}-x_{0}\right\}=\operatorname{aff}\left\{x_{0}, \ldots, x_{k}\right\}$
-+ $\left\{x_{0}, \ldots, x_{k}\right\}$ 包含 $0 \Rightarrow \operatorname{aff}\left\{x_{0}, \ldots, x_{k}\right\}=\operatorname{span}\left\{x_{0}, \ldots, x_{k}\right\}$
-+ 线性无关的向量组也是仿射无关的
-+ 如果 $x_1, x_2, \dots, x_k$ 仿射无关，那么 $0=\sum_{i=0}^{k} \alpha_{i} x_{i}, 0=\sum_{i=0}^{k} \alpha_{i}$ 有唯一解 $\alpha_{0}=\alpha_{1}=\cdots=\alpha_{k}=0$
-
-
-#### 仿射变换 (affine transformation)
-
-仿射变换是指满足以下条件的函数：
-
-$$
-F(\lambda x+(1-\lambda) y)=\lambda F(x)+(1-\lambda) F(y), \quad \lambda \in \mathrm{R}
-$$
-
-
-+ 对于仿射变换 $F$， $T(x) = F(x) - F(0)$ 是线性变换。
-+ 如果 $S$ 是仿射集，那么 $F(S)$ 也是仿射集，即仿射集在仿射变换的作用下也是仿射的。
-+ $F(\operatorname{aff} M)=\operatorname{aff}(F(M))$
-
-
-
 ### 极点
 
 称 $x$ 是凸集 $C$ 的极点，如果不存在两点 $x_1, x_2\;(x_1 \neq x_2)$，使得
@@ -504,147 +472,4 @@ $$
 **H. Minkowski 定理** ：对凸紧集 $C \subset \mathrm{R}^n$ 满足：$C = \operatorname{conv} (\operatorname{ext} C)$
 
 
-### 凸集的表示
-
-**Caratheodory’s theorem**：
-
-$S$ 是 $\mathrm{R}^n$ 的子集，那么， $x \in \operatorname{conv} S$，当且仅当存在一个至多包含 $S$ 中 $n+1$ 个点的 $A \subset S$，使得 $x$ 是 $A$ 中点的凸组合。
-
-这个定理反过来是显然的，如果 $x$ 是 $A$ 中点的凸组合，那么必然 $x \in \operatorname{conv} S$。
-
-现在设 $x \in \operatorname{conv} S$，那么根据凸包的定义，不妨设存在 $k > n, \lambda _i > 0$，使得 $x = \sum_{i=0}^k \lambda_i x_i$， 现在 $x_i - x_0 \: (1 \leq i \leq k)$ 这超过 $n$ 个的向量族必然是线性相关的，这样就可以采用线性相关的定义来证明 $x$ 只需要用 $k-1$ 个点的凸组合来表示就行了。
-
-例：设 $S = \{(0, 0), (0, 1), (1, 1), (1,0)\}$，$S$ 表示的是单位正方形的四个点，$\operatorname{conv} S$ 就是一个单位正方形。在这个单位正方形里随便取一个点，总能找到由 $S$ 中三个点组成的三角形覆盖住这个点。
-
-关于 $\operatorname{coni} S$ 成立一个类似的定理，只不过点数从 $n+1$ 减少到了 $n$ 个。
-
-**W. Fenchel and L. Bunt**：
-
-如果 $S \subset \mathrm{R}^n$ 是一个**连通**的凸集，则 $x \in \operatorname{conv} S$ 可以被表示成 $S$ 中 $n$ 个点的凸组合；这个结论可以被放宽至 $S$ 有不超过 $n$ 个连通分量。
-
-
-**Minkowski and Weyl**：polyhedron representation
-
-有界多面体可由其极点唯一决定。对于无界的多面体，可以由极点和方向来决定（extreme points and extreme rays）。
-
-这写下来就是：对任何 $P = \{x \mid Ax \leq b\}$，总能找到两个点集 $V, R$ ，使得：
-
-$$
-P = \operatorname{conv}(V) + \operatorname{coni}(R)\\
-$$
-
-也就是说，多面体可以表示成一个凸集和一个锥的 Minkowski sum。这个定理在一些教材中也叫做 resolution theorem.
-
-参考：https://scaron.info/robotics/polyhedra-and-polytopes.html
-
-
-
-### 几类重要的锥
-
-对一个任意的集合 $C$，它边界点 $x_0$ 的 **normal cone** 指的是集合 $\{y \mid y^T (x - x_0) \leq 0,\; \forall x \in C\}$。即 $y$ 与任何以 $x_0$ 为端点的线段都不构成锐角。不论集合 $C$ 是什么，它的 normal cone 都是一个凸锥！
-
-对一个任意的集合 $C$，它的 **barrier cone** 被定义为集合 $\{y \mid |y^T x| < +\infty, \; \forall x \in C\}$。即非零向量 $y$ 是包含 $C$ 的半平面 $\{x \mid y^T x \leq \alpha\}$ 的法向。不论集合 $C$ 是什么，它的 barrier cone 也是一个凸锥！
-
-对一个任意的集合 $C$，它的 **recession cone** 被定义为集合 $\{y \mid x - ty \in C, \;  \forall x \in C, \; \forall t \geq 0\}$。$C$ 的回收锥可以理解为是 $C$ 内所有可以无限延伸的方向生成的锥。凸集的 recession cone 是一个凸锥；特别地，多面体 $\{x \mid Ax = b\}$ 的 recession cone 是 $\{y \mid Ay=0\}$。
-
-如果 $C$ 是一个非空的闭凸集，那么 $C$ 的 recession cone 是它的 barrier cone 的对偶锥。
-
-polar cone
-
-### 支撑函数
-
-一个集合 $C$ 的支撑函数（support function）定义为：
-
-$$
-S_C(y) = \sup\, \{y^Tx \mid x \in C\}
-$$
-
-容易看到，支撑函数是一个齐次函数（homogeneous），并且不论集合 $C$ 是什么，$S_C$ 都是凸函数！
-
-例子：
-
-+ 单点集 $\{a_0\}$ 的支撑函数是 $S(y) = a_0^T y$
-+ 半径为 1 的单位球的支撑函数是 $S(y) = \| y\|_2$
-+ $\mathcal{U} = \{x \mid \| x - \mu \| \leq 1\}$ 的支撑函数是 $S_{\mathcal{U}} (y) = y^T \mu + \| y\|_\ast$ （这个在鲁棒优化里面有应用）
-
-
-下面这个定理说明，一个闭凸集被它的支撑函数完全刻画：
-
-**如果 $C$ 和 $D$ 是闭凸集，那么 $C = D$ 当且仅当 $S_C = S_D$**。
-
-假如 $S_C = S_D$，先证明 $D \subseteq C$；假如说存在一点 $x_0 \in D, x_0 \notin C$，因为 $C$ 是闭集，而闭集和闭集外一点是可以找到超平面严格分割的，于是，存在 $a \neq 0$，使得 $a^T x_0 > b$，且 $a^T x < b, \,\forall x  \in C$，这意味着：
-
-$$
-\sup _{x \in C} a^{T} x \leq b<a^{T} x_{0} \leq \sup _{x \in D} a^{T} x \\
-$$
-
-与 $S_C = S_D$ 矛盾，这就证明了 $D \subseteq  C$，于是 $D=C$。
-
-#### 支撑函数的几何意义
-
-![support function](../figures/Convex-Set/support.png)
-
-
-
-对于每一个 $a \in \mathrm{R}^n$ ，借助支撑函数都能找到包含 $C$ 的一个支撑超平面：
-
-$$
-H_a = \{ y \mid  y^T a \leq S_C(a)\} \\
-$$
-
-这个超平面以 $a$ 为法向量。
-
-在上图中 $y$ 引出的支撑超平面就是虚线标的那条。
-
-**利用支撑函数可以证明，一个闭凸集等于它所有的支撑半平面的交集。**
-
-
-
-### 对偶范数的进一步理解
-
-当我们在研究 $X = \mathrm{R}^n$ 的时候（此时没有引入范数），我们会发现 $\mathrm{R}^n$ 的对偶空间 $X^\ast$ 和 $\mathrm{R}^n$ 是线性同构的（只需要纯代数的证明），如果我们在 $\mathrm{R}^n$ 中引入范数，那么它的对偶空间的元素，也会有随之定义的算子范数，**这个对偶空间里的算子范数就是对偶范数**！
-
-在 $\mathrm{R}^n$ 空间中，范数 $\| \cdot \|$ 的对偶范数被定义为：
-
-$$
-\|z\|_{\ast}=\sup \left\{z^{T} x \mid\|x\| \leq 1\right\} \\
-$$
-
-我们知道 $(\mathrm{R}^n, \|\cdot \|)$ 是一个 Banach space，该空间上每一个元素 $z$ 都能诱导出一个 linear functional：
-
-$$
-f_z(x) = z^T x \\
-$$
-
-这个 linear functional $f_z$ 的算子范数就是 $z$ 的对偶范数！所以，**$(\mathrm{R}^n, \| \cdot \|)$ 的对偶空间是 $(\mathrm{R}^n, \|\cdot \|_\ast)$**。
-
-> $\mathrm{R}^n$ 上的所有线性泛函都具有形式：$f(x) = a^T x$. 
->
-> 见：https://math.stackexchange.com/questions/3377554/show-that-any-linear-function-f-mathbbrn-to-mathbbr-is-of-the-form-fx
-
-根据对偶范数的定义可以得到不等式：
-
-$$
-\|x \| \cdot \|z\|_\ast \leq |x^T z| \\
-$$
-
-在矩阵空间 $\mathrm{R}^{m\times n}$ 上，类似的，有限维线性空间与其对偶空间都是线性同构的，假如我们在 $\mathrm{R}^{m\times n}$ 引入谱范数（spectrum norm），即矩阵最大的奇异值，类似可以在矩阵空间上构造线性泛函：
-
-$$
-f_Z (X) = \operatorname{tr}(Z^T X) \\
-$$
-
-这个由矩阵 $Z$ 诱导出的线性泛函，它的算子范数：
-
-$$
-\|Z\|_{2 *}=\sup \left\{\operatorname{tr}\left(Z^{\top} X\right) \mid\|X\|_{2} \leq 1\right\} = \sum_i\sigma_i(Z) \\
-$$
-
-就是核范数（nuclear norm），即矩阵所有奇异值的和。
-
-
-
-### 近似的凸集表示定理
-
-> HDP
 
