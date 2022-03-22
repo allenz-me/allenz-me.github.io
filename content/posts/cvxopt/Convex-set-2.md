@@ -1,5 +1,5 @@
 ---
-title: "Convex Set —— 续"
+title: "Convex Set — 续"
 date: 2022-01-01
 draft: false
 slug: convex-set-2

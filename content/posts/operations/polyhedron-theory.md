@@ -1,7 +1,7 @@
 ---
 title: "Basic Polyhedron Theory"
 date: 2022-03-07
-draft: true
+draft: false
 toc: false
 slug: polyhedron-theory
 categories: ["运筹与优化"]

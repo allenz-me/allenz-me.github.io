@@ -1,5 +1,5 @@
 ---
-title: "泊松分布及其模拟"
+title: "泊松过程及其模拟"
 date: 2021-12-20
 draft: false
 slug: possion
