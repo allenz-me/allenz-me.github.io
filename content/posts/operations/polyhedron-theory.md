@@ -249,7 +249,7 @@ $P$ 的一个 face $F$ 称为 **facet**，如果 $F$  非空且 $\operatorname{d
 
 **Edges**
 
-多面体的0维的 face 称为 edge
+多面体的1维的 face 称为 edge
 
 
 
