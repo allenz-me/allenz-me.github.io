@@ -12,3 +12,23 @@ tags: []
 
 ---
 
+
+
+对凸性的刻画，从弱到强，分别是：
+
++ 拟凸 (quasiconvex)
+
+
+
+
+
++ 凸 (convex)
+
+
+
++ 严格凸 (strictly convex)
+
+
+
++ 强凸 (strongly convex)
+

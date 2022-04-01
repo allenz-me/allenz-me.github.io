@@ -21,10 +21,13 @@ Fourier 最先设计了一种类似高斯消元的方法来研究 $Ax\leq b$ 的
 它的思想可以理解为：给出 $(\bar{x}_1, \bar{x}_2, \dots, \bar{x}_{n-1})$，我们是否能找到一个 $\bar{x}_n$ ，使得 $(\bar{x}_1, \dots, \bar{x}_n)$ 是 $Ax\leq b$ 的解 。
 
 令 $I=\{1, \ldots, m\}$，引入记号：
+
 $$
 I^{+}:=\left\{i \in I: a_{i n}>0\right\}, \quad I^{-}:=\left\{i \in I: a_{i n}<0\right\}, \quad I^{0}:=\left\{i \in I: a_{i n}=0\right\}
 $$
+
 则：
+
 $$
 Ax \leq b \quad \Longleftrightarrow  \quad\begin{array}{llll}
 \sum_{j=1}^{n-1} a_{i j}^{\prime} x_{j} & +x_{n} & \leq b_{i}^{\prime}, & i \in I^{+} \\
@@ -32,18 +35,22 @@ Ax \leq b \quad \Longleftrightarrow  \quad\begin{array}{llll}
 \sum_{j=1}^{n-1} a_{i j} x_{j} & & \leq b_{i}, & i \in I^{0}
 \end{array} \tag{1}
 $$
+
 其中 $a_{i j}^{\prime}=a_{i j} /\left|a_{i n}\right|, b_{i}^{\prime}=b_{i} /\left|a_{i n}\right|, i \in I^{+} \cup I^{-}$ .
 
 $I^{+}, I^{-}$ 里的不等式分别相加，移去 $|I^{+}| + |I^{-}|$ 个并增加 $|I^+| \times |I^-|$ 个不等式，可以得到：
+
 $$
 \begin{array}{l}
 \sum_{j=1}^{n-1}\left(a_{i j}^{\prime}+a_{k j}^{\prime}\right) x_{j} & \leq b_{i}^{\prime}+b_{k}^{\prime}, & i \in I^{+}, k \in I^{-} \\
 \sum_{j=1}^{n-1} a_{i j} x_{j} & \leq b_{i}, & i \in I^{0}
 \end{array} \tag{2}
 $$
+
 现在我们可以回答上面那个问题了，$(\bar{x}_1, \bar{x}_2, \dots, \bar{x}_{n-1})$ 满足(2) 当且仅当 存在 $\bar{x}_n$，使得 $(\bar{x}_1, \dots, \bar{x}_n)$ 是 $Ax\leq b$ 的解。
 
 令 
+
 $$
 l= \begin{cases} \displaystyle\max _{k \in I^{-}}\left\{\sum_{j=1}^{n-1} a_{k j}^{\prime} \bar{x}_{j}-b_{k}^{\prime}\right\},  & I^- \neq \emptyset  \\
 - \infty  , & I^- = \emptyset \\
@@ -52,6 +59,7 @@ u= \begin{cases} \displaystyle\min _{i \in I^{+}}\left\{b_{i}^{\prime}-\sum_{j=1
 + \infty,   & I^+ = \emptyset \\
 \end{cases}
 $$
+
 $l \leq \bar{x}_n \leq u$ 就是满足条件的数！
 
 这意味着 $n$ 个线性不等式组 $A^n x \leq b^n$ 的有解性可以等价于一个 $n-1$ 个线性不等式组 $A^{n-1}x \leq b^{n-1}$ 的有解性。所以 Fourier elimination 的思路就是不断递推到 $A^1 x \leq b^1$ ，但是每一次迭代都有可能加入非常多的新的不等式，算法执行起来可能需要指数时间。

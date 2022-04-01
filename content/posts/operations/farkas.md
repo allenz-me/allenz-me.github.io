@@ -4,7 +4,7 @@ date: 2021-12-01
 draft: false
 slug: farkas
 categories: ["运筹与优化"]
-tags: []
+tags: ["Duality"]
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
 
@@ -18,43 +18,49 @@ Farkas 引理的内容是，一下两组式子有且仅有一个是可行的：
 1. $Ax = b, x \geq 0$
 2. $A^T y \geq 0, b^T y < 0$
 
----
-
 一个矩阵 $A$ 的所有列向量可以张成一个锥，另一个向量 $b$，与这个锥的位置关系只有两种：在锥内，不然就在锥外。所以 $b$ 在锥内和 $b$ 在锥外时成立的代数关系，恰好只有一个也必然有一个是成立的，同时另一个就不成立了。
 
-如果 $b$ 在锥内，那么可以找到一组非负的系数，使得 $b$ 能被 $A$ 的列向量线性表示，即存在 $x \geq 0, Ax=b$。
++ 如果 $b$ 在锥内，那么可以找到一组非负的系数，使得 $b$ 能被 $A$ 的列向量线性表示，即存在 $x \geq 0, Ax=b$。
 
-如果 $b$ 在锥外，那么根据点与凸集的分离定理，$b$ 和 $A$ 的列向量张成的锥，可以被一个（过原点的）超平面分离，设这个超平面的法向量为 $y$，那么可以有：$A^T y \geq 0, b^T y < 0$。
++ 如果 $b$ 在锥外，那么根据点与凸集的分离定理，$b$ 和 $A$ 的列向量张成的锥，可以被一个（过原点的）超平面分离，设这个超平面的法向量为 $y$，那么可以有：$A^T y \geq 0, b^T y < 0$。
 
-这个定理也可以通过替代定理的方式去证明。现考虑一个线性规划问题和它的对偶问题：
+这个定理也可以通过替代定理的方式去证明。考虑一个线性规划问题和它的对偶问题：
 
 $$
 (\mathcal{P})\quad
-
 \begin{array}{ll}
 \operatorname{minimize} & \quad 0 \\
 \text {subject to } & A x =b, x \geq 0
 \end{array}  \qquad 
-
 (\mathcal{D})\quad
-
 \begin{array}{ll}
 \operatorname { maximize }  \; -b^T y \\
 \text {subject to }  \; A^{T} y \geq 0
 \end{array}
 $$
 
-如果(1)可行，那么两个LP的最优值都是0，那么对于任意满足 $A^T y \geq 0$ 的 $y$ 都成立 $-b^T y \leq 0$，即(2)不可行。
++  如果(1)可行，那么两个LP的最优值都是0，那么对于任意满足 $A^T y \geq 0$ 的 $y$ 都成立 $-b^T y \leq 0$，即(2)不可行。
 
-如果(1)不可行，那么(P)问题的最优值是 $+\infty$，所以(D)问题最大值无上界，所以存在 $y$ 使得 $-b^T y > 0, A^Ty \geq 0$，即(2)可行。
-
-这里很重要的一点就是LP成立强对偶性！
++ 如果(1)不可行，那么(P)问题的最优值是 $+\infty$，所以(D)问题最大值无上界，所以存在 $y$ 使得 $-b^T y > 0, A^Ty \geq 0$，即(2)可行。
 
 除此以外，Farkas引理还有纯代数的证明：
 
-+ 如果 $\exists\; x \geq 0$，使得 $Ax=b$，那么如果 $A^T y \geq 0$，就有 $b^T y=x^T A^T y \geq 0$ ；
++ 如果 $\exists\, x \geq 0$，使得 $Ax=b$，那么如果 $A^T y \geq 0$，就有 $b^T y=x^T A^T y \geq 0$ ；
 
 + 如果存在 $y$ 使得 $A^T y\geq 0$ 并且 $b^T y < 0$，那么如果 $b \geq 0$，$x^T A^T y \geq 0$，从而 $Ax \neq b$。
+
+
+
+## KKT定理
+
+对于一般的非线性规划：
+
+$$
+\begin{aligned}
+    \min \; & f(x)  \\
+    \text{s.t. } & 
+\end{aligned}
+$$
 
 
 
@@ -75,7 +81,7 @@ $$
 \begin{array}{ll}
 \operatorname { maximize }  \; b^T y \\
 \text {subject to }  \; A^{T} y \leq c
-\end{array} \tag{*}
+\end{array}
 $$
 
 的原问题(P)和对偶问题(D)分别具有最优值 $p^\ast$ 和 $d^\ast$。
@@ -108,12 +114,11 @@ $$
 > 都不可行！
 
 
-
-Farkas引理可以用来论证线性规划的强对偶性，强对偶性建立在原问题或对偶问题的某一个是可行的基础上。
+**Farkas引理可以用来论证线性规划的强对偶性，强对偶性建立在原问题或对偶问题的某一个是可行的基础上。**
 
 > 当两个问题都不可行，即有 $d^\ast = - \infty, \; p^\ast = + \infty$，强对偶性不再成立！
 >
-> 线性规划强对偶性指的是：如果原问题可行，并且最优值有界，那么对偶问题也可行，且两个最优值相等。
+> **线性规划强对偶性指的是：如果原问题可行，并且最优值有界，那么对偶问题也可行，且两个最优值相等。**
 
 设 $\epsilon > 0$，以及：
 
@@ -203,19 +208,31 @@ $$
 
 以上两个关系有且仅有一个成立。其中 $(x^\ast, y^\ast)$ 是原问题和对偶问题的一组最优解。
 
-> 意思就是，总存在一组最优解使得强互补松弛条件（两个不等式中的一个）成立。
+> 意思就是，**总存在一组最优解使得强互补松弛条件（两个不等式中的一个）成立**。
 
-
-
-$A^T _j y^\ast < c_j \Rightarrow x_j^\ast = 0$ 是容易的，直接用互补松弛就可以了。而 $x^\ast_j = 0 \Rightarrow A^T_j y^\ast<c_j$ 有点困难，下面我来证一下，
-
-
+$A^T _j y^\ast < c_j \Rightarrow x_j^\ast = 0$ 是容易的，直接用互补松弛就可以了；而 $x^\ast_j = 0 \Rightarrow A^T_j y^\ast<c_j$ 证明起来有点困难。
 
 ### 对偶问题与影子价格
 
 要理解透影子价格，必须对线性规划的对偶有充分的认识！
 
-依旧考虑(*)式这一组对偶问题，
+不妨考虑资源约束下的不等式线性规划 ($b \geq 0$)：
+$$
+(\mathcal{P})\quad
+
+\begin{array}{ll}
+\operatorname{minimize} & \quad c^T x \\
+\text {subject to } & A x \geq b, x \geq 0
+\end{array}  \qquad 
+
+(\mathcal{D})\quad
+
+\begin{array}{ll}
+\operatorname { maximize }  \; b^T y \\
+\text {subject to }  \; A^{T} y \leq c, y \geq 0
+\end{array}
+$$
+对于最大化对偶问题(D)，可以看成是资源约束下的最大化利润问题，假如说 $(\bar{x}, \bar{y})$ 是一组最优解，如果资源约束增大为 $c_\epsilon = c + \epsilon$，在保证最优性和可行性的条件下，目标函数值增大 $\epsilon^T \bar{x}$ .
 
 
 
@@ -244,14 +261,10 @@ $$
 
 
 
-
-
 > Gordan 定理：
 > (1) $Ax < 0$
 > (2) $A^Ty=0, \:y\succeq 0, \:y\neq 0$
 > 只能有一个有解！
-
-
 
 
 

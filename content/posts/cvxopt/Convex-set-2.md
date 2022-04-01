@@ -111,7 +111,7 @@ $$
 $$
 \operatorname{rbd} C = \operatorname{cl} C \backslash \operatorname{ri} C
 $$
-相对内点对凸集十分重要，因为**非空的凸集必然存在相对内点**。
+相对内点对凸集十分重要，因为**非空的凸集必然存在相对内点**。闭凸集可以分解为相对内点集和相对边界集。
 
 
 对凸集而言
@@ -141,6 +141,10 @@ $$
 
 If $C$ is a convex set, $x \in \operatorname{ri}(C)$ and $\bar{x} \in \operatorname{cl}(C)$, then all points on the line segment connecting $x$ and $\bar{x}$, except possibly $\bar{x}$, belong to $\operatorname{ri}(C)$ .
 
+**Nonemptiness of Relative Interior**
+
+If $C$ is a nonempty convex set, then $\operatorname{ri} (C)$ is a nonempty convex set, and has the same affine hull as $C$ .
+
 **Prolongation Lemma / Stretching principle**
 
 $x \in \operatorname{ri}(C)$ if and only if every line segment in $C$ having $x$ as one endpoint can be prolonged beyond $x$ without leaving $C$.
@@ -149,6 +153,9 @@ i.e, if $C$ convex
 $$
 x \in \operatorname{ri} C \Leftrightarrow \forall z \in C, \exists \mu>1, \mu x+(1-\mu) z \in C .
 $$
+
+cvxthy 1.3 / 1.3.1
+
 
 
 ## 凸集的表示
@@ -182,24 +189,107 @@ $$
 
 也就是说，多面体可以表示成一个凸集和一个锥的 Minkowski sum。这个定理在一些教材中也叫做 resolution theorem.
 
+## 投影算子
+
+对于闭子空间，我们有一个经典的投影分解：
+$$
+x = \mathrm{p}_V(x) + \mathrm{p}_{V^\perp}(x)
+$$
+一个点到闭凸集的投影是唯一的，由此可以定义投影算子：
+$$
+x \mapsto \mathrm{p}_{C}(x)
+$$
+
+成立：
+$$
+\langle x - \mathrm{p}_C(x), y - \mathrm{p}_C(x)\rangle \leq 0, \quad \forall y \in C
+$$
+
+和：
+$$
+\left\|\mathrm{p}_{C}\left(x_{1}\right)-\mathrm{p}_{C}\left(x_{2}\right)\right\| \leqslant\left\|x_{1}-x_{2}\right\|
+$$
+
+
+
+
 
 ## 几类重要的锥
 
 ### Polar cone
 
-对于凸锥来说，非常有意义的一点是，它可以认为是介于 subspace 与 general convex set 之间的产物。
+**对于闭凸锥来说，非常有意义的一点是，它可以认为是介于 subspace 与 general convex set 之间的产物。**
 
 锥 $K$ 的极锥定义为：
 $$
 K^{\circ}=\left\{s \in \mathbb{R}^{n}:\langle s, x\rangle \leqslant 0 \text { for all } x \in K\right\}
 $$
-如果 $K$ 是一个超平面，那么 $K^\circ = K^\perp$ . 实际上，极锥就可以看成是正交补的推广。
+如果 $K$ 是一个超平面，那么 $K^\circ = K^\perp$ . 实际上，**极锥就可以看成是正交补的推广**。
 
-<img src="../figures/Convex-set-2/image-20220321163212889.png" alt="image-20220321163212889" style="zoom:60%;" />
+<img src="../figures/Convex-set-2/image-20220321163212889.png" alt="image-20220321163212889" style="zoom:50%;" />
 
-注意到极锥一定是闭凸锥；$K^\circ = - K ^\ast$
+注意到极锥一定是闭凸锥；它的定义刚好是对偶锥反过来， $K^\circ = - K ^\ast$ .
 
 极运算是反序的，如果锥 $K_1 \subseteq K_2$，那么 $K_2^\circ \subseteq K_1^\circ$ .
+
+**闭凸锥的投影算子**
+
+投影到闭凸锥和投影到闭超平面是相似的
+$$
+\mathrm{p}_{K}(x)+\mathrm{p}_{K^{\circ}}(x)=x
+$$
+**(Moreau定理)** 设 $K$ 是一个闭凸锥，则下面两个说法等价
+
+1. $x=x_{1}+x_{2}$ with $x_{1} \in K, x_{2} \in K^{\circ}$ and $\left\langle x_{1}, x_{2}\right\rangle=0$;
+2. $x_{1}=\mathrm{p}_{K}(x)$ and $x_{2}=\mathrm{p}_{K^{\circ}}(x)$.
+
+
+
+### Tangent cone
+
+对于光滑的集合，在某一点我们可以用超平面来近似。但是，凸跟光滑没有必然的联系，在集合 $S$ 的一点 $\bar{x}$，我们用切锥来表示这种近似 (first-order approximation of sets)：
+$$
+T_{S}(\bar{x})=\left\{d \mid \exists S \supseteq\left\{x_{k}\right\} \rightarrow \bar{x},\left\{t_{k}>0\right\} \rightarrow 0, \; \lim _{k \rightarrow \infty} \frac{x_{k}-\bar{x}}{t_{k}}=d\right\} = \overline{\operatorname{cone}}(S-x)
+$$
+切锥一定是闭的，但不一定是凸的，如 $K=\left\{(x, y) \in \mathbb{R}^{2} \mid x, y \geq 0, x y=0\right\}, T_{K}(0)=K$.
+
+切锥作为一阶近似，与光滑集合边界上的超平面近似的相容的。不难发现，单位圆上一点的切锥就是它这点的切线。
+
+切锥是若干个半平面的交
+
+
+
+令 $S$ 是一个适当的光滑曲面
+$$
+S:=\left\{x \in \mathbb{R}^{n}: c_{i}(x)=0 \text { for } i=1, \ldots, m\right\}
+$$
+则 $T_S(x) = \left\{d \in \mathbb{R}^{n}:\left\langle\nabla c_{i}(x), d\right\rangle=0 \text { for } i=1, \ldots, m\right\}$
+
+【小于等于的情况】
+
+
+
+切锥是一个一般性的概念，闭凸锥的切锥有更简洁的表示。
+
+如果 $C$ 是一个闭凸锥，那么 $T_C(x) = \overline{\operatorname{cone}} (C-x)$，自然 $T_C(x)$ 是一个闭凸集。
+
+### Normal cone
+
+法锥：切锥的极锥，因此一定是闭凸锥。
+$$
+N_{C}(x)=\{v  \mid \langle v, y - x\rangle \leq 0, \, \forall y \in C\}
+$$
+
+
+### Recession cone
+
+
+
+
+
+
+
+
 
 
 
@@ -211,7 +301,28 @@ $$
 
 如果 $C$ 是一个非空的闭凸集，那么 $C$ 的 recession cone 是它的 barrier cone 的对偶锥。
 
-polar cone
+
+
+
+
+## Hyperplane seperation
+
+引入了相对拓扑之后，超平面分离定理还能有进一步的细化。
+
+凸集的分离根据其程度可分为以下三种：
+
++ weak seperation
+
+
+
++ proper seperation
+
+
+
++ strict seperation
+
+
+
 
 
 ## 近似的凸集表示定理
