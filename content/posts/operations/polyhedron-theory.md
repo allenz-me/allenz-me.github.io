@@ -5,21 +5,67 @@ draft: false
 toc: false
 slug: polyhedron-theory
 categories: ["运筹与优化"]
-tags: []
+tags: ["Polyhedron"]
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
 
-线性规划的可行域 $P$ 是一个多面体，混合整数线性规划有时候可以转换成多面体上的线性优化因。此，多面体组合学是线性规划，包括整数线性规划在内的组合优化的一个重要理论。
+多面体与线性不等式 $Ax \leq b$ 有着紧密的联系，围绕这它们，主要有两个研究问题：
 
-首先是一些基本概念：
+1. 系统 $Ax \leq b$ 是否有解
+2. 系统 $Ax \leq b$ 的几何性质
+
+### Fourier Elimination
+
+Fourier 最先设计了一种类似高斯消元的方法来研究 $Ax\leq b$ 的有解性。
+
+它的思想可以理解为：给出 $(\bar{x}_1, \bar{x}_2, \dots, \bar{x}_{n-1})$，我们是否能找到一个 $\bar{x}_n$ ，使得 $(\bar{x}_1, \dots, \bar{x}_n)$ 是 $Ax\leq b$ 的解 。
+
+令 $I=\{1, \ldots, m\}$，引入记号：
+$$
+I^{+}:=\left\{i \in I: a_{i n}>0\right\}, \quad I^{-}:=\left\{i \in I: a_{i n}<0\right\}, \quad I^{0}:=\left\{i \in I: a_{i n}=0\right\}
+$$
+则：
+$$
+Ax \leq b \quad \Longleftrightarrow  \quad\begin{array}{llll}
+\sum_{j=1}^{n-1} a_{i j}^{\prime} x_{j} & +x_{n} & \leq b_{i}^{\prime}, & i \in I^{+} \\
+\sum_{j=1}^{n-1} a_{i j}^{\prime} x_{j} & -x_{n} & \leq b_{i}^{\prime}, & i \in I^{-} \\
+\sum_{j=1}^{n-1} a_{i j} x_{j} & & \leq b_{i}, & i \in I^{0}
+\end{array} \tag{1}
+$$
+其中 $a_{i j}^{\prime}=a_{i j} /\left|a_{i n}\right|, b_{i}^{\prime}=b_{i} /\left|a_{i n}\right|, i \in I^{+} \cup I^{-}$ .
+
+$I^{+}, I^{-}$ 里的不等式分别相加，移去 $|I^{+}| + |I^{-}|$ 个并增加 $|I^+| \times |I^-|$ 个不等式，可以得到：
+$$
+\begin{array}{l}
+\sum_{j=1}^{n-1}\left(a_{i j}^{\prime}+a_{k j}^{\prime}\right) x_{j} & \leq b_{i}^{\prime}+b_{k}^{\prime}, & i \in I^{+}, k \in I^{-} \\
+\sum_{j=1}^{n-1} a_{i j} x_{j} & \leq b_{i}, & i \in I^{0}
+\end{array} \tag{2}
+$$
+现在我们可以回答上面那个问题了，$(\bar{x}_1, \bar{x}_2, \dots, \bar{x}_{n-1})$ 满足(2) 当且仅当 存在 $\bar{x}_n$，使得 $(\bar{x}_1, \dots, \bar{x}_n)$ 是 $Ax\leq b$ 的解。
+
+令 
+$$
+l= \begin{cases} \displaystyle\max _{k \in I^{-}}\left\{\sum_{j=1}^{n-1} a_{k j}^{\prime} \bar{x}_{j}-b_{k}^{\prime}\right\},  & I^- \neq \emptyset  \\
+- \infty  , & I^- = \emptyset \\
+\end{cases}\qquad 
+u= \begin{cases} \displaystyle\min _{i \in I^{+}}\left\{b_{i}^{\prime}-\sum_{j=1}^{n-1} a_{i j}^{\prime} \bar{x}_{j}\right\}, & I^+ \neq \emptyset \\ 
++ \infty,   & I^+ = \emptyset \\
+\end{cases}
+$$
+$l \leq \bar{x}_n \leq u$ 就是满足条件的数！
+
+这意味着 $n$ 个线性不等式组 $A^n x \leq b^n$ 的有解性可以等价于一个 $n-1$ 个线性不等式组 $A^{n-1}x \leq b^{n-1}$ 的有解性。所以 Fourier elimination 的思路就是不断递推到 $A^1 x \leq b^1$ ，但是每一次迭代都有可能加入非常多的新的不等式，算法执行起来可能需要指数时间。
+
+### Polyhedron
+
+线性规划的可行域 $P$ 是一个多面体，混合整数线性规划有时候可以转换成多面体上的线性优化。因此，多面体组合学是线性规划，包括整数线性规划在内的组合优化的一个重要理论。
 
 **Polyhedron**
-
 $$
-P=\left\{x \in \mathbb{R}^{n}: A x \leq b\right\}
+P:=\left\{x \in \mathbb{R}^{n}: A x \leq b\right\}
 $$
 
-polyhedron 的复数形式的 polyhedra，bounded polyhedron 称为 polytope。
+polyhedron 的复数形式是 polyhedra，bounded polyhedron 称为 polytope。
 
 **Rational polyhedron**
 
@@ -60,7 +106,7 @@ $$
 
 图示如下：
 
-<img src="../figures/polyhedron-theory/image-20220320151845791.png" alt="image-20220320151845791" style="zoom:67%;" />
+<img src="../figures/polyhedron-theory/image-20220320151845791.png" alt="" style="zoom:67%;" />
 
 
 
@@ -82,8 +128,6 @@ $$
 
 直观上看，a nonempty polyhedron is pointed when it does not contain any line.
 
-<br>
-
 如果 $P:=\left\{x \in \mathbb{R}^{n}: A x \leq b\right\}=\operatorname{conv}\left(v^{1}, \ldots, v^{p}\right)+ \operatorname{cone}\left(r^{1}, \ldots, r^{q}\right)$ 非空，那么
 
 $$
@@ -97,7 +141,7 @@ $$
 
 多面体 $P=\left\{x \in \mathbb{R}^{n}: A x \leq b\right\}$ 是由一组不等式系统 $a_i^T x \leq b_i, \, i \in M$ 组成的，称不等式 $a_i^T x \leq b_i$ 是一个 implicit equality，如果 $P$ 被包含在超平面 $\{x \mid a_i^T x = b_i\}$ 中。
 
-记  $M^{=}=\left\{i \in M \mid a^T_{i} x=b_{i},\, \forall x \in P\right\}$，$M^{<}=\left\{i \in M \mid a^T_{i} x<b_{i},\, \exists x \in P\right\}$。并引入记号 $(A^=, b^=), \, (A^<, b^<)$ 使得：
+记  $M^{=}=\left\{i \in M \mid a^T_{i} x=b_{i},\, \forall x \in P\right\}$，$M^{<}=\left\{i \in M \mid a^T_{i} x<b_{i},\, \exists x \in P\right\}$，并引入记号 $(A^=, b^=), \, (A^<, b^<)$ 使得：
 
 $$
 P=\left\{x \in \mathbb{R}^{n}: A^{=} x \leq b^{=}, A^{<} x \leq b^{<}\right\}=\left\{x \in \mathbb{R}^{n}: A^{=} x=b^{=}, A^{<} x \leq b^{<}\right\}
@@ -109,7 +153,7 @@ $$
 
 显然，一个多面体可能没有 interior point。但是，可以证明非空的多面体一定有 inner point。
 
-根据 $M^{<}$ 的定义，$\forall i \in M^{<}$，都存在 $x_i \in P$ 使得 $a_i^T x_i \leq b_i$，由于多面体是凸集，不难发现 $\bar{x}:=\displaystyle\frac{1}{\left|M^{<}\right|} \sum_{i \in M^{<}} x_{i}$ 是一个满足条件的点。
+根据 $M^{<}$ 的定义，$\forall i \in M^{<}$，都存在 $x_i \in P$ 使得 $a_i^T x_i < b_i$，由于多面体是凸集，不难发现 $\bar{x}:=\displaystyle\frac{1}{\left|M^{<}\right|} \sum_{i \in M^{<}} x_{i}$ 是一个满足条件的点。
 
 由此不难证明：
 $$
@@ -128,8 +172,6 @@ x_{i j} & \geq 0, \quad i, j=1, \ldots n
 \end{aligned} \,\right\}
 $$
 的维数是 $n^2-2n+1$ .
-
-
 
 ### Faces
 
@@ -151,11 +193,13 @@ $$
 
 $\emptyset$ 和 $P$ 本身都是 $P$ 的 face，称 $P$ 的其它 face 都是 *proper* 的。
 
-直观上理解，face 就是多面体与它的一个支撑超平面的交。
+**直观上理解，face 就是多面体与它的一个支撑超平面的交。**
 
-**Characterization of the Faces**
+
+##### Characterization of the Faces
 
 非空集合 $F$ 是 $P$ 的 face 当且仅当，对某个 $I \subseteq M$， $F$ 可以写成：
+
 $$
 F =\left\{x \in \mathbb{R}^{n}: a_{i}^T x=b_{i}, \,i \in I, a_{i}^T x \leq b_{i}, \,i \in M \backslash I\right\}
 $$
@@ -164,18 +208,42 @@ $$
 多面体 $P$ 的 face 有以下性质：
 
 + face 的数量是有限的
-
-
-
-
++ $F$ 是 $P$ 的 face，那么 $\operatorname{lin}(F) = \operatorname{lin}(P)$
++ $P$ 的两个 face $F \neq F^\prime$ 当且仅当 $\operatorname{aff}(F) \neq \operatorname{aff}(F^\prime)$
 
 
 
 ### Facets
+
+如果 $P$ 删去一个不等式仍然不变就说这个不等式是 ***redundant*** 的，一个多面体的各个约束可能都是多余的，比如一个不等式重复使用多次。
+
+如果系统 $Ax \leq b$ 定义的多面体不包含任何多余的约束，那么就称这个系统是多面体的 *minimal representation* .
 
 $P$ 的一个 face $F$ 称为 **facet**，如果 $F$  非空且 $\operatorname{dim} F = \operatorname{dim}P - 1$ .
 
 比如说正方体的一条棱是 face，一个面就是 facet 。
 
 
+
+### Minimal Faces
+
+如果 $F$ 是 $P$ 的一个非空的 face，称 $F$ 是 $P$ 的一个 minimal face，如果 $F$ 不包含任何 $P$ 的 proper face。一个极小的 face 不一定是顶点。
+
+**Hoﬀman and Kruskal**
+
+如果 $F$ 是 $P$ 的非空的 face，那么 $\operatorname{dim}(\operatorname{lin}(P))  \leq \operatorname{dim}(F) \leq \operatorname{dim}(P)$ .
+
+
+
+**Vectices**
+
+多面体的0维的 face 称为 vertex，$P$ 存在顶点当且仅当 $\operatorname{lin}(P) = \{0\}$ .
+
+**Edges**
+
+多面体的0维的 face 称为 edge
+
+
+
+### Decomposition Theorem for Polyhedra
 
