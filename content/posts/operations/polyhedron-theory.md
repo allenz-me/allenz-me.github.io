@@ -53,10 +53,10 @@ $$
 
 $$
 l= \begin{cases} \displaystyle\max _{k \in I^{-}}\left\{\sum_{j=1}^{n-1} a_{k j}^{\prime} \bar{x}_{j}-b_{k}^{\prime}\right\},  & I^- \neq \emptyset  \\
-- \infty  , & I^- = \emptyset \\
-\end{cases}\qquad 
+- \infty  , & I^- = \emptyset
+\end{cases}\;\, \qquad 
 u= \begin{cases} \displaystyle\min _{i \in I^{+}}\left\{b_{i}^{\prime}-\sum_{j=1}^{n-1} a_{i j}^{\prime} \bar{x}_{j}\right\}, & I^+ \neq \emptyset \\ 
-+ \infty,   & I^+ = \emptyset \\
++ \infty,   & I^+ = \emptyset
 \end{cases}
 $$
 
