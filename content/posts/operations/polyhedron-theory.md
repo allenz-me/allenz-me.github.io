@@ -1,5 +1,5 @@
 ---
-title: "Basic Polyhedron Theory"
+title: "Basic Polyhedron Theory (1)"
 date: 2022-03-07
 draft: false
 toc: false
@@ -64,6 +64,10 @@ $l \leq \bar{x}_n \leq u$ 就是满足条件的数！
 
 这意味着 $n$ 个线性不等式组 $A^n x \leq b^n$ 的有解性可以等价于一个 $n-1$ 个线性不等式组 $A^{n-1}x \leq b^{n-1}$ 的有解性。所以 Fourier elimination 的思路就是不断递推到 $A^1 x \leq b^1$ ，但是每一次迭代都有可能加入非常多的新的不等式，算法执行起来可能需要指数时间。
 
+实际上，这种算法也可以看成是投影，多面体 $P$ 非空，当且仅当它在一个低一维的子空间上的投影非空。
+
+<img src="../figures/polyhedron-theory/image-20220402141107763.png" alt="image-20220402141107763" style="zoom:55%;" />
+
 ### Polyhedron
 
 线性规划的可行域 $P$ 是一个多面体，混合整数线性规划有时候可以转换成多面体上的线性优化。因此，多面体组合学是线性规划，包括整数线性规划在内的组合优化的一个重要理论。
@@ -116,7 +120,7 @@ $$
 
 <img src="../figures/polyhedron-theory/image-20220320151845791.png" alt="" style="zoom:67%;" />
 
-
+一个多面体 = 极点的凸包 + 极线的锥包
 
 ### Lineality Space and Recession Cone
 
@@ -141,7 +145,7 @@ $$
 $$
 \begin{aligned}
 \operatorname{rec}(P)&=\left\{r \in \mathbb{R}^{n}: A r \leq 0\right\}=\operatorname{cone}\left(r^{1}, \ldots, r^{q}\right) \\
-\operatorname{lin}(P)&=\left\{r \in \mathbb{R}^{n}: A r=0\right\} \\
+\operatorname{lin}(P)&=\left\{r \in \mathbb{R}^{n}: A r=0\right\} = \operatorname{ker}(A) \\
 \end{aligned}
 $$
 
@@ -219,8 +223,6 @@ $$
 + $F$ 是 $P$ 的 face，那么 $\operatorname{lin}(F) = \operatorname{lin}(P)$
 + $P$ 的两个 face $F \neq F^\prime$ 当且仅当 $\operatorname{aff}(F) \neq \operatorname{aff}(F^\prime)$
 
-
-
 ### Facets
 
 如果 $P$ 删去一个不等式仍然不变就说这个不等式是 ***redundant*** 的，一个多面体的各个约束可能都是多余的，比如一个不等式重复使用多次。
@@ -231,8 +233,6 @@ $P$ 的一个 face $F$ 称为 **facet**，如果 $F$  非空且 $\operatorname{d
 
 比如说正方体的一条棱是 face，一个面就是 facet 。
 
-
-
 ### Minimal Faces
 
 如果 $F$ 是 $P$ 的一个非空的 face，称 $F$ 是 $P$ 的一个 minimal face，如果 $F$ 不包含任何 $P$ 的 proper face。一个极小的 face 不一定是顶点。
@@ -241,17 +241,27 @@ $P$ 的一个 face $F$ 称为 **facet**，如果 $F$  非空且 $\operatorname{d
 
 如果 $F$ 是 $P$ 的非空的 face，那么 $\operatorname{dim}(\operatorname{lin}(P))  \leq \operatorname{dim}(F) \leq \operatorname{dim}(P)$ .
 
-
-
 **Vectices**
 
-多面体的0维的 face 称为 vertex，$P$ 存在顶点当且仅当 $\operatorname{lin}(P) = \{0\}$ .
+多面体的0维的 face 称为 *vertex* 。
+
+$P$ 存在顶点当且仅当 $\operatorname{lin}(P) = \{0\}$ ，即 $P$ is pointed.
+
+$\bar{v}$ 是 $P$ 的顶点，当且仅当 $\bar{v}$ 是 $P$ 的极点 (extreme point)；当且仅当 $\bar{v}$ 满足 $Ax \leq b$ 中 $n$ 个线性无关的等式。
 
 **Edges**
 
-多面体的1维的 face 称为 edge
+多面体的1维的 face 称为 *edge* 。
 
+一个 edge 最多包含两个顶点，如果 $P$ 是 pointed 的，那么每个 edge 都至少会包含一个 vertex 。
 
+**Extreme Rays**
 
-### Decomposition Theorem for Polyhedra
+一个 pointed polyhedral cone $C$ 的 *extreme ray* 指的是 $C$ 的 edge。
+
+一个 pointed polyhedron $P$ 的 *extreme ray* 指的是它的 recession cone 的 extreme ray。
+
+Extreme ray 的概念类似于 extreme point，它不能写成两条不同线的 conic combination。
+
+<!-- ### Decomposition Theorem for Polyhedra -->
 

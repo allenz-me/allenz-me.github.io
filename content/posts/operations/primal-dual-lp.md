@@ -57,7 +57,7 @@ $$
 
 这个问题我们把它叫做 dual restricted program (DRP)
 
-+ 如果 DRP 的最优值是0，这意味着对偶问题(D)达到最优
++ 如果 DRP 的最优值是0，这意味着对偶问题(D)达到最优，因为沿着任何可行方向都不能增加目标函数值了。
 + 如果 DRP 的最优值大于0，这说明存在一个足够小的 $t>0$，使得 $\mathbf{u}$ 沿着 DRP 的解 $\mathbf{v}$ 前进一段距离能保持对偶可行性同时提升函数值！现在我们要找到最大的 $t$，$\mathbf{u} + t \mathbf{v}$ 必须要保证可行性，对于 指标集 $J$ 对应的约束，可行性是一定满足的。
   + 如果 $\mathbf{v}^\top A_j \leq 0 , \; \forall j \notin J$ ，那么 $\mathbf{u}$ 沿着 $\mathbf{v}$ 前进多少都不会违背可行性，这说明对偶问题(D)是无上界的，从而原问题没有可行解。
   + 如果 $\exists j \notin J, \;\mathbf{v}^\top A_j > 0$，那么可以选择的最大的 $t$ 是 $\min\limits_{j \notin J,\, \mathbf{v}^\top A_j > 0} \displaystyle\frac{c_j - \mathbf{u}^\top A_j}{\mathbf{v}^\top A_j}$

@@ -49,20 +49,66 @@ $$
 
 + 如果存在 $y$ 使得 $A^T y\geq 0$ 并且 $b^T y < 0$，那么如果 $b \geq 0$，$x^T A^T y \geq 0$，从而 $Ax \neq b$。
 
-
-
-## KKT定理
+## KKT 定理
 
 对于一般的非线性规划：
 
 $$
 \begin{aligned}
-    \min \; & f(x)  \\
-    \text{s.t. } & 
+\min \; & f(\boldsymbol{x}) \\
+\text {s.t. } & g_{i}(\boldsymbol{x}) \leq 0, \quad i=1, \ldots, m \\
+& h_{i}(\boldsymbol{x})=0, \quad i=1, \ldots, n
 \end{aligned}
 $$
 
+$\boldsymbol{x}^\ast \in \mathcal{X}$ 是局部极小点 (local minimum)，并满足一定的 constraint qualification，则存在 $\lambda_1, \dots, \lambda_m \geq 0$ 和 $\mu_1, \dots, \mu_n$ 使得：
+$$
+\begin{aligned}
+\nabla f\left(\boldsymbol{x}_{*}\right)+\sum_{i=1}^{m} \lambda_{i} \nabla g_{i}\left(\boldsymbol{x}_{*}\right)+\sum_{i=1}^{n} \mu_{i} \nabla h_{i}\left(\boldsymbol{x}_{*}\right)&=\mathbf{0} \\
+\lambda_{i} g_{i}\left(\boldsymbol{x}_{*}\right)&=0, \;\;i=1, \ldots, m
+\end{aligned}
+$$
+**以上定理给出了局部最优的必要条件，没有凸性的要求。**
 
+$\boldsymbol{x}^\ast$ 处的 Linearized cone 是：
+$$
+L_{\mathcal{X}} (\boldsymbol{x}^\ast) = \left\{ d \,\middle\vert\,
+\begin{aligned}
+\nabla g_i(\boldsymbol{x}^\ast)^T d \leq 0 \\
+\nabla h_i(\boldsymbol{x}^\ast)^T d  = 0
+\end{aligned}
+\right\}
+$$
+
+在满足 CQ 条件的情况下，$L_{\mathcal{X}}(\boldsymbol{x}^\ast) = T_{\mathcal{X}}(\boldsymbol{x}^\ast)$ 即可行方向锥恰好与切锥相同，由 $\boldsymbol{x}^\ast$ 是局部极小得到：
+$$
+\nabla f (\boldsymbol{x}^\ast) ^T d \geq 0, \quad \forall d \in T_{\mathcal{X}}(\boldsymbol{x}^\ast) \tag{1}
+$$
+记：
+$$
+A=\left(\begin{array}{c}
+-\nabla g_{i}(\bar{x})^{T} \\
+-\nabla h_{j}(\bar{x})^{T} \\
+\nabla h_{j}(\bar{x})^{T}
+\end{array}\right) \in \mathrm{R}^{(|I|+2 p) \times n}
+$$
+则 (1) 等价于：
+$$
+\nabla f (\boldsymbol{x}^\ast) ^T d \geq 0, Ad \geq 0 \tag{2}
+$$
+这说明：
+$$
+\exists\left(\begin{array}{l}
+\lambda \\
+\mu_{+} \\
+\mu_{-}
+\end{array}\right) \geq 0,\;\;\text{s.t. } A^{T}\left(\begin{array}{l}
+\lambda \\
+\mu_{+} \\
+\mu_{-}
+\end{array}\right)=\nabla f(\bar{x})
+$$
+令 $\mu = \mu_{+} - \mu_{-}$ 即可。
 
 ## 线性规划强对偶性
 
@@ -234,10 +280,6 @@ $$
 $$
 对于最大化对偶问题(D)，可以看成是资源约束下的最大化利润问题，假如说 $(\bar{x}, \bar{y})$ 是一组最优解，如果资源约束增大为 $c_\epsilon = c + \epsilon$，在保证最优性和可行性的条件下，目标函数值增大 $\epsilon^T \bar{x}$ .
 
-
-
-
-
 ## Farkas 引理的应用
 
 利用 Farkas 引理能够得到一个有用的推论：
@@ -259,16 +301,10 @@ $$
 得证！
 
 
-
-
-> Gordan 定理：
+> 与之相关的还有 Gordan 定理：
 > (1) $Ax < 0$
 > (2) $A^Ty=0, \:y\succeq 0, \:y\neq 0$
 > 只能有一个有解！
-
-
-
-
 
 ---
 

@@ -76,13 +76,21 @@ Closure operators are also called "**hull operators**".
 
 由此可定义闭凸包算子 
 $$
-\overline{\operatorname{conv}} S := \bigcap_{\begin{array}{c} &S \subset U \\ &S \text{ closed} \end{array} } U = \operatorname{cl} (\operatorname{conv} S)
+\overline{\operatorname{conv}} S := \bigcap_{\begin{array}{c} &S \subset U \\ &S \text{ convex,\,closed} \end{array} } U = \operatorname{cl} (\operatorname{conv} S)
 $$
 
 对于非空集合 $S$
 
 + $\overline{\operatorname{conv}} S=\operatorname{cl}(\operatorname{conv} S)$
 + 如果 $S$ 有界，那么 $\overline{\operatorname{conv}} S=\operatorname{conv}(\operatorname{cl} S)=\operatorname{cl}(\operatorname{conv} S)$
+
+类似地，包算子 $\operatorname{cone}$ 也是不保持闭性的，如 $\{(x, y) \in \mathrm{R}^2 \mid y \geq 1\}$，其锥包不是闭的。
+
+由此可以定义闭锥包算子：
+$$
+\overline{\operatorname{cone}} S:= \operatorname{cl} (\operatorname{cone} S)
+$$
+若 $S$ 是紧集且 $0 \notin \operatorname{conv} S$, 则 $\overline{\operatorname{cone}} S=\operatorname{cone} S$ .
 
 
 ## Relative topology
