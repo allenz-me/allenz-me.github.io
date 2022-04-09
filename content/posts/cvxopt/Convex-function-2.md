@@ -14,21 +14,165 @@ tags: []
 
 
 
+
+## 凸函数
+
 对凸性的刻画，从弱到强，分别是：
 
-+ 拟凸 (quasiconvex)
+### 拟凸 (quasiconvex)
+
+$f$ 的所有 sublevel sets $L_\alpha = \{x \mid f(x) \leq \alpha\}$ 是凸集。
+
+### 凸 (convex)
+
+定义在凸集上的函数 $f$ 满足 $\forall x, y, \lambda \in [0, 1]$ 成立：
+$$
+f(\lambda x + (1-\lambda )y) \leq \lambda f(x) + (1-\lambda) f(y)
+$$
+则称 $f$ 是凸函数。
+
+#### Epigraph characterization of convexity
+
+一个函数的 epigraph 指的是：
+$$
+\text { epi } f=\left\{(x, r) \in \mathbb{R}^{n} \times \mathbb{R} \mid f(x) \leq r\right\}
+$$
+如果把上面的小于等于号换成小于号，就是 $f$ 的 strict epigraph $\operatorname{epi}_s(f)$ .
+
+$f$ 是凸函数等价于：
+
++ $\operatorname{epi}(f)$ 是凸集
++ $\operatorname{epi}_s(f)$ 是凸集
+
+#### First-order characterization of convexity
+
+### 严格凸 (strictly convex)
+
+定义在凸集上的函数 $f$ 满足 $\forall x \neq y, \lambda \in (0, 1)$ 成立：
+$$
+f(\lambda x + (1-\lambda )y) < \lambda f(x) + (1-\lambda) f(y)
+$$
+则称 $f$ 是严格凸函数。
 
 
 
+### 强凸 (strongly convex)
+
+存在 $\sigma > 0$ 使得定义在凸集上的函数 $f$ 满足 $\forall x, y, \lambda \in [0, 1]$ 成立：
+$$
+f(\lambda x+(1-\lambda) y) \leq \lambda f(x)+(1-\lambda) f(y)-\frac{\sigma}{2} \lambda(1-\lambda)\|x-y\|^{2}
+$$
+则称 $f$ 是强凸函数，且 $\sigma$ 称为强凸系数 (modulus of strong convexity)。上式的等价定义是：$f(x) - \displaystyle\frac{\sigma}{2} \|x \|^2$ 是凸函数。
 
 
-+ 凸 (convex)
+
+## 凸函数的连续性
+
+$\mathrm{R}^n \to \mathrm{R}$的凸函数是连续函数。
+
+**proper 的凸函数在相对内点集上是连续的。**
+
+由此可见，$\mathrm{R}^n$ 上的凸函数一定是闭的（下半连续）。
 
 
 
-+ 严格凸 (strictly convex)
+## Log-determinant
+
+$\mathrm{S}_{++}^n \to \mathrm{R}$ 的函数 $f(X) = \log \det X$ 称为 log-det function，其梯度：
+$$
+\nabla f(X) = X^{-1}
+$$
+先证明 $\nabla f(I) = I$，设 $\Delta \in \mathrm{S}^n$ 其特征值为 $\lambda_1, \lambda_2, \dots, \lambda _n$
+$$
+\begin{aligned}
+f(I+\Delta)-f(I)-\langle I, \Delta\rangle &=\log \left(\prod_{i=1}^{n}\left(\lambda_{i}+1\right)\right)-\operatorname{tr}(\Delta)=\sum_{i=1}^{n}\left[\log \left(\lambda_{1}+1\right)-\lambda_{i}\right] \\
+&=o(\operatorname{tr}(\Delta))=o\left(\sqrt{\operatorname{tr}\left(\Delta^{T} \Delta\right)}\right)=o(\|\Delta\|)
+\end{aligned}
+$$
+对于一般情形：
+$$
+\begin{aligned}
+& f(X+\Delta)-f(X)-\left\langle X^{-1}, \Delta\right\rangle \\
+=& \log \left(\operatorname{det}\left(X^{\frac{1}{2}}\left(I+X^{-\frac{1}{2}} \Delta X^{-\frac{1}{2}}\right) X^{\frac{1}{2}}\right)\right)-\log (\operatorname{det}(X))-\operatorname{tr}\left(X^{-1} \Delta\right) \\
+=& \log \left(\operatorname{det}\left(I+X^{-\frac{1}{2}} \Delta X^{-\frac{1}{2}}\right)\right)-\operatorname{tr}\left(X^{-\frac{1}{2}} \Delta X^{-\frac{1}{2}}\right) \\
+=& o\left(\operatorname{tr}\left(X^{-\frac{1}{2}} \Delta X^{-\frac{1}{2}}\right)\right) = o(\|\Delta\|)
+\end{aligned}
+$$
+以上的内积都是矩阵的 Frobenius 内积。
+
+或者使用复合函数的求导公式：
+$$
+\frac{\partial}{\partial X_{i j}} \log \operatorname{det} X=\frac{1}{\operatorname{det} X} \frac{\partial \operatorname{det} X}{\partial X_{i j}}=\frac{1}{\operatorname{det} X} \operatorname{adj}(X)_{j i}=\left(X^{-1}\right)_{j i}
+$$
+其中 $\operatorname{adj}(X)$ 表示 $X$ 的伴随矩阵，满足 $\operatorname{adj}(X) = \det(X) \cdot X^{-1}$ .
+
+**Jacobi's formula**
+$$
+\frac{d}{d t} \operatorname{det} A(t)=\operatorname{tr}\left(\operatorname{adj}(A(t)) \frac{d A(t)}{d t}\right)=(\operatorname{det} A(t)) \cdot \operatorname{tr}\left(A(t)^{-1} \cdot \frac{d A(t)}{d t}\right)
+$$
+
+由此得到
+
+$$
+\frac{\partial \det A}{\partial A_{ij}} = \operatorname{adj}(A)_{ji}
+$$
+
+根据 $f(X)$ 的梯度，我们能得到它的一阶近似：
+$$
+f(Z) \approx f(X) + \langle X^{-1}, Z - X \rangle = f(X)+\operatorname{tr}\left(X^{-1}(Z-X)\right)
+$$
+
+
+## 半连续 Semi-Continuity
+
+半连续是对连续性的一种弱化，跟连续性类似，它有分析学上的定义，也有拓扑学意义上的定义。
+
+**分析学意义**
+
+称 $f$ 在 $\bar{x}$ 下半连续, 如果 $\displaystyle\liminf _{x \rightarrow \bar{x}} f(x)\geq f(\bar{x})$
+
+称 $f$ 在 $\bar{x}$ 上半连续, 如果 $\displaystyle\limsup _{x \rightarrow \bar{x}} f(x) \leq  f(\bar{x})$
+
+上（下）半连续函数是在各个点都上（下）半连续的函数。
+
+**拓扑学意义**
+
+Let $f$ be a real (or extended-real) function on a topological space. If
+$$
+\{x: f(x)>\alpha\}
+$$
+is open for every real $\alpha, f$ is said to be *lower semi-continuous*. If
+$$
+\{x: f(x)<\alpha\}
+$$
+is open for every real $\alpha, f$ is said to be *upper semi-continuous*.
+
+最简单的例子是，开集的 indicator function $\mathbf{1}_A(x) = \begin{cases} 1 & x\in A\\ 0 & x \notin A \end{cases}$ 是下半连续的，闭集的 indicator function 是上半连续的。
+
+$\mathrm{R}$ 上的半连续函数：
+
+<img src="../figures/Convex-function-2/Lower-left-and-upper-right-semi-continuous-functions.png" alt="Lower (left) and upper (right) semi-continuous functions" style="zoom:67%;" />
 
 
 
-+ 强凸 (strongly convex)
+**等价定义**
+
+$f: X \to \mathrm{\bar{R}}$ 是上半连续的等价于：
+
++ All superlevel sets $\{x \in X: f(x) \geq y\}$ with $y \in \mathrm{R}$ are closed in $X$.
++ The hypograph $\{(x, t) \in X \times \mathrm{R}: t \leq f(x)\}$ is closed in $X \times \mathrm{R}$.
+
+$f: X \to \mathrm{\bar{R}}$ 是下半连续的等价于：
+
++ All sublevel sets $\{x \in X: f(x) \leq y\}$ with $y \in \mathrm{R}$ are closed in $X$.
++ The epigraph $\{(x, t) \in X \times \mathrm{R}: t \geq f(x)\}$ is closed in $X \times \mathrm{R}$.
+
+**在凸优化中，有时把闭函数定义为 epigraph 为闭集的函数，它与下半连续函数是等价的。**
+
+**性质**
+
++ $f$ 连续当且仅当它是上半连续和下半连续的。
++ 下半连续函数的和是下半连续的；上半连续函数的和是下半连续的。
++ $f$ 下半连续当且仅当 $-f$ 是上半连续的。
++ 紧集上的下半连续函数存在最小值；紧集上的上半连续函数存在最大值。两个联系起来就是紧集上的连续函数存在最值。(Weierstrass extreme value theorem)
 

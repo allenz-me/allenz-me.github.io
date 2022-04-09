@@ -654,33 +654,7 @@ $$
 
 这是一条分割线，如果有时间，我会在下面继续补充一些重要的知识。
 
-### 一元凸函数的分析性质
 
-
-
-### 仿射变换 (affine transformation)
-
-形式上的，仿射变换定义为：
-$$
-f(\lambda x + (1-\lambda)y) = \lambda f(x) + (1-\lambda) f(y) \qquad 0\leq \lambda \leq 1
-$$
-
-如果还满足 $f(0) = 0$，那么这就成了线性变换（linear transformation）。
-
-给定仿射变换 $f(x)$，$g(x) = f(x) - f(0)$ 是一个线性变换。
-
-
-
-> 线性变换的两个条件：
->
-> + 加性 additive    $T(x+y) = Tx + Ty$ 
-> + 齐性 homogeneous    $T(\lambda x) = \lambda Tx$
-
-
-
-性质：
-
-+ 对于集合 $S$，$f(\operatorname{aff} S) = \operatorname{aff} f(S)$
 
 
 

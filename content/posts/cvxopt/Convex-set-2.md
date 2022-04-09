@@ -69,7 +69,7 @@ Closure operators are also called "**hull operators**".
 + $C$ 是凸集 $\Longrightarrow \operatorname{int} C$ 和 $\operatorname{cl} C$ 都是凸的
 
 + $C$ 是紧的 $\Longrightarrow \operatorname{conv} C$ 也是紧的 （$\operatorname{conv} C$ 的任意点列都有收敛子列）
-+ $C$ 有界 $\Longrightarrow \operatorname{cl} C$ 是紧集  $\Longrightarrow\operatorname{conv} C$ 是紧集
++ $C$ 有界 $\Longrightarrow \operatorname{cl} C$ 是紧集  $\Longrightarrow\operatorname{conv} (\operatorname{cl}C)$ 是紧集 $\Longrightarrow\operatorname{conv} C$ 有界
 
 
 包算子 $\operatorname{conv}$ 保持紧性，但是不保持闭性（$x^2y=1$ 的函数图像的凸包是一个开集），除非集合有界。
@@ -130,7 +130,7 @@ $$
 + $\operatorname{rbd} C=\operatorname{rbd}(\operatorname{ri} C)=\operatorname{rbd}(\operatorname{cl} C)$
 + $F(\operatorname{ri} C) = \operatorname{ri} F(C)$  for any affine map $F$
 
-
+引入相对内点的作用就是，可以把一个不满维的集合，通过改变拓扑，将它变成满维的。
 
 如果两个凸集 $C_1, C_2$ 满足 $\operatorname{ri} C_1 \cap \operatorname{ri} C_2 \neq \emptyset$，那么：
 
@@ -142,7 +142,7 @@ $$
 \end{aligned}
 $$
 
-
+下面是三个相对内点最重要的性质
 
 
 **Line segment principle**
@@ -161,10 +161,6 @@ i.e, if $C$ convex
 $$
 x \in \operatorname{ri} C \Leftrightarrow \forall z \in C, \exists \mu>1, \mu x+(1-\mu) z \in C .
 $$
-
-cvxthy 1.3 / 1.3.1
-
-
 
 ## 凸集的表示
 
@@ -232,7 +228,7 @@ $$
 $$
 K^{\circ}=\left\{s \in \mathbb{R}^{n}:\langle s, x\rangle \leqslant 0 \text { for all } x \in K\right\}
 $$
-如果 $K$ 是一个超平面，那么 $K^\circ = K^\perp$ . 实际上，**极锥就可以看成是正交补的推广**。
+如果 $K$ 是一个超平面，那么 $K^\circ = K^\perp$ . 实际上，**极锥就可以看成是正交补的推广**，此时内积小于等于0可以看成是正交的推广。
 
 <img src="../figures/Convex-set-2/image-20220321163212889.png" alt="image-20220321163212889" style="zoom:50%;" />
 
@@ -240,9 +236,31 @@ $$
 
 极运算是反序的，如果锥 $K_1 \subseteq K_2$，那么 $K_2^\circ \subseteq K_1^\circ$ .
 
-**闭凸锥的投影算子**
+#### Polar Cone Theorem
 
-投影到闭凸锥和投影到闭超平面是相似的
+对任何非空的锥 $K$，有：
+$$
+K^{\circ \circ} = \overline{\operatorname{conv}} K
+$$
+特别的，如果 $C$ 是一个闭凸锥，那么：$K^{\circ \circ} = K$ . (Farkas Lemma)
+
+**这个定理一定程度上说明了“子空间、正交补”和“闭凸锥、极运算”是类似的。**
+
+#### 闭凸锥的投影
+
+根据投影定理很容易得到：
+$$
+\langle x - \mathrm{p}_K(x), \,\mathrm{p}_K(x) \rangle = 0 \,\text{ and }\, \langle x -  \mathrm{p}_K(x), \, y\rangle \leq 0 \;\; \forall y \in K
+$$
+这点跟投影到子空间是非常类似的。对闭凸锥还成立：
+$$
+\mathrm{p}_{K}(x)=0 \Longleftrightarrow x \in K^{\circ}
+$$
+
+$$
+x \in K \quad \Longleftrightarrow \quad\langle s, x\rangle \leqslant 0 \text { for all } s \in K^{\circ} .
+$$
+
 $$
 \mathrm{p}_{K}(x)+\mathrm{p}_{K^{\circ}}(x)=x
 $$
@@ -251,83 +269,187 @@ $$
 1. $x=x_{1}+x_{2}$ with $x_{1} \in K, x_{2} \in K^{\circ}$ and $\left\langle x_{1}, x_{2}\right\rangle=0$;
 2. $x_{1}=\mathrm{p}_{K}(x)$ and $x_{2}=\mathrm{p}_{K^{\circ}}(x)$.
 
-
-
 ### Tangent cone
 
 对于光滑的集合，在某一点我们可以用超平面来近似。但是，凸跟光滑没有必然的联系，在集合 $S$ 的一点 $\bar{x}$，我们用切锥来表示这种近似 (first-order approximation of sets)：
 $$
-T_{S}(\bar{x})=\left\{d \mid \exists S \supseteq\left\{x_{k}\right\} \rightarrow \bar{x},\left\{t_{k}>0\right\} \rightarrow 0, \; \lim _{k \rightarrow \infty} \frac{x_{k}-\bar{x}}{t_{k}}=d\right\} = \overline{\operatorname{cone}}(S-x)
+\mathrm{T}_{S}(\bar{x})=\left\{d \mid \exists S \supseteq\left\{x_{k}\right\} \rightarrow \bar{x},\left\{t_{k}>0\right\} \rightarrow 0, \; \lim _{k \rightarrow \infty} \frac{x_{k}-\bar{x}}{t_{k}}=d\right\} = \overline{\operatorname{cone}}(S-x)
 $$
-切锥一定是闭的，但不一定是凸的，如 $K=\left\{(x, y) \in \mathbb{R}^{2} \mid x, y \geq 0, x y=0\right\}, T_{K}(0)=K$.
+**切锥一定是闭的，但不一定是凸的**，如 $K=\left\{(x, y) \in \mathbb{R}^{2} \mid x, y \geq 0, x y=0\right\}, \mathrm{T}_{K}(0)=K$.
 
-切锥作为一阶近似，与光滑集合边界上的超平面近似的相容的。不难发现，单位圆上一点的切锥就是它这点的切线。
-
-切锥是若干个半平面的交
-
-
+切锥作为一阶近似，与光滑集合边界上的超平面近似的相容的。不难发现，单位圆上一点的切锥就是它这点的切线。切锥可以看成是若干个半平面的交。
 
 令 $S$ 是一个适当的光滑曲面
 $$
-S:=\left\{x \in \mathbb{R}^{n}: c_{i}(x)=0 \text { for } i=1, \ldots, m\right\}
+S:=\left\{x \in \mathbb{R}^{n} \mid c_{i}(x)=0 \text { for } i=1, \ldots, m\right\}
 $$
-则 $T_S(x) = \left\{d \in \mathbb{R}^{n}:\left\langle\nabla c_{i}(x), d\right\rangle=0 \text { for } i=1, \ldots, m\right\}$
+则 $\mathrm{T}_S(x) = \left\{d \in \mathbb{R}^{n}\mid\left\langle\nabla c_{i}(x), d\right\rangle=0 \text { for } i=1, \ldots, m\right\}$
 
-【小于等于的情况】
-
-
+另一个例子是：
+$$
+S:= \{x \in \mathbb{R}^n \mid c(x) \leq 0\}
+$$
+如果 $c(\bar{x}) = 0$ 并且 $\nabla c(\bar{x}) \neq 0$，则 $\mathrm{T}_S(\bar{x}) = \{d \in \mathbb{R}^n \mid \langle c(\bar{x}), d\rangle \leq 0\}$
 
 切锥是一个一般性的概念，闭凸锥的切锥有更简洁的表示。
 
-如果 $C$ 是一个闭凸锥，那么 $T_C(x) = \overline{\operatorname{cone}} (C-x)$，自然 $T_C(x)$ 是一个闭凸集。
+如果 $C$ 是一个闭凸锥，那么 $\mathrm{T}_C(x) = \overline{\operatorname{cone}} (C-x)$，自然 $\mathrm{T}_C(x)$ 是一个闭凸集。
 
 ### Normal cone
 
-法锥：切锥的极锥，因此一定是闭凸锥。
+集合 $C$ 在 $x$ 处的法锥，定义为：
 $$
-N_{C}(x)=\{v  \mid \langle v, y - x\rangle \leq 0, \, \forall y \in C\}
+\mathrm{N}_{C}(x)=\{v  \mid \langle v, y - x\rangle \leq 0, \, \forall y \in C\}
 $$
 
+法锥是切锥的极锥，因此一定是闭凸锥。
+
+令 $C_1, C_2$ 是非空的闭凸集，则：
+$$
+\begin{gathered}
+\mathrm{T}_{C_{1}+C_{2}}\left(x_{1}+x_{2}\right)=\mathrm{cl}\left[\mathrm{T}_{C_{1}}\left(x_{1}\right)+\mathrm{T}_{C_{2}}\left(x_{2}\right)\right] \text{ and }
+\mathrm{N}_{C_{1}+C_{2}}\left(x_{1}+x_{2}\right)=\mathrm{N}_{C_{1}}\left(x_{1}\right) \cap \mathrm{N}_{C_{2}}\left(x_{2}\right) \\
+\mathrm{T}_{C_{1} \cap C_{2}}(x) \subset \mathrm{T}_{C_{1}}(x) \cap \mathrm{T}_{C_{2}}(x) \text { and } \mathrm{N}_{C_{1} \cap C_{2}}(x) \supset \mathrm{N}_{C_{1}}(x)+\mathrm{N}_{C_{2}}(x)
+\end{gathered}
+$$
+取 $x \in C, s \in \mathbb{R}^n$，以下结论是等价的：
+
++ $s \in \mathrm{N}_C(x)$
++ $x = \mathrm{p}_C(x+s)$
+
+即 $x + \mathrm{N}_C(x) = \mathrm{p}_C^{-1}(x)$ .
 
 ### Recession cone
 
+对一个任意的集合 $C$，它的 **recession cone** 被定义为：
 
+$$
+\operatorname{rec}(C)=\{y \mid x + ty \in C, \;  \forall x \in C, \; \forall t \geq 0\}
+$$
 
+$C$ 的回收锥可以理解为是 $C$ 内所有可以无限延伸的方向生成的锥。凸集 $C$ 有界当且仅当 $\operatorname{rec}(C) = \{0\}$ .
 
+凸集的 recession cone 是一个凸锥。特别地，多面体 $\{x \mid Ax = b\}$ 的 recession cone 是 $\{y \mid Ay=0\}$。
 
+**Lineality Space**
 
+集合 $C$ 的 Lineality Space 定义为：
+$$
+\operatorname{lin}(C) = \operatorname{rec}(C) \cap (-\operatorname{rec}(C))
+$$
+$d \in \operatorname{lin}(C)$ 当且仅当 $\forall x \in C$，整条直线 $\{d \mid x + \alpha d, \alpha \geq 0\}$ 都包含在 $C$ 中。
 
+**Decomposition of a Convex Set**
 
+设 $C$ 是一个非空凸集，则对于任意包含在 $\operatorname{lin}(C)$ 中的子空间 $S$，成立分解式：
+$$
+C = S + (C \cap S^{\perp})
+$$
 
-
-
-对一个任意的集合 $C$，它边界点 $x_0$ 的 **normal cone** 指的是集合 $\{y \mid y^T (x - x_0) \leq 0,\; \forall x \in C\}$。即 $y$ 与任何以 $x_0$ 为端点的线段都不构成锐角。不论集合 $C$ 是什么，它的 normal cone 都是一个凸锥！
+### Barrier cone
 
 对一个任意的集合 $C$，它的 **barrier cone** 被定义为集合 $\{y \mid |y^T x| < +\infty, \; \forall x \in C\}$。即非零向量 $y$ 是包含 $C$ 的半平面 $\{x \mid y^T x \leq \alpha\}$ 的法向。不论集合 $C$ 是什么，它的 barrier cone 也是一个凸锥！
-
-对一个任意的集合 $C$，它的 **recession cone** 被定义为集合 $\{y \mid x - ty \in C, \;  \forall x \in C, \; \forall t \geq 0\}$。$C$ 的回收锥可以理解为是 $C$ 内所有可以无限延伸的方向生成的锥。凸集的 recession cone 是一个凸锥；特别地，多面体 $\{x \mid Ax = b\}$ 的 recession cone 是 $\{y \mid Ay=0\}$。
 
 如果 $C$ 是一个非空的闭凸集，那么 $C$ 的 recession cone 是它的 barrier cone 的对偶锥。
 
 
 
+## Extreme points
 
+称 $x$ 是凸集 $C$ 的极点，如果不存在两点 $x_1, x_2\;(x_1 \neq x_2)$，使得
+$$
+x = \frac{1}{2}(x_1 + x_2)
+$$
+
++ 闭区间 $[a, b]$ 的极点是 $a$ 和 $b$
++ 单位球的任意一点都是极点
++ 半平面、仿射集没有极点
+
+极点的等价定义：
+
++ $x$ 是 $C$ 的一个 face
++ $C\backslash \{x\}$ 是凸的
+
+一般用 $\operatorname{ext} C$ 来表示 $C$ 的极点集。注意算子 $\operatorname{ext}$ 不满足单调性。
+
+凸紧集必然存在极点。令 $\bar{x}$ 是连续函数 $x \to \| x \|^2$ 在 $C$ 上的最小值点，容易验证 $\bar{x}$ 是极点。
+
+如果一个集合不包含一条直线，那么它必然包含一个极点。
+
+如果 $F$ 是 $C$ 的一个 face，那么 $\operatorname{ext} F \subseteq \operatorname{ext} C$ .
+
+**H. Minkowski 定理** ：对凸紧集 $C \subset \mathrm{R}^n$ 满足：$C = \operatorname{conv} (\operatorname{ext} C)$
+
+Converse Minkowski's Theorem：假设 $C$ 是非空凸紧集, 集合 $D \subseteq C$ 满足 $\overline{\operatorname{conv}} D=C$，则有 $\operatorname{ext} C \subset \operatorname{cl} D$
+
+> **Krein–Milman theorem** — A compact convex subset of a Hausdorff locally convex topological vector space is equal to the closed convex hull of its extreme points.
+>
+> 这是 Minkowski 定理在无穷维的推广。
+
+### Face
+
+Let $C$ be a convex set. A face of $C$ is a subset $F$ of $C$ such that
+1. $F$ is convex, and
+2. given any line segment $L \subseteq C$, if $\operatorname{ri}(L) \cap F \neq \emptyset$, then $L \subseteq F$.
+
+Faces that are nonempty and proper subsets of $C$ are called *proper faces*.
+
++ The intersection of two faces of $C$ is a face of $C$
++ A face of a face of $C$ is a face of $C$
++ Any proper face of $C$ lies on its relative boundary $\operatorname{rbd}(C)$
+
+### Exposed Face
+
+A set $F \subseteq C$ is an exposed face of $C$ if there is a supporting hyperplane $H$ of $C$ such that $F = C\cap H$
+
+*An exposed face is a face.*
+
+<img src="https://i.stack.imgur.com/Jak91.png" alt="A special face" style="zoom:99%;" />
+
+For polyhedra, all the faces are exposed.
 
 ## Hyperplane seperation
 
 引入了相对拓扑之后，超平面分离定理还能有进一步的细化。
 
-凸集的分离根据其程度可分为以下三种：
+对于超平面 $H = \{x\mid a^T x = b\}$，凸集的分离根据其程度可分为以下三种：
 
 + weak seperation
 
-
+$$
+\sup_{x \in C_{1}} a^{T} x \leq \inf_{x \in C_{2}} a^{T} x
+$$
 
 + proper seperation
 
-
+$$
+\sup _{x_{1} \in C_{1}} a^{T} x_{1} \leq \inf _{x_{2} \in C_{2}} a^{T} x_{2} \, , 
+\quad \inf _{x_{1} \in C_{1}} a^{T} x_{1}<\sup _{x_{2} \in C_{2}} a^{T} x_{2}
+$$
 
 + strict seperation
+
+$$
+\sup_{x \in C_{1}} a^{T} x < \inf_{x \in C_{2}} a^{T} x
+$$
+
+恰当分离指的是在弱分离的基础上，并且超平面不同时包含 $C_1$ 和 $C_2$ 。
+
+<img src="../figures/Convex-set-2/image-20220404141849352.png" alt="" style="zoom:44%;" />
+
+弱分离存在很平凡的情况，比如上图(c)。
+
+### 强分离
+
+**闭凸集与集合外一点的强分离性** 是投影定理的直接推论，分离超平面的法向直接就是投影方向。
+
+两个不相交的闭凸集可以被强分离，当且仅当它们的回收锥不相交。
+
+> $\operatorname{rec}(C_1) \cap \operatorname{rec}(C_2) = \emptyset \Rightarrow C_1 - C_2$ is closed. 对 $0$ 和 $C_1 - C_2$ 用点与闭凸集的强分离定理。
+
+### 恰当分离
+
+**两个凸集可以被恰当分离当且仅当它们的相对内点集不相交。**
 
 
 

@@ -1,6 +1,7 @@
 ---
 title: "在 Jupyter 中安装 R 和 Julia"
 date: 2022-01-01
+toc: false
 draft: false
 slug: jupyter-r-julia
 categories: ["算法与程序设计"]

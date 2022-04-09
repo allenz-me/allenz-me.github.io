@@ -13,16 +13,16 @@ tags: ["Duality"]
 
 Farkas 引理在对偶理论中有重要的应用，并且还被用来证明KKT条件。这个引理代数形式可以有多种，但是它的几何意义是恒定而简明的。
 
-Farkas 引理的内容是，一下两组式子有且仅有一个是可行的：
+Farkas 引理的内容是，给定矩阵 $A$ 和向量 $b$，以下两组式子有且仅有一个是可行的：
 
 1. $Ax = b, x \geq 0$
 2. $A^T y \geq 0, b^T y < 0$
 
-一个矩阵 $A$ 的所有列向量可以张成一个锥，另一个向量 $b$，与这个锥的位置关系只有两种：在锥内，不然就在锥外。所以 $b$ 在锥内和 $b$ 在锥外时成立的代数关系，恰好只有一个也必然有一个是成立的，同时另一个就不成立了。
+一个矩阵 $A$ 的所有列向量可以张成一个锥 $K = \{Ax \mid x \geq 0\}$，另一个向量 $b$，与这个锥的位置关系只有两种：在锥内，不然就在锥外。所以 $b$ 在锥内和 $b$ 在锥外时成立的代数关系，恰好只有一个也必然有一个是成立的，同时另一个就不成立了。
 
-+ 如果 $b$ 在锥内，那么可以找到一组非负的系数，使得 $b$ 能被 $A$ 的列向量线性表示，即存在 $x \geq 0, Ax=b$。
++ 如果 $b \in K$ ，那么可以找到一组非负的系数，使得 $b$ 能被 $A$ 的列向量线性表示，即存在 $x \geq 0, Ax=b$。
 
-+ 如果 $b$ 在锥外，那么根据点与凸集的分离定理，$b$ 和 $A$ 的列向量张成的锥，可以被一个（过原点的）超平面分离，设这个超平面的法向量为 $y$，那么可以有：$A^T y \geq 0, b^T y < 0$。
++ 如果 $b \notin K$ ，那么根据点与凸集的分离定理，$b$ 和 $A$ 的列向量张成的锥，可以被一个（过原点的）超平面分离，设这个超平面的法向量为 $y$，那么可以有：$A^T y \geq 0, b^T y < 0$。
 
 这个定理也可以通过替代定理的方式去证明。考虑一个线性规划问题和它的对偶问题：
 
@@ -47,7 +47,14 @@ $$
 
 + 如果 $\exists\, x \geq 0$，使得 $Ax=b$，那么如果 $A^T y \geq 0$，就有 $b^T y=x^T A^T y \geq 0$ ；
 
-+ 如果存在 $y$ 使得 $A^T y\geq 0$ 并且 $b^T y < 0$，那么如果 $b \geq 0$，$x^T A^T y \geq 0$，从而 $Ax \neq b$。
++ 如果存在 $y$ 使得 $A^T y\geq 0$ 并且 $b^T y < 0$，那么如果 $b \geq 0$，$x^T A^T y \geq 0$，从而 $Ax \neq b$ 。
+
+> 如果我们从锥的角度去看的话，Farkas 引理实质上说明了 $K = K^{\circ\circ}$ 
+>
+> A finite generated cone equals its bipolar cone
+> $$
+> b \in K \Leftrightarrow b^T y \leq 0 \, \text{ for all } y \in K^\circ = \{y \mid A^T y \leq 0\} \Leftrightarrow b \in K^{\circ\circ}
+> $$
 
 ## KKT 定理
 
@@ -82,7 +89,7 @@ $$
 
 在满足 CQ 条件的情况下，$L_{\mathcal{X}}(\boldsymbol{x}^\ast) = T_{\mathcal{X}}(\boldsymbol{x}^\ast)$ 即可行方向锥恰好与切锥相同，由 $\boldsymbol{x}^\ast$ 是局部极小得到：
 $$
-\nabla f (\boldsymbol{x}^\ast) ^T d \geq 0, \quad \forall d \in T_{\mathcal{X}}(\boldsymbol{x}^\ast) \tag{1}
+\nabla f (\boldsymbol{x}^\ast) ^T d \geq 0, \quad \forall d \in T_{\mathcal{X}}(\boldsymbol{x}^\ast)
 $$
 记：
 $$
@@ -92,9 +99,9 @@ A=\left(\begin{array}{c}
 \nabla h_{j}(\bar{x})^{T}
 \end{array}\right) \in \mathrm{R}^{(|I|+2 p) \times n}
 $$
-则 (1) 等价于：
+则有：
 $$
-\nabla f (\boldsymbol{x}^\ast) ^T d \geq 0, Ad \geq 0 \tag{2}
+\nabla f (\boldsymbol{x}^\ast) ^T d \geq 0, Ad \geq 0
 $$
 这说明：
 $$

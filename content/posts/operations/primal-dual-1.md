@@ -4,8 +4,8 @@ date: 2022-04-03
 draft: false
 slug: primal-dual-1
 toc: false
-categories: ["运筹与优化"]
-tags: []
+categories: ["运筹与优化", "整数和组合优化"]
+tags: ["网络流"]
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
 
@@ -18,8 +18,8 @@ tags: []
 对于有向图 $(V, E)$，它的 **node-arc incidence matrix** 是一个 $|V| \times |E|$ 的矩阵：
 $$
 A_{v, \,e} = \begin{cases} 
-+1, &\text{if arc } e \text{ leaves node } v \\
--1, &\text{if arc } e \text{ enters node } v \\
++1, &\text{if arc } e \text{ starts at node } v \\
+-1, &\text{if arc } e \text{ ends at node } v \\
 0, &\text{otherwise}
 \end{cases}
 $$
@@ -54,7 +54,7 @@ $$
 
 如果 $a_i^T f > 0$，表示 $i$ 处有流量流出；如果 $a_i^T f < 0$，表示 $i$ 处有流量流入。
 
-**注意上面的点—弧关联矩阵是一个缺秩的矩阵，它有一个多余的约束。**这点也好理解，当你知道 $|V|-1$ 个点的流量的时候，你自然就知道剩下一个点的流量了。
+**注意上面的点—弧关联矩阵是一个缺秩的矩阵，它有一个多余的约束。** 这点也好理解，当你知道 $|V|-1$ 个点的流量的时候，你自然就知道剩下一个点的流量了。
 
 ### Shortest Path
 
@@ -68,8 +68,8 @@ Af =\left[\begin{array}{c}
 0 \\
 \end{array} \right]\;
 \begin{array}{l}
-s: \text{a unit flow out} \\
-t: \text{a unit flow in}\\
+s: \text{a unit flow leaving} \\
+t: \text{a unit flow entering}\\
 \text{flow conservation}  \\
 \vdots\\
 \text{flow conservation} \\

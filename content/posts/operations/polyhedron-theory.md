@@ -4,7 +4,7 @@ date: 2022-03-07
 draft: false
 toc: false
 slug: polyhedron-theory
-categories: ["运筹与优化"]
+categories: ["运筹与优化", "整数和组合优化"]
 tags: ["Polyhedron"]
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
@@ -138,7 +138,7 @@ $$
 
 注意到 $\operatorname{lin}(P)=\operatorname{rec}(P) \cap-\operatorname{rec}(P)$，当 $\operatorname{lin}(P)=\{0\}$ 时，称多面体 $P$ 是 pointed.
 
-直观上看，a nonempty polyhedron is pointed when it does not contain any line.
+直观上看，a nonempty polyhedron is pointed when it does not contain any line. $d \in \operatorname{lin}(P)$ 当且仅当对任意的 $x \in P$，直线 $\{x + \alpha d \mid \alpha \in \mathrm{R}\}$ 被包含在 $P$ 内。
 
 如果 $P:=\left\{x \in \mathbb{R}^{n}: A x \leq b\right\}=\operatorname{conv}\left(v^{1}, \ldots, v^{p}\right)+ \operatorname{cone}\left(r^{1}, \ldots, r^{q}\right)$ 非空，那么
 

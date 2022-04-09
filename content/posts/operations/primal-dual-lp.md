@@ -4,8 +4,8 @@ date: 2022-03-19
 draft: false
 slug: primal-dual-lp
 toc: false
-categories: ["运筹与优化"]
-tags: []
+categories: ["运筹与优化", "整数和组合优化"]
+tags: ["线性规划"]
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
 
