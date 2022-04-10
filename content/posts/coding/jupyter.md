@@ -35,8 +35,20 @@ IRkernel::installspec()
 
 执行 `versioninfo()` 命令，如果观察到 `JULIA_PKG_SERVER` 的地址是BFSU的镜像源，就代表配置成功了。
 
+Julia 的常用包有：
+```shell
+Plots
+DataFrames  # 数据分析
+JuMP
+Flux # 机器学习
+Distributions
+LaTeXStrings
+PyCall
+PyPlot
+```
 
-##### Jupyter
+
+#### Jupyter
 
 查看Jupyter当前支持的kernel：`jupyter kernelspec list`
 

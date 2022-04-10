@@ -195,11 +195,13 @@ $$
 
 ## 投影算子
 
+对于集合 $C$ 和集合外一点 $x$，$x$ 到 $C$ 的投影被定义为 $\arg \min _{y\in C} \|y - x \|$
+
 对于闭子空间，我们有一个经典的投影分解：
 $$
 x = \mathrm{p}_V(x) + \mathrm{p}_{V^\perp}(x)
 $$
-一个点到闭凸集的投影是唯一的，由此可以定义投影算子：
+一个点到闭凸集 $C$ 的投影是唯一的，由此可以定义投影算子：
 $$
 x \mapsto \mathrm{p}_{C}(x)
 $$
@@ -209,12 +211,14 @@ $$
 \langle x - \mathrm{p}_C(x), y - \mathrm{p}_C(x)\rangle \leq 0, \quad \forall y \in C
 $$
 
-和：
+$x_0$ 是 $x$ 到 $C$ 的投影点当且仅当 $\langle x - x_0, y - x_0\rangle \leq 0, \; \forall y \in C$
+
+投影算子是非扩张的 (nonexpansive)：
 $$
-\left\|\mathrm{p}_{C}\left(x_{1}\right)-\mathrm{p}_{C}\left(x_{2}\right)\right\| \leqslant\left\|x_{1}-x_{2}\right\|
+\left\|\mathrm{p}_{C}\left(x_{1}\right)-\mathrm{p}_{C}\left(x_{2}\right)\right\| \leq \left\|x_{1}-x_{2}\right\|
 $$
 
-
+但它并不是一个压缩映射 (contraction)，上面的不等号是可以取等的。
 
 
 
@@ -250,19 +254,15 @@ $$
 
 根据投影定理很容易得到：
 $$
-\langle x - \mathrm{p}_K(x), \,\mathrm{p}_K(x) \rangle = 0 \,\text{ and }\, \langle x -  \mathrm{p}_K(x), \, y\rangle \leq 0 \;\; \forall y \in K
+\langle x - \mathrm{p}_K(x), \,\mathrm{p}_K(x) \rangle = 0 \,\text{ and }\, \langle x -  \mathrm{p}_K(x), \, y\rangle \leq 0 \;\; \forall y \in K \Rightarrow x - \mathrm{p}_K(x) \in K^{\circ}
 $$
 这点跟投影到子空间是非常类似的。对闭凸锥还成立：
 $$
-\mathrm{p}_{K}(x)=0 \Longleftrightarrow x \in K^{\circ}
-$$
-
-$$
-x \in K \quad \Longleftrightarrow \quad\langle s, x\rangle \leqslant 0 \text { for all } s \in K^{\circ} .
-$$
-
-$$
-\mathrm{p}_{K}(x)+\mathrm{p}_{K^{\circ}}(x)=x
+\begin{array}{c}
+\mathrm{p}_{K}(x)=0 \Longleftrightarrow x \in K^{\circ} \\
+x \in K \quad \Longleftrightarrow \quad\langle s, x\rangle \leqslant 0 \text { for all } s \in K^{\circ} \\
+\mathrm{p}_{K}(x)+\mathrm{p}_{K^{\circ}}(x)=x \\
+\end{array}
 $$
 **(Moreau定理)** 设 $K$ 是一个闭凸锥，则下面两个说法等价
 

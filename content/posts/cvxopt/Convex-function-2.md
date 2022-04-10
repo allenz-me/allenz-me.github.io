@@ -13,8 +13,6 @@ tags: []
 ---
 
 
-
-
 ## 凸函数
 
 对凸性的刻画，从弱到强，分别是：
@@ -46,6 +44,22 @@ $f$ 是凸函数等价于：
 
 #### First-order characterization of convexity
 
+如果函数 $f$ 可微，那么 $f$ 的凸性可以由一阶条件来刻画：
+$$
+f(x) \geq f\left(x_{0}\right)+\left\langle\nabla f\left(x_{0}\right), x-x_{0}\right\rangle \quad \forall x, x_0 \in \operatorname{dom} f
+$$
+
+**Monotonicity of gradient**
+
+可微的函数 $f$ 是凸函数当且仅当：
+$$
+\langle\nabla f(x)-\nabla f(y), x-y\rangle \geq 0 \quad \forall x, y \in \operatorname{dom} f
+$$
+
+#### Second-order characterization of convexity
+
+二次可微的函数 $f$ 是凸函数的充要条件是： $\nabla^2 f (x) \succeq 0, \;\forall x \in \operatorname{dom} f$ .
+
 ### 严格凸 (strictly convex)
 
 定义在凸集上的函数 $f$ 满足 $\forall x \neq y, \lambda \in (0, 1)$ 成立：
@@ -54,7 +68,23 @@ f(\lambda x + (1-\lambda )y) < \lambda f(x) + (1-\lambda) f(y)
 $$
 则称 $f$ 是严格凸函数。
 
+#### First-order characterization of strict convexity
 
+如果函数 $f$ 可微，那么 $f$ 的严格凸性可以由一阶条件来刻画：
+$$
+f(x) >  f\left(x_{0}\right)+\left\langle\nabla f\left(x_{0}\right), x-x_{0}\right\rangle \quad \forall x \neq x_0 \in \operatorname{dom} f
+$$
+
+**Monotonicity of gradient**
+
+可微的函数 $f$ 是严格凸函数当且仅当：
+$$
+\langle\nabla f(x)-\nabla f(y), x-y\rangle >  0 \quad \forall x \neq y \in \operatorname{dom} f
+$$
+
+#### Second-order characterization of strict convexity
+
+二次可微的函数 $f$ 是严格凸函数的充分条件是： $\nabla^2 f \succ 0, \; \forall x \in \operatorname{dom} f$ .
 
 ### 强凸 (strongly convex)
 
@@ -64,7 +94,60 @@ f(\lambda x+(1-\lambda) y) \leq \lambda f(x)+(1-\lambda) f(y)-\frac{\sigma}{2} \
 $$
 则称 $f$ 是强凸函数，且 $\sigma$ 称为强凸系数 (modulus of strong convexity)。上式的等价定义是：$f(x) - \displaystyle\frac{\sigma}{2} \|x \|^2$ 是凸函数。
 
+#### First-order characterization of strong convexity
 
+如果函数 $f$ 可微，那么 $f$ 以系数 $\sigma$ 强凸可以由一阶条件来刻画：
+$$
+f(x) \geq f\left(x_{0}\right)+\left\langle\nabla f\left(x_{0}\right), x-x_{0}\right\rangle+\frac{1}{2} \sigma \left\|x-x_{0}\right\|^{2} .
+$$
+
+#### Monotonicity of gradient
+
+可微的函数 $f$ 以系数 $\sigma$ 强凸当且仅当：
+$$
+\langle\nabla f(x)-\nabla f(y), x-y\rangle \geq \sigma\|x-y\|^{2} \quad \forall x, y \in \operatorname{dom} f
+$$
+
+#### Second-order characterization of strong convexity
+
+二次可微的函数 $f$ 以系数 $\sigma$ 强凸当且仅当 $\nabla^2 f(x) \succ \sigma I$ .
+
+## Infimal Convolution
+
+函数 $f$ 和 $g$ 的 **infimal convolution** (or epi-sum) 指的是：
+
+$$
+\begin{aligned}
+(f\, \square\, g)(x) &= \inf_{y \in \mathrm{R}^{n}} \left\{f(x-y)+g(y)\right\} \\
+ &= \inf \{ f(x_1) + g(x_2) \mid x_1 + x_2 = x\}
+\end{aligned}
+$$
+
+其几何含义是：$\operatorname{epi}(f \,\square\, g) = \operatorname{epi}(f) + \operatorname{epi}(g)$ 或是 $\operatorname{epi}_s(f \,\square\, g) = \operatorname{epi}_s(f) + \operatorname{epi}_s(g)$，由此可见，凸函数的 infimal convolution 是凸的。同时我们还得到：$\operatorname{dom} (f \,\square\, g) = \operatorname{dom} f + \operatorname{dom} g$ .
+
+还可以定义一族函数的 infimal convolution:
+$$
+\begin{aligned}
+f(x) &=\left(f_{1} \square f_{2} \square \ldots f_{m}\right)(x) \\
+&=\inf \left\{\sum_{k=1}^{m} f\left(x_{k}\right) \mid x_{k} \in \mathrm{R}^{n}, \sum_{k=1}^{m} x_{k}=x\right\}
+\end{aligned}
+$$
+
+infimal convolution 有以下性质：
+
++ commutativity: $f \square g = g \square f$
++ associativity: $(f \square g) \square h = f \square (g \square h)$
++ preserves the order: $f_1 \leq f_2 \Rightarrow f_1 \square g \leq f_2 \square g$
+
+**Infimal convolution of support functions**
+
+Let $\left\{C_{k}\right\}_{k=1, \ldots, m}$ be non-empty convex sets, $C_{k} \in \mathbb{R}^{n}$. Then
+$$
+\begin{gathered}
+\delta^{*}\left(\cdot \mid C_{1}+\ldots+C_{m}\right)=\delta^{*}\left(\cdot \mid C_{1}\right)+\ldots+\delta^{*}\left(\cdot \mid C_{m}\right) \\
+\delta^{*}\left(\cdot \mid \operatorname{cl} C_{1} \cap \ldots \cap \operatorname{cl} C_{m}\right)=\operatorname{cl}\left\{\delta^{*}\left(\cdot \mid C_{1}\right) \square \ldots \delta^{*}\left(\cdot \mid C_{m}\right)\right\}
+\end{gathered}
+$$
 
 ## 凸函数的连续性
 
@@ -107,6 +190,7 @@ $$
 其中 $\operatorname{adj}(X)$ 表示 $X$ 的伴随矩阵，满足 $\operatorname{adj}(X) = \det(X) \cdot X^{-1}$ .
 
 **Jacobi's formula**
+
 $$
 \frac{d}{d t} \operatorname{det} A(t)=\operatorname{tr}\left(\operatorname{adj}(A(t)) \frac{d A(t)}{d t}\right)=(\operatorname{det} A(t)) \cdot \operatorname{tr}\left(A(t)^{-1} \cdot \frac{d A(t)}{d t}\right)
 $$
@@ -121,6 +205,11 @@ $$
 $$
 f(Z) \approx f(X) + \langle X^{-1}, Z - X \rangle = f(X)+\operatorname{tr}\left(X^{-1}(Z-X)\right)
 $$
+
+### Convexity of log-determinant
+
+【待】
+
 
 
 ## 半连续 Semi-Continuity
