@@ -5,7 +5,7 @@ draft: false
 slug: primal-dual-1
 toc: false
 categories: ["运筹与优化", "整数和组合优化"]
-tags: ["网络流"]
+tags: ["网络流", "线性规划"]
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
 
@@ -111,7 +111,8 @@ $$
 \begin{aligned}
 \max_{f, \,\mathrm{v}} \;\; & \mathrm{v} \\
 \text{s.t. } \; &  Af + d \mathrm{v} \leq 0 \\
- & 0 \leq f \leq b
+ & f \leq b \\
+ & f \geq 0 \\
 \end{aligned} \tag{MF}
 $$
 其中 $b$ 是每条边的容量上限。
@@ -147,12 +148,12 @@ $$
 \end{aligned}
 \tag{SP-DRP}
 $$
-事实上，上面这个问题是非常好求解的！因为 $y_s$ 要么为 1 要么为 0 。
+一般原始对偶算法是解RP，但事实上，对最短路这个例子来说，解DRP是足够容易的！因为 $y_s$ 要么为 1 要么为 0 。
 
 + 如果 $J$ 中存在 $s \to t$ 的路径，那么可以让 $y_s = 0$ ，说明已经达到最优
 + 如果 $J$ 中不存在 $s \to t$ 的路径，那么 $y_s$ 最大可以取到 1，继续迭代
 
-SP-DRP 的最优解是：
+SP-DRP 的最优解可以直接根据 $J$ 和图的结构给出：
 $$
 \bar{y}_i = \begin{cases}
 1, & i\, \text{ reachable from } s \text{ using arcs in } J \\
@@ -166,15 +167,149 @@ $$
 $$
 则 $y_{\text{new}} = y + \theta \bar{y}$，使 $\theta$ 最小的 $(i, j)$ 将进入到 $J_{\text{new}}$ 中。**这一过程的思想就是，不断向 $J$ 中添加边，直到 $J$ 包含一条从 $s$ 到 $t$ 的路径。**
 
+于是，我们把解最短路问题转化为求解多个可达性子问题。算法终止当且仅当存在一条使用 $J$ 中的边的 $s\to t$ 的路径。
+
+严格来说，PD算法的有限终止性在这里并不适用，因为PD算法有限终止的前提是用单纯型法解RP问题。但是，finiteness follows from two simple observations about DRP:
+
++ Once edge $(i, j)$ becomes admissible (enters $J$) it never leaves $J$ at any later stage.
++ At every iteration of DRP, at least one new $(i, j)$, the one that deﬁnes $\theta$ , becomes admissible.
+
+以上两点结合一个例子就能很轻易的理解了。
+
+对于图：
+
+<img src="../figures/primal-dual-1/image-20220415145459276.png" alt="image-20220415145459276" style="zoom:80%;" />
+
+它的迭代过程是：
+
+<img src="../figures/primal-dual-1/image-20220415145540334.png" alt="image-20220415145540334" style="zoom:90%;" />
+
+其实这个算法的本质就是Dijkstra算法，从 $t$ 点开始做动态规划，它是一个多项式时间的算法！
+
+### Max Flow — Min cuts
+
+一个割 (cut) 指的是 $V$ 的一个子集 $W$，割的容量 (capacity)指的是 $c(W, \overline{W})=\displaystyle\sum_{(i, j):\, i\in W, j \in \overline{W}} b_{ij}$
+
+$s-t$ cut 指的是一个子集 $W \subset V$ 使得 $s\in W, t \in \overline{W}$ .
+
+<img src="../figures/primal-dual-1/image-20220415163414591.png" alt="image-20220415163414591" style="zoom:50%;" />
+
+最大流的原问题是：
+$$
+\begin{aligned}
+\max_{f, \,\mathrm{v}} \;\; & \mathrm{v} \\
+\text{s.t. } \; &  Af + d \mathrm{v} = 0 \\
+ & f \leq b \\
+ & f \geq 0 \\
+\end{aligned}
+$$
+引入对偶变量 $p_i \;(i\in V)$ 和 $\gamma_{ij} \; (i, j) \in E$，上面问题的对偶问题就是：
+$$
+\begin{aligned}
+\min \; & \sum_{i, j) \in E} \gamma_{ij} b_{ij} \\
+\text{s.t. } & p_i - p_j + \gamma_{ij} \geq 0 \\
+& -p_s + p_t \geq 1 \\
+& \gamma_{ij} \geq 0, \;\; p \text{ free }
+\end{aligned}
+$$
+给定一个 $s-t$ cut $(W, \overline{W})$，定义：
+$$
+\gamma_{ij} = \begin{cases}
+1 & \text{if } (i, j) \in E \text{ and } i \in W, j \in \overline{W} \\
+0 & \text{otherwise} \\
+\end{cases}, \qquad p_i = \begin{cases}
+0 & i \in W \\
+1 & i \in \overline{W} \\
+\end{cases}
+$$
+可以确定一个对偶问题的可行解。这其实说明了最小割问题是最大流问题的上界。
+
+注意到：
+
++ 如果 $(i, j) \in E$ 并且 $i \in W, j \in \overline{W}$ ，则约束条件 $p_i - p_j - \gamma_{ij} = 0 \geq 0$ 是紧的
++ 如果 $(i, j) \in E$ 并且 $i \in\overline{W}, j \in W$ ，则约束条件 $p_i - p_j - \gamma_{ij} = 1 \geq 0$ 是严格成立的
+
+**Max-flow min-cut theorem**
+
+Max-flow = min-cut 如果互补松弛条件成立：
+$$
+\begin{aligned}
+f_{ij} = 0 \quad & \forall  (i, j) \in E \;\; \text{ s.t. } i \in \overline{W}, j \in W \\
+f_{ij} = b \quad & \forall (i, j) \in E \;\; \text{ s.t. } i \in W, j \in \overline{W}
+\end{aligned}
+$$
+
+下图展示了如何从最大流的结果得到最小割：
+
+<img src="../figures/primal-dual-1/image-20220415164840986.png" alt="image-20220415164840986" style="zoom:50%;" />
+
+最优性可以体现在找到一个割使得割的容量与流量相等。
+
+### Primal Dual — Max Flow
+
+对于最大流问题，我们可以直接把问题看成是某个问题的对偶问题：
+$$
+\begin{aligned}
+\max_{f, \,\mathrm{v}} \;\; & \mathrm{v} \\
+\text{s.t. } \; &  Af + d \mathrm{v} \leq 0 \\
+ & f \leq b \\
+ & f \geq 0 \\
+\end{aligned} \tag{MF-D}
+$$
+因为 $Af + dv \leq 0$ 等号总是成立的，所以DRP是：
+$$
+\begin{array}{crl}
+\max\; & v  \\
+\text{s.t.} & A f+d v & \leq 0 \quad \text { for all rows } \\
+&f & \leq 0 \quad \text { for rows where } f=b \text { in } D \\
+&-f & \leq 0 \quad \text { for rows where } f=0 \text { in } D \\
+&f & \leq 1 \\
+&v & \leq 1
+\end{array} \tag{MF-DRP}
+$$
+如果 DRP 的最优解是 0，那么这表明问题达到最优。
+
+令 $v=1$，对 DRP 而言，这意味着存在一条从 $s\to t$ 的路 $P$，其饱和弧 (saturated arc, $f_e=b_e$) 必然是反向弧 (in backward direction)，其空弧 (unused arc, $f_e=0$) 必然是前向弧 (in forward direction)，其它弧可以是任意方向的。  
+
+**这样的路我们叫做增广路 (augmenting path)。求解 DRP 就等价于找增广路。沿着增广路就可以增加网络的流量。**
+
+> Augmenting path: an undirect path restricted to using an edge in forward direction if that edge is unsaturated and using an edge in backward direction if that edge had positive flow.
+
+此时：
+$$
+\theta = \min_{(i, j) \in P}\begin{cases}
+b_{ij} - f_{ij} & \forall (i, j) \text{ forward } \\
+f_{ij} & \forall (i, j) \text{ backward }
+\end{cases}
+$$
+
+Ford-Fulkerson 算法的基本思路与通过多次求解DRP来找到最大流是一样的。
+
+**Ford-Fulkerson method**
+
+Start with 0 ﬂow.
+
+While there exists an augmenting path:
+
+- ﬁnd an augmenting path
+
+- compute bottleneck capacity
+
+- increase ﬂow on that path by bottleneck capacity
+
+Ford-Fulkerson 方法值的并不是一个确定的算法，**增广路可能不是唯一的，怎么确定好的增广路是非常重要的。**
+
+**Ford-Fulkerson Labeling Algorithm**
+
+这是一个具体算法，由 Ford 和 Fulkerson 在1955年提出。
+
+例子在：https://www.doc88.com/p-16816167056590.html
+
+如果流量是有理数（整数），那么算法保证在有限步终止，时间复杂度为 $O(E^2U)$，其中 $U$ 表示边的最大容量。如果流量是无理数，那么算法可能不能在有限步终止。
 
 
 
+其它算法：
 
-
-
-
-
-
-
-
+![image-20220415172612932](../figures/primal-dual-1/image-20220415172612932.png)
 

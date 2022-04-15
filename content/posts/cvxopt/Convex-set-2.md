@@ -84,13 +84,13 @@ $$
 + $\overline{\operatorname{conv}} S=\operatorname{cl}(\operatorname{conv} S)$
 + 如果 $S$ 有界，那么 $\overline{\operatorname{conv}} S=\operatorname{conv}(\operatorname{cl} S)=\operatorname{cl}(\operatorname{conv} S)$
 
-类似地，包算子 $\operatorname{cone}$ 也是不保持闭性的，如 $\{(x, y) \in \mathrm{R}^2 \mid y \geq 1\}$，其锥包不是闭的。
+包算子 $\operatorname{cone}$ 不保持闭性也不保持紧性的，如 $\{(x, y) \in \mathrm{R}^2 \mid y \geq 1\}$，其锥包不是闭的；如 $\{(x, y) \in \mathrm{R}^2 \mid (x-1)^2 + y^2 \leq 1\}$，其锥包不是紧的。
 
 由此可以定义闭锥包算子：
 $$
 \overline{\operatorname{cone}} S:= \operatorname{cl} (\operatorname{cone} S)
 $$
-若 $S$ 是紧集且 $0 \notin \operatorname{conv} S$, 则 $\overline{\operatorname{cone}} S=\operatorname{cone} S$ .
+若 $S$ 是紧集且 $0 \notin \operatorname{conv} S$， 则锥包保持闭性，有 $\overline{\operatorname{cone}} S=\operatorname{cone} S$ ，即 $\operatorname{cone} S$ 是闭的。
 
 
 ## Relative topology
@@ -128,6 +128,7 @@ $$
 + $\mathrm{ri}(\mathrm{ri} C)=\operatorname{ri} C=\operatorname{ri}(\operatorname{cl} C)$
 + $\mathrm{cl} C=\mathrm{cl}(\mathrm{ri} C)$
 + $\operatorname{rbd} C=\operatorname{rbd}(\operatorname{ri} C)=\operatorname{rbd}(\operatorname{cl} C)$
++ $C$ and $\bar{C}$ share the same closure / relative interior if and only if $\operatorname{ri}(C) \subseteq \bar{C} \subseteq \operatorname{cl}(C)$
 + $F(\operatorname{ri} C) = \operatorname{ri} F(C)$  for any affine map $F$
 
 引入相对内点的作用就是，可以把一个不满维的集合，通过改变拓扑，将它变成满维的。
@@ -236,6 +237,8 @@ $$
 
 <img src="../figures/Convex-set-2/image-20220321163212889.png" alt="image-20220321163212889" style="zoom:50%;" />
 
+如上图，几何上看，$K$ 与 $K^\circ$ 中的元素夹角大于等于$\displaystyle\frac{\pi}{2}$ .
+
 注意到极锥一定是闭凸锥；它的定义刚好是对偶锥反过来， $K^\circ = - K ^\ast$ .
 
 极运算是反序的，如果锥 $K_1 \subseteq K_2$，那么 $K_2^\circ \subseteq K_1^\circ$ .
@@ -246,21 +249,21 @@ $$
 $$
 K^{\circ \circ} = \overline{\operatorname{conv}} K
 $$
-特别的，如果 $C$ 是一个闭凸锥，那么：$K^{\circ \circ} = K$ . (Farkas Lemma)
+特别的，如果 $K$ 是一个闭凸锥，那么：$K^{\circ \circ} = K$ . (Farkas Lemma)
 
 **这个定理一定程度上说明了“子空间、正交补”和“闭凸锥、极运算”是类似的。**
 
 #### 闭凸锥的投影
 
-根据投影定理很容易得到：
+根据投影定理很容易得到： 
 $$
 \langle x - \mathrm{p}_K(x), \,\mathrm{p}_K(x) \rangle = 0 \,\text{ and }\, \langle x -  \mathrm{p}_K(x), \, y\rangle \leq 0 \;\; \forall y \in K \Rightarrow x - \mathrm{p}_K(x) \in K^{\circ}
 $$
 这点跟投影到子空间是非常类似的。对闭凸锥还成立：
 $$
 \begin{array}{c}
-\mathrm{p}_{K}(x)=0 \Longleftrightarrow x \in K^{\circ} \\
-x \in K \quad \Longleftrightarrow \quad\langle s, x\rangle \leqslant 0 \text { for all } s \in K^{\circ} \\
+\mathrm{p}_{K}(x)=0 \;\Longleftrightarrow \; x \in K^{\circ} \\
+x \in K \; \Longleftrightarrow \; \langle s, x\rangle \leqslant 0 \text { for all } s \in K^{\circ} \\
 \mathrm{p}_{K}(x)+\mathrm{p}_{K^{\circ}}(x)=x \\
 \end{array}
 $$
@@ -291,18 +294,27 @@ S:= \{x \in \mathbb{R}^n \mid c(x) \leq 0\}
 $$
 如果 $c(\bar{x}) = 0$ 并且 $\nabla c(\bar{x}) \neq 0$，则 $\mathrm{T}_S(\bar{x}) = \{d \in \mathbb{R}^n \mid \langle c(\bar{x}), d\rangle \leq 0\}$
 
-切锥是一个一般性的概念，闭凸锥的切锥有更简洁的表示。
-
-如果 $C$ 是一个闭凸锥，那么 $\mathrm{T}_C(x) = \overline{\operatorname{cone}} (C-x)$，自然 $\mathrm{T}_C(x)$ 是一个闭凸集。
+切锥是一个一般性的概念，闭凸集的切锥有更简洁的表示。一般地，如果 $C$ 是一个闭凸集，那么 $C \subseteq \{x\} + \mathrm{T}_C(x)$ 且成立 $\mathrm{T}_C(x) = \overline{\operatorname{cone}} (C-x)$，自然 $\mathrm{T}_C(x)$ 是一个闭凸锥。如果 $x \in \operatorname{ri} C$，那么 $\mathrm{T}_C(x)$ 是子空间。
 
 ### Normal cone
 
-集合 $C$ 在 $x$ 处的法锥，定义为：
+集合 $C$ 在 $x$ 处的法锥，定义为切锥的极锥：
+
+$$
+\mathrm{N}_C(x) = (\mathrm{T}_C(x))^\circ
+$$
+
+如果 $C$ 是一个凸集，那么有更简洁的表示：
+
 $$
 \mathrm{N}_{C}(x)=\{v  \mid \langle v, y - x\rangle \leq 0, \, \forall y \in C\}
 $$
 
-法锥是切锥的极锥，因此一定是闭凸锥。
+如果 $K$ 是一个闭凸锥，那么
+$$
+\mathrm{N}_{K}(\bar{x})=\{\bar{x}\}^{\perp} \cap K^{\circ}=\left\{v \in K^{\circ} \mid\langle v, \bar{x}\rangle=0\right\}
+$$
+特别地 $\mathrm{N}_K(0) = K^\circ$ .
 
 令 $C_1, C_2$ 是非空的闭凸集，则：
 $$
@@ -319,6 +331,36 @@ $$
 
 即 $x + \mathrm{N}_C(x) = \mathrm{p}_C^{-1}(x)$ .
 
+#### Fermat’s rule in a context of constrained minimization
+
+如果定义在 $C$ 上的可微的函数 $f$ 在 $x$ 处取得局部极小，那么：
+
++ $\langle \nabla f(x), d \rangle \geq 0 \;\; \forall d \in \mathrm{T}_C(x)$
++ $-\nabla f(x) \in \mathrm{N}_C(x)$
++ 若 $C$ 是凸集，那么 $\langle \nabla f(y), y -x \rangle \geq 0 \;\; \forall y \in C $
+
+切锥一定程度反映了可行方向。如果 $x$ 是内点，那么 $\mathrm{N}_C(x) = \{0\}$，这就是经典的 Fermat 引理了。
+
+### Horizon cone
+
+$S$ 的地平锥是：
+
+$$
+S^{\infty}=\left\{v \in \mathbb{E} \mid \exists\left\{x_{k}\right\} \subseteq S,\left\{t_{k}>0\right\} \rightarrow 0, t_{k} x_{k} \rightarrow v\right\}
+$$
+
+地平锥和回收锥类似，但不同的一点是，任意一个集合的地平锥一定是闭的，但是回收锥不一定。
+
+$S$ 有界当且仅当 $S^\infty = \{0\}$ .
+
+如果 $C$ 是凸集，那么 $\operatorname{rec}( \operatorname{cl} C) = C^\infty$ . 这说明对闭凸集而言，地平锥和回收锥是一个概念。
+
+#### Closedness Under Linear Transformations
+
+线性变换不一定把闭集映射成闭集，如线性算子 $T: (x, y) \to x$ 把闭集 $\{(x, y) \mid xy \geq 1\}$ 映射成 $\mathrm{R}\backslash \{0\}$ 。利用地平锥，我们能得到一个充分条件。
+
+给定线性算子 $T$ 和闭集 $C$，若 $\ker T \cap C^{\infty} = \{0\}$，则 $T(C)$ 是闭集。特别地，如果 $T$ 是单射或者 $C$ 有界，结论也成立。
+
 ### Recession cone
 
 对一个任意的集合 $C$，它的 **recession cone** 被定义为：
@@ -329,7 +371,7 @@ $$
 
 $C$ 的回收锥可以理解为是 $C$ 内所有可以无限延伸的方向生成的锥。凸集 $C$ 有界当且仅当 $\operatorname{rec}(C) = \{0\}$ .
 
-凸集的 recession cone 是一个凸锥。特别地，多面体 $\{x \mid Ax = b\}$ 的 recession cone 是 $\{y \mid Ay=0\}$。
+**凸集的回收锥是一个凸锥**。闭凸集的回收锥是闭凸锥。特别地，多面体 $\{x \mid Ax = b\}$ 的 recession cone 是 $\{y \mid Ay=0\}$。
 
 **Lineality Space**
 
