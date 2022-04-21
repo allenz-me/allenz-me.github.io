@@ -45,6 +45,7 @@ Distributions
 LaTeXStrings
 PyCall
 PyPlot
+Zygote
 ```
 
 

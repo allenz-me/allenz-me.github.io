@@ -15,7 +15,6 @@ tags: ["正态分布", "次高斯分布"]
 
 本文总结自 高维概率 第二章
 
-
 <!-- 本书：
 
 [HDP-book.pdf](https://uploader.shimo.im/f/CwR4dIKrjpcCDJgR.pdf?fileGuid=DGdRyQyhVkdyvcWd)
@@ -66,7 +65,7 @@ $$
 我们借助矩母函数，说明了对称伯努利分布的和的尾巴是指数速度趋于0的。使用相同的方法，可以得到**针对有界随机变量的Hoeffding不等式**：
 
 $$
-\forall t > 0, \quad\mathbb{P}\left\{\sum_{i=1}^{N}\left(X_{i}-\mathbb{E} X_{i}\right) \geq t\right\} \leq \exp \left(-\frac{2 t^{2}}{\sum_{i=1}^{N}\left(M_{i}-m_{i}\right)^{2}}\right), \quad X_i \in [m_i, M_i]\\
+\forall t > 0, \;\; X_i \in [m_i, M_i] \quad\Longrightarrow \quad\mathbb{P}\left\{\sum_{i=1}^{N}\left(X_{i}-\mathbb{E} X_{i}\right) \geq t\right\} \leq \exp \left(-\frac{2 t^{2}}{\sum_{i=1}^{N}\left(M_{i}-m_{i}\right)^{2}}\right)\\
 $$
 
 在推导的过程中，主要用到了 Hoeffding 引理 $\mathbb{E}[e^{\lambda (X - \mathbb{E}[X])}] \leq e^{\lambda^2(M-m)^2/8}$ 和技巧：
@@ -77,11 +76,11 @@ $$
 
 $E[e^{\lambda X}]$ 是 $X$ 的矩母函数，独立随机变量和的矩母函数等于其矩母函数的乘积！
 
-注意到正态分布也成立Hoeffding不等式，但正态分布并不是有界的，这说明Hoeffding不等式可以在某些条件下推广到无界的分布，这也是我们提出次高斯分布的原因。
+注意到正态分布也成立 Hoeffding 不等式，但正态分布并不是有界的，这说明 Hoeffding 不等式可以在某些条件下推广到无界的分布，这也是我们提出次高斯分布的原因。
 
-通过Hoeffding不等式我们知道，有界随机变量的和，以及正态分布的尾巴是以 $e^{-t^2}$ 这一速度趋于0的，但并不是所有的分布都能达到这种速度。比如我们熟知的指数分布，它就是 $e^{-t}$ 级别的收敛速度。
+通过 Hoeffding 不等式我们知道，有界随机变量的和，以及正态分布的尾巴是以 $e^{-t^2}$ 这一速度趋于0的，但并不是所有的分布都能达到这种速度。比如我们熟知的指数分布，它就是 $e^{-t}$ 级别的收敛速度。
 
-Chernoff不等式对于0-1伯努利分布的和给出了一个更好的界，由二项分布的泊松近似可知参数为 $\lambda$ 的泊松分布的右尾满足：$\forall t > \lambda, \; \mathbb{P}\{X \geq t\} \leq e^{-\lambda}\left(\frac{e \lambda}{t}\right)^{t}$，这说明泊松分布的尾的收敛速度是 $e^{-t \ln t}$ 级别的。这个尾巴也可以从上面提到的技巧来证明。
+Chernoff 不等式对于0-1伯努利分布的和给出了一个更好的界，由二项分布的泊松近似可知参数为 $\lambda$ 的泊松分布的右尾满足：$\forall t > \lambda, \; \mathbb{P}\{X \geq t\} \leq e^{-\lambda}\left(\frac{e \lambda}{t}\right)^{t}$，这说明泊松分布的尾的收敛速度是 $e^{-t \ln t}$ 级别的。这个尾巴也可以从上面提到的技巧来证明。
 
 ## Sub-gaussian Distribution
 
@@ -143,7 +142,7 @@ $$
 \mathbb{P}\left\{\left|\sum_{i=1}^{N} X_{i}\right| \geq t\right\} \leq 2 \exp \left(-\frac{c t^{2}}{\sum_{i=1}^{N}\left\|X_{i}\right\|_{\psi_{2}}^{2}}\right)\\
 $$
 
-这就是说，次高斯分布和次高斯分布的和，它们的尾巴都具有 $e^{-t^2}$ 趋近于0的良好性质！
+这就是说，次高斯分布和次高斯分布的和，它们的尾巴都具有以 $e^{-t^2}$ 的速度趋近于0的良好性质！
 
 另外，对于非零均值的分布，因为
 
@@ -153,7 +152,9 @@ $$
 
 一样可以写出其零均值化后的形式。于是，广义的Hoeffding不等式与之前针对有界随机变量的Hoeffding不等式实现了优美的统一。
 
-*注：有界随机变量的Hoeffding不等式的另一种推广是McDiarmid’s inequality，如果* $f:\mathrm{R}^n \to \mathrm{R}$ *是可测函数，* $X$ *是* $n$ *维随机向量，并且：*
+***McDiarmid 1998***
+
+*注：有界随机变量的 Hoeffding 不等式的另一种推广是 McDiarmid’s inequality，如果* $f:\mathrm{R}^n \to \mathrm{R}$ *是可测函数，* $X$ *是* $n$ *维随机向量，并且：*
 $$
 \left|f\left(x_{1}, \ldots, x_{i}, \ldots, x_{n}\right)-f\left(x_{1}, \ldots, x_{i}^{\prime}, \ldots, x_{n}\right)\right| \leq c_{i}, \forall i =1, 2, ..., n\\
 $$
@@ -164,7 +165,7 @@ $$
 \mathbb{P}\{f(X)-\mathbb{E} f(X) \geq t\} \leq \exp \left(-\frac{2 t^{2}}{\sum_{i=1}^{n} c_{i}^{2}}\right)\\
 $$
 
-*注意到取* $f(X)=\sum_{i=1}^n X_i$ *就刚好是Hoeffding不等式。*
+*注意到取* $f(X)=\sum_{i=1}^n X_i$ *就刚好是 Hoeffding 不等式。*
 
 ## Sub-exponential Distributions
 

@@ -256,20 +256,20 @@ $$
  & f \geq 0 \\
 \end{aligned} \tag{MF-D}
 $$
-因为 $Af + dv \leq 0$ 等号总是成立的，所以DRP是：
+因为 $Af + d\mathrm{v} \leq 0$ 等号总是成立的，所以DRP是：
 $$
 \begin{array}{crl}
-\max\; & v  \\
-\text{s.t.} & A f+d v & \leq 0 \quad \text { for all rows } \\
+\max\; & \mathrm{v}  \\
+\text{s.t.} & A f+d \mathrm{v} & \leq 0 \quad \text { for all rows } \\
 &f & \leq 0 \quad \text { for rows where } f=b \text { in } D \\
 &-f & \leq 0 \quad \text { for rows where } f=0 \text { in } D \\
 &f & \leq 1 \\
-&v & \leq 1
+&\mathrm{v} & \leq 1
 \end{array} \tag{MF-DRP}
 $$
 如果 DRP 的最优解是 0，那么这表明问题达到最优。
 
-令 $v=1$，对 DRP 而言，这意味着存在一条从 $s\to t$ 的路 $P$，其饱和弧 (saturated arc, $f_e=b_e$) 必然是反向弧 (in backward direction)，其空弧 (unused arc, $f_e=0$) 必然是前向弧 (in forward direction)，其它弧可以是任意方向的。  
+令 $\mathrm{v}=1$，对 DRP 而言，这意味着存在一条从 $s\to t$ 的路 $P$，其饱和弧 (saturated arc, $f_e=b_e$) 必然是反向弧 (in backward direction)，其空弧 (unused arc, $f_e=0$) 必然是前向弧 (in forward direction)，其它弧可以是任意方向的。  
 
 **这样的路我们叫做增广路 (augmenting path)。求解 DRP 就等价于找增广路。沿着增广路就可以增加网络的流量。**
 
@@ -291,11 +291,9 @@ Start with 0 ﬂow.
 
 While there exists an augmenting path:
 
-- ﬁnd an augmenting path
-
+- find an augmenting path
 - compute bottleneck capacity
-
-- increase ﬂow on that path by bottleneck capacity
+- increase flow on that path by bottleneck capacity
 
 Ford-Fulkerson 方法值的并不是一个确定的算法，**增广路可能不是唯一的，怎么确定好的增广路是非常重要的。**
 

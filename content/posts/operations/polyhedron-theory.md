@@ -1,5 +1,5 @@
 ---
-title: "Basic Polyhedron Theory (1)"
+title: "多面体与线性不等式组"
 date: 2022-03-07
 draft: false
 toc: false

@@ -86,6 +86,8 @@ $$
 
 在前一次迭代中非零的 $x, y$ ，可以直接放在下一次迭代的单纯型表中！如果我们用的是 revised simplex，那么直接拿之前的 $B^{-1}$ 作为下次迭代的 $B^{-1}$，**这就节省了大量的计算**！
 
+> 值得一提的是根据单纯型法的理论，原问题最优解 $B^{-1} b$，对偶问题最优解 $c_B^T B^{-1}$，最优值 $c_B^T B^{-1}b$ .
+
 让我们来总结一下 PD 算法的步骤：
 
 1. 找到一个对偶可行解 $\mathbf{u}$，确定指标集 $J = \{j : \mathbf{u}^\top A_j = c_j\}$
@@ -98,5 +100,5 @@ $$
 
 最后，简单说明一下算法的有限终止性。假定问题是有解并且是非退化的 (nondegenerate)
 
-假设第三步中 $j_0=\underset{{j \notin J,\, v_j^\top A > 0}}{\operatorname{argmin}}  \displaystyle\frac{c_j - u_j^\top A}{v_j^\top A}$，注意到 $j_0 \notin J$ 但是 $j_0 \in J_{\text{new}}$，在将要开始的 RP 的单纯型迭代中，$x_{j_0}$ 的 reduced cost 是 $\bar{c}_{j_0} = 0 - \mathbf{v}^\top A_{j_0} < 0$，这说明下一步迭代 RP 能有严格的提升(也就是说函数值会严格下降)，因为多面体的 extreme point 的个数是有限的，因此算法必然在有限步终止。
+假设第三步中 $j_0=\underset{{j \notin J,\, v_j^\top A > 0}}{\operatorname{argmin}}  \displaystyle\frac{c_j - u_j^\top A}{v_j^\top A}$，注意到 $j_0 \notin J$ 但是 $j_0 \in J_{\text{new}}$，在将要开始的 RP 的单纯型迭代中，$x_{j_0}$ 的 reduced cost 是 $\bar{c}_{j_0} = 0 - \mathbf{v}^\top A_{j_0} < 0$，这说明下一步迭代 RP 能有严格的提升(也就是说函数值会严格下降)，因为多面体的 extreme point 的个数是有限的，**我们至多解有限次RP（子问题）**，因此算法必然在有限步终止。
 
