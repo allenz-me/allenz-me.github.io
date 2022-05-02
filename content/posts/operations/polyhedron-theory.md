@@ -235,25 +235,29 @@ $P$ 的一个 face $F$ 称为 **facet**，如果 $F$  非空且 $\operatorname{d
 
 ### Minimal Faces
 
-如果 $F$ 是 $P$ 的一个非空的 face，称 $F$ 是 $P$ 的一个 minimal face，如果 $F$ 不包含任何 $P$ 的 proper face。一个极小的 face 不一定是顶点。
+如果 $F$ 是 $P$ 的一个非空的 face，称 $F$ 是 $P$ 的一个 minimal face，如果 $F$ 不包含任何 $P$ 的 proper face，也就是说，没有维数更低的 face 了。
 
-**Hoﬀman and Kruskal**
+一个非空的 face $F$ 是 $P$ 的 minimal face，当且仅当 $F=\{x\in \mathbb{R}^n : A^\prime x = b^\prime\}$ 且 $\text{rank}(A^\prime) = \text{rank}(A),\, (A^\prime, b^\prime)$ 是 $(A, b)$ 的子系统，也就是说，$F$ 是极大线性无关组的等式解，是一个仿射子空间。注意到 $\operatorname{lin}(P) =\ker A$，**这说明 $F$ 是 $\operatorname{lin}(P)$ 平移得到的**。 由此立刻得到推论：如果 $F$ 是 $P$ 的非空的 face，那么 $\operatorname{dim}(\operatorname{lin}(P))  \leq \operatorname{dim}(F) \leq \operatorname{dim}(P)$ .
 
-如果 $F$ 是 $P$ 的非空的 face，那么 $\operatorname{dim}(\operatorname{lin}(P))  \leq \operatorname{dim}(F) \leq \operatorname{dim}(P)$ .
+一个极小的 face 不一定是顶点，比如“空间中一本摊开的无穷大的书”，它没有顶点，只有一条（无限长的）边。
 
 **Vectices**
 
 多面体的0维的 face 称为 *vertex* 。
 
-$P$ 存在顶点当且仅当 $\operatorname{lin}(P) = \{0\}$ ，即 $P$ is pointed.
+$P$ 存在顶点当且仅当 $\operatorname{lin}(P) = \{0\}$ ，即 $P$ has a vertex if and only if $P$ is pointed.
 
 $\bar{v}$ 是 $P$ 的顶点，当且仅当 $\bar{v}$ 是 $P$ 的极点 (extreme point)；当且仅当 $\bar{v}$ 满足 $Ax \leq b$ 中 $n$ 个线性无关的等式。
+
+通常来说，凸集 $C$ 的极点 $x$ 定义为，如果 $x = (x_1+x_2)/2$，那么 $x_1 = x_2 = x$，顶点和极点的概念对于多面体来说是相同的。
 
 **Edges**
 
 多面体的1维的 face 称为 *edge* 。
 
 一个 edge 最多包含两个顶点，如果 $P$ 是 pointed 的，那么每个 edge 都至少会包含一个 vertex 。
+
+多面体 $P$ 的 skeleton 指的是图 $G(P)$，其点为多面体 $P$ 的顶点，边为多面体的边。
 
 **Extreme Rays**
 
@@ -264,4 +268,34 @@ $\bar{v}$ 是 $P$ 的顶点，当且仅当 $\bar{v}$ 是 $P$ 的极点 (extreme 
 Extreme ray 的概念类似于 extreme point，它不能写成两条不同线的 conic combination。
 
 <!-- ### Decomposition Theorem for Polyhedra -->
+
+
+
+### Linear Optimization
+
+一个线性优化指的是 $\max \; \{c^T x : x \in P\}$ .
+
+
+
+### Integral Polyhedra
+
+A convex set $C \subseteq \mathbb{R}^n$ is *integral* if $C = \operatorname{conv} (C \cap \mathbb{Z}^n)$ 。
+
+一般我们把多面体 $P$ 的所有整点的凸包记作 $P_I$ .
+
+<img src="../figures/polyhedron-theory/image-20220430152134249.png" alt="image-20220430152134249" style="zoom:50%;" />
+
+如果 $P=P_I$，那么多面体 $P$ 是整的。
+
+一个多面体是整的，如果：
+
++ $P$ 的最小面包含一个整数点
++ 对任意整向量 $c$，$\max \{ c^T x : x \in P \}$ 的最优解是整的
++ 对任意整向量 $c$，$\max \{ c^T x : x \in P \}$ 的最优值是整数
+
+以上三条性质是刻画 TDI(total dual integrality) 的重要工具。
+
+**(Integer Farkas Lemma or Kronecker Approximation Theorem)**
+
+令 $A \in \mathbb{Z}^{m\times n}, b\in \mathbb{Z}^m$ 都是整的，则 $Ax=b$ 没有整数解 $\Leftrightarrow$ 存在 $u \in \mathbb{R}^m$ 使得 $uA \in \mathbb{Z}^n, u^T b \notin \mathbb{Z}$ 。
 

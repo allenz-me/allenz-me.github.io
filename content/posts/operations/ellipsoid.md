@@ -31,7 +31,7 @@ $$
 
 Ellipsoid algorithm 意在解决这样一个问题：
 $$
-\text{Given a bounded polytope } P \in \mathbb{R}^n \text{ find } x \in P \text{ or assert  } P \text{ is empty}
+\text{Given a bounded polytope } P \in \mathbb{R}^n \text{ find } x \in P \text{ or assert  } P \text{ empty}
 $$
 假设我们有这样一个 *separation oracle* :给定一个 $x$，oracle 返回结果：$x \in P$ 或者一个 violated constraint $c^T x \leq d$ .
 
@@ -75,9 +75,24 @@ $$
 
 所以，总的来说，椭球算法的时间复杂度就是多项式的。(weakly polynomial)
 
+椭球法还能解决一般的凸优化问题。
+
 ### Oracles and Computational Complexity
 
-椭球算法中重要的一环就是找到一个 violated constraint
+椭球算法可以分解为：calls to a separation oracle + basic arithmetic operations.
 
+事实上，**separation 和 optimization 在计算上是等价的 (computationally equivalent)**，给定凸集 $K$，对于：
 
++ Separate $({K}):$ Given as input a vector $\vec{x}$, output yes if $\vec{x} \in \mathcal{K}$, or a hyperplane separating $\vec{x}$ from ${K}$.
+- Optimize $({K}):$ Given as input a vector $\vec{w}$, output $\arg \max _{\vec{x} \in {K}}\{\vec{x} \cdot \vec{w}\}$.
 
+椭球算法实质上说明了，如果能在多项式时间内计算Separate $({K})$ ，那么也能在多项式时间内计算  Optimize $({K})$。
+
+除了 separation oracle，还有其它的 oracle，比如：
+
++ Violation oracle
++ Optimization oracle
++ Validity oracle
++ Membership Oracle
+
+见：https://en.wikipedia.org/wiki/Separation_oracle
