@@ -3,7 +3,7 @@ title: "Total Unimodularity"
 date: 2022-04-20
 draft: false
 slug: total-unimodular
-toc: true
+toc: false
 categories: ["运筹与优化", "整数和组合优化"]
 tags: []
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
@@ -50,7 +50,7 @@ A \text{ is total unimodular} \Longleftrightarrow \{x: Ax \leq b, x\geq 0, A \te
 $$
 
 
-(Seymour's Decomposition Theorem)
+【Seymour's Decomposition Theorem】
 
 借助 total unimodularity，我们可以确定哪些整数规划问题可以直接等价于其线性松弛。
 
@@ -89,15 +89,26 @@ $$
 \end{aligned}
 $$
 
-**(König)**  二分图的最大基数匹配等于其最小顶点覆盖。
+**(König Theorem)**  二分图的最大基数匹配等于其最小顶点覆盖。
 
 
 
 ### Total Dual Integrality
 
-有理系统 $Ax \leq b$ 称作全对偶整的 (TDI, total dual integral)，如果对任意的整向量 $c$，只要 $\max\{c^T x: A x \leq b\}$ 有解，其对偶问题 $\min \{b^T y : A^Ty = c, y \geq 0\}$ 都有整数最优解。
+有理系统 $Ax \leq b$ 称作全对偶整的 (**TDI**, total dual integral)，如果对任意的整向量 $c$，只要 $\max\{c^T x: A x \leq b\}$ 有解，其对偶问题 $\min \{b^T y : A^Ty = c, y \geq 0\}$ 都存在整数最优解。（不一定所有的最优解都要是整数的）
+
+TDI 是比 TU 更强的条件：$(A, b) \text{ TDI }, b \in \mathbb{Z}^m \Longrightarrow \{x: Ax \leq b\} \text{ is integral}$.
+
+反过来是可能不成立的，存在整的多面体不是TDI的**。但是，任何整的多面体都可以被一个 TDI 系统表示。**
+
+> However, any integral polyhedron can always be represented by a TDI system whose coeﬃcients are all integer.
+>
+> TDI is a representation, not a polytope.
+
+比如 $P = \{(x_1, x_2) : x_1 + 2x_2 \leq 6, 2x_2 + x_1 \leq 6, \; x_1, x_2 \geq 0\}$ ，问题 $\displaystyle\max_{(x_1, x_2) \in P}\, \{x_1 + x_2\}$ 的对偶问题无整数解。
+
+但是，取 $P$ 的另一种表示：$P = \{(x_1, x_2) : x_1 + 2x_2 \leq 6, 2x_2 + x_1 \leq 6, x_1+ x_2 \leq 4,  \; x_1, x_2 \geq 0\}$，这时候问题 $\displaystyle\max_{(x_1, x_2) \in P}\, \{x_1 + x_2\}$ 的对偶问题存在整数解。
 
 
 
-
-
+【connection with Hilbert Basis】

@@ -9,13 +9,13 @@ tags: []
 # 四个大类: 分析与概率, 算法与程序设计, 运筹与优化, 论文简读
 ---
 
-## Matching
+# Matching
 
 图 $G(V, E)$ 上的一个匹配 (matching) 指的是一个集合 $M\subseteq E$，$M$ 中**任何两条边没有公共端点**。如果一个匹配包含了图的每一个顶点，就说这个匹配是完美的 (perfect matching)。
 
 下图表示了一个图的匹配：
 
-<img src="../figures/Matching/image-20220422200807886.png" alt="image-20220422200807886" style="zoom:50%;" />
+<img src="../figures/Matching/image-20220422200807886.png" alt="image-20220422200807886" style="zoom:40%;" />
 
 称一个匹配是极大的 (maximal)，如果增加一条边之后就不是一个匹配了。组合优化里一个很基础的问题就是最大基数匹配 (*maximum* cardinality matching)，完美匹配自然是最大基数匹配，但是完美匹配可能是不存在的。
 
@@ -27,7 +27,32 @@ $$
 
 用 node-edge incidence matrix 来表示，就是 $\{x \in \{0, 1\}^E: A_G x \leq \mathbf{1}\}$，它的 linear relexation 是 $\{x: A_Gx \leq \mathbf{1}, x\geq \mathbf{0}\}$ 。
 
-### Matching polytope
+## Max Matching and Min Vertex Cover
+
+图的最大基数匹配 (max matching) 问题是：
+$$
+\begin{aligned}
+\max \; & \mathbf{1}^T x \\
+\text{s.t. } & A_G x \leq \mathbf{1} \\
+& x \in \{0, 1\}^E
+\end{aligned}
+$$
+图的 vertex cover 指的的 $V$ 的一个子集，使得每一条边都至少包含这个子集的一个点。图的最小顶点覆盖 (min vertex cover) 问题是：
+$$
+\begin{aligned}
+\min \; & \mathbf{1}^T y \\
+\text{s.t. } & y_i + y_j \geq 1 \quad \forall (i, j) \in E \\
+& y \in \{0, 1\}^V
+\end{aligned}
+$$
+
+图的最大匹配小于等于其最小顶点覆盖。
+
+**(König Theorem)**  二分图的最大基数匹配等于其最小顶点覆盖。 
+
+Size of max matching = size of min vertex cover, in bipartite graphs.
+
+## Matching polytope
 
 定义 $G$ 的 *matching polytope* 为所有合法的 matching vectors 的凸包，记：
 $$
@@ -38,9 +63,27 @@ $$
 P_{\text{perf-match}}(G) = \operatorname{conv} \{\chi_M: M \text{ is a perfect matching of } G\}
 $$
 
+## Matchings in Bipartite Graphs
+
+二分图指的是图的点可以划分成不相交的两组点 $A, B$，使得每一条边都恰好连接 $A, B$ 的顶点；等价地，二分图可以定义为无奇数圈 (odd-length circle) 的图。下图是一个二分图，三角形不是二分图。
+
+【二分图的图例】
+
+### Hall’s Theorem
+
+令 $G=(V, E)$ 是一个二分图且 $V=U\cup W$，对于 $S \subseteq U$，定义 $S$ 的 neibor $N(S) \subseteq W$ 为与 $S$ 相邻的点，则：
+$$
+G \text{ has a matching covering } U \Longleftrightarrow |N(S)| \geq |S| \quad \forall S\subseteq  U
+$$
+特别地，如果 $|U|=|W|$，$G$ 存在一个完美匹配。
+
+Hall 定理的证明可以用到 König 定理。
+
+## Matching in Non-Bipartite Graphs
+
 ### Augmenting Paths
 
-给定一个匹配 $M$，称一条路为交错路 ($M$-alternation path) ，如果这条路每两条相邻的边都有一条在 $M$ 中；称其为增广路 ($M$-augmenting path)，如果它是一个交错路，并且路的两个端点不在 $M$ 中。
+给定一个匹配 $M$，称一条路为**交错路 ($M$-alternation path)** ，如果这条路每两条相邻的边都有一条在 $M$ 中；称其为**增广路 ($M$-augmenting path)**，如果它是一个交错路，并且路的两个端点不在 $M$ 中。
 
 如果 $P$ 是一条增广路，那么 $N=M \triangle P=(M \backslash P) \cup(P \backslash M)$ 也是一个匹配，注意到 $| P \backslash M | = | P \cap M | + 1$，所以 $| N | = | M | + | P \backslash M | − | P ∩ M | = | M | + 1$ 是一个基数更大的匹配。
 
@@ -49,13 +92,25 @@ $$
 M \text{ is a maximum matching } \Leftrightarrow \text{ no } M\text{-augmenting path} 
 $$
 
-### Matchings in Bipartite Graphs
+【证明】
 
-二分图指的是图的点可以划分成不相交的两组点 $U, V$，使得每一条边都恰好连接 $U, V$ 的顶点。等价地，二分图可以定义为无奇数圈 (odd-length circle) 的图。下图是一个二分图，三角形不是二分图。
-
-<img src="../figures/Matching/220px-Simple-bipartite-graph.svg.png" alt="img"  />
+所以说，要找最大匹配，其实就是要找 M-augmenting path。
 
 
+### Tutte-Berge Formula
+
+这个公式是对图的最大匹配数的一个刻画。
+
+记 
++ $\nu(G): \text{size of maximum matching}$
++ $o(G):\text{number of the connected components of the graph that have an odd number of vertices}$
+
+则：
+$$
+\nu(G)=\min _{U \subseteq V} \frac{1}{2}(|V|+|U|-o(G-U))
+$$
+
+推论(Tutte’s theorem)：$G$ 存在完美匹配当且仅当 $\forall U \subseteq V, o(G-U) \leq |U|$ .
 
 
 
