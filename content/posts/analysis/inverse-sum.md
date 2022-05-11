@@ -2,7 +2,7 @@
 title: "Inverse of the sum of matrices"
 date: 2022-05-11
 draft: false
-slug: kronecker
+slug: inverse-of-matrix-sum
 toc: false
 categories: ["分析与概率"]
 tags: []
