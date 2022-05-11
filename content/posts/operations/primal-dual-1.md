@@ -313,3 +313,8 @@ Ford-Fulkerson 方法值的并不是一个确定的算法，**增广路可能不
 
 ![image-20220415172612932](../figures/primal-dual-1/image-20220415172612932.png)
 
+
+
+## Minimum-cost flow problem
+
+最小费用流问题是最短路问题和最大流问题的结合，

@@ -54,7 +54,7 @@ Size of max matching = size of min vertex cover, in bipartite graphs.
 
 ## Matching polytope
 
-定义 $G$ 的 *matching polytope* 为所有合法的 matching vectors 的凸包，记：
+定义 $G$ 的 matching polytope 为所有匹配的凸包，记：
 $$
 P_{\text{match}}(G) = \operatorname{conv} \{\chi_M: M \text{ is a matching of } G\}
 $$
@@ -62,6 +62,10 @@ $$
 $$
 P_{\text{perf-match}}(G) = \operatorname{conv} \{\chi_M: M \text{ is a perfect matching of } G\}
 $$
+
+
+
+
 
 ## Matchings in Bipartite Graphs
 
@@ -95,6 +99,16 @@ $$
 【证明】
 
 所以说，要找最大匹配，其实就是要找 M-augmenting path。
+
+### Edmonds’ Algorithm
+
+If there are any vertices not covered by the current matching (“exposed” vertices), search for an $M$-augmenting path from each exposed vertex $v$. If an augmenting path $P$ is found, augment $M$ by updating $M$ to $M\Delta P$. If no $M$-augmenting paths can be found, $M$ is optimal.
+
+
+
+
+
+At any step in the algorithm, let M be the current matching and let X be the set of exposed vertices (vertices not covered by M).
 
 
 ### Tutte-Berge Formula

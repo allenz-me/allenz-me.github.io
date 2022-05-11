@@ -76,7 +76,7 @@ $$
 & \mathbf{x}, \mathbf{y} \geq \mathbf{0}
 \end{array} \tag{RP}
 $$
-我们把它称作是 restricted primal (RP)，它暗含了 $\mathbf{x}_{J^C} = \mathbf{0}$. (RP) 输出一个满足互补松弛条件、并把不可行性降到最低的 $\mathbf{x}$ .
+我们把它称作是 restricted primal (RP)，它暗含了 $\mathbf{x}_{J^C} = \mathbf{0}$. (RP) 输出一个满足互补松弛条件、并把不可行性降到最低的 $\mathbf{x}$ . （注意到 $\mathbf{b} \geq 0$ 使得 (RP) 直接有一个初始解，这是它的第二个意义。）
 
 (RP) 可以用单纯型法高效地求解，同时因为单纯型法的优点，我们同时还能得到 (DRP) 的解。
 

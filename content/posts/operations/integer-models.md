@@ -31,7 +31,7 @@ $$
 
 ### Packing, Partitioning, Covering
 
-令 $E=\{1, 2, \dots, n\}$ 是一个集合，$\mathcal{F}=\{F_1, F_2, \dots, F_m\}$ 是 $E$ 的一族子集。由此我们可以定义一个 incidence matrix $A$ :
+令 $E=\{1, 2, \dots, n\}$ 是一个集合，$\mathcal{F}=\{F_1, F_2, \dots, F_m\}$ 是 $E$ 的一族子集。由此我们可以定义一个 incidence matrix $A=[a_{ij}]^{m \times n}$ :
 $$
 a_{ij} = \begin{cases}
 1 & \text{if } j \in F_i \\
