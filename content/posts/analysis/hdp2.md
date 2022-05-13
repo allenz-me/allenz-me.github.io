@@ -189,7 +189,7 @@ $$
 
 该不等式也容易由$\|X-\mathbb{E} X\|_{\psi_{1}} \leq C\|X\|_{\psi_{1}}$推广到非零均值随机变量。
 
-Bernstein不等式的意思是，在均值附近，衰减速度是接近高斯分布的，远离均值的部分，则是以指数分布的速度衰减的，这与泊松分布（二项分布的极限）是类似的。Bernstein不等式下面这种形式反映了该思想：
+Bernstein不等式的意思是，在均值附近，衰减速度接近高斯分布的衰减速度，远离均值的部分，则是以指数分布的尾巴衰减的，这与泊松分布（二项分布的极限）是类似的。Bernstein不等式下面这种形式反映了该思想：
 
 $$
 \mathbb{P}\left\{\left|\frac{1}{\sqrt{N}} \sum_{i=1}^{N} X_{i}\right| \geq t\right\} \leq\left\{\begin{array}{ll}2 \exp \left(-c t^{2}\right), & t \leq C \sqrt{N} \\2 \exp (-t \sqrt{N}), & t \geq C \sqrt{N}\end{array}\right.\\

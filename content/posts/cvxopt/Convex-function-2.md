@@ -137,7 +137,7 @@ $$
 
 1. $I_C \square \| \cdot \| = d_C(\cdot)$ 
 2. $I_{C_1} \square I_{C_2} = I_{C_1 + C_2}$
-3. 如果 $f_1(x)=\displaystyle\frac{1}{2} x^T A_1 x,\, f_2(x)=\displaystyle\frac{1}{2} x^T A_2 x$，则 $(f_1 \square f_2) (x) = \displaystyle\frac{1}{2} x^T A_{12} x, \; A_{12} = (A_1^{-1} + A_2^{-1})^{-1}$
+3. 如果 $f_1(x)=\displaystyle\frac{1}{2} x^T A_1 x,\, f_2(x)=\displaystyle\frac{1}{2} x^T A_2 x$，则 $(f_1 \square f_2) (x) = \displaystyle\frac{1}{2} x^T(A_1^{-1} + A_2^{-1})^{-1} x$
 
 
 

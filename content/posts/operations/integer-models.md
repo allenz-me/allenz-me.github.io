@@ -66,6 +66,7 @@ $$
 
 一个无向图 $G(V, E)$ 的独立集 (independent set, stable set, coclique) 是 $V$ 的一个不相邻子集，即 $V$ 的独立集的顶点互不相邻。
 
+
 如果我们把 $E=\{(i, j) \cdots\}$ 看成是 $G$ 的一个子集族，那么每一个独立集都是一个 set packing。
 
 

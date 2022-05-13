@@ -81,14 +81,16 @@ $$
 
 ### 赋范线性空间 (normed vector space)
 
-$X$ 上的函数 $p(\cdot)$ 成为一个 **范数(norm)** 的条件是：
+如果 $X$ 是一个度量空间，$\mathrm{K}$ 是其对应的数域，则定义在 $X$ 的函数 $p(\cdot)$ 成为一个 **范数(norm)** 的条件是：
 
 1. $p(x) \geqslant 0 , \;\forall x \in X$ (positive semidefiniteness)
-2. $p(\alpha x) = |\alpha| p(x), \;\forall x \in X$ (positive homogeneity)
-3. $p(x) + p(y) \leqslant p(x + y), \; \forall x, y \in X$ (the triangle inequality)
+2. $p(\alpha x) = |\alpha| p(x), \;\forall x \in X, \alpha \in \mathrm{K}$ (positive homogeneity)
+3. $p(x) + p(y) \leqslant p(x + y), \; \forall x, y \in X$ (the triangle inequality / subadditivity)
 4. $p(x) = 0 \Rightarrow x = 0$ (positive definiteness)
 
 满足前三个条件的称为**半范数(seminorm)**，半范数可以为非零的向量赋予零长度。
+
+> 满足条件2和3的称为 sublinear function / quasi-seminorm / Banach functional
 
 赋范线性空间记为 $(X, \| \cdot \|)$。
 

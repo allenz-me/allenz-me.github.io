@@ -52,6 +52,8 @@ $$
 
 Size of max matching = size of min vertex cover, in bipartite graphs.
 
+
+
 ## Matching polytope
 
 定义 $G$ 的 matching polytope 为所有匹配的凸包，记：
@@ -63,13 +65,57 @@ $$
 P_{\text{perf-match}}(G) = \operatorname{conv} \{\chi_M: M \text{ is a perfect matching of } G\}
 $$
 
+如果 $G$ 是二分的，则 $A_G$ 是 TUM，所以：
 
+$$
+\begin{aligned}
+P_{\text{match}}(G) & = \{x \in \mathbb{R}^E \mid A_G x \leq \mathbf{1}, \, x\geq 0 \} \\
+P_{\text{perf-match}}(G) & = \{x \in \mathbb{R}^E \mid A_G x= \mathbf{1}, \, x \geq 0\}
+\end{aligned}
+$$
+
+对于一般图，Edmonds 给出了如下的刻画：
+
+### Matching Polytope Theorem
+
+$$
+\begin{aligned}
+P_{\text{match}}(G) &= \{x \in \mathbb{R}^E \mid A_G x \leq \mathbf{1}, \, x \geq 0, \sum_{e \in E[U]} x_{e} \leq \frac{|U|-1}{2},\; \forall U \subseteq V,|U| \text { odd }\} \\
+P_{\text{perf-match}}(G) & = \{x \in \mathbb{R}^E \mid A_G x= \mathbf{1}, \, x \geq 0, \sum_{e \in \delta(U)} x_{e} \geq 1, \; \forall U \subseteq V,|U| \text { odd }\}
+\end{aligned}
+$$
+
+考虑一个三角形，约束条件
+$$
+\begin{aligned}
+&x_{12}+x_{13}  \leq 1\\
+&x_{12}+x_{23} \leq 1\\
+&x_{13}+x_{23} \leq 1\\
+&x \geq 0
+\end{aligned}
+$$
+注意到 $(1/2, 1/2, 1/2)$ 也是这组约束表示的多面体的一个顶点，但它并不代表一个合法的匹配。所以说，刻画 matching polytope 的核心就是处理 odd cycle。
+
+令 $E[U] = \{(i, j) \in E \mid i, j \in U\}$ 表示奇数个节点内部的匹配，对于三角形来说，$(1/2, 1/2, 1/2)$ 不满足 $\displaystyle\sum_{e \in E[U]} x_e \leq \frac{|U|-1}{2}=1, \, U=V$ 。添加这个条件可以刻画 matching polytope。
+
+
+
+对于完全匹配，由 $\sum_{e \in \delta(v)} x_{e}=1, \; v \in V$ 对所有的 $v \in U \subseteq V$ 求和得
+$$
+|U|=\sum_{v \in U} \sum_{e \in \delta(v)} x_{e}=\sum_{e \in \delta(U)} x_{e}+2 \sum_{e \in E[U]} x_{e}
+$$
+
+结合 $\displaystyle\sum_{e \in E[U]} x_e \leq \frac{|U|-1}{2}$ ，有
+$$
+\sum_{e \in \delta(U)} x_{e} \geq 1, \; \forall U \subseteq V,|U| \text { odd }
+$$
+这个条件表示的是任何 odd set $U$，都有一个 $U$ 中的点与 $V \backslash U$ 中的点相匹配。这是关于 perfect matching 的限制。
 
 
 
 ## Matchings in Bipartite Graphs
 
-二分图指的是图的点可以划分成不相交的两组点 $A, B$，使得每一条边都恰好连接 $A, B$ 的顶点；等价地，二分图可以定义为无奇数圈 (odd-length circle) 的图。下图是一个二分图，三角形不是二分图。
+二分图指的是图的点可以划分成不相交的两组点 $A, B$，使得每一条边都恰好连接 $A, B$ 的顶点；等价地，**二分图可以定义为无奇数圈 (odd-length circle) 的图**。下图是一个二分图，三角形不是二分图。
 
 【二分图的图例】
 
@@ -127,6 +173,29 @@ $$
 推论(Tutte’s theorem)：$G$ 存在完美匹配当且仅当 $\forall U \subseteq V, o(G-U) \leq |U|$ .
 
 
+
+### Gallai’s theorem
+
+记：
+
+$$
+\begin{aligned}
+ \alpha(G):=&\max \{|C| \mid C  \text{ is a stable set }  \} \\
+ \tau(G):=&\min \{|W| \mid W  \text{ is a vertex cover }  \} \\
+ \nu(G):=&\max \{|M| \mid M  \text{ is a matching}  \} \\
+ \rho(G):=&\min \{|F| \mid F  \text{ is an edge cover } \}  \\
+\end{aligned}
+$$
+
+如果图 $G=(V, E)$ 没有孤立点，则：
+
+$$
+\alpha(G)+\tau(G)=|V|=\nu(G)+\rho(G)
+$$
+
+(1) $U$ is a stable set $\Longleftrightarrow V \backslash U$ is a vertex cover. 
+
+(2) 给定一个最大匹配 $M$，对每一个没有匹配到的 $v \notin M$ 添加一条边连接至 $M$，再加上 $M$ 中的边，这样可以形成一个 vertex cover，这说明 $\rho(G) \leq |M| + (|V|-2|M|)=|V| - \nu(G)$； 另一方面，给定一个最小边覆盖 $|F|$，图 $(V, F)$ 由 $|V|-|F|$ 个不相交的 $G$ 的子图构成，用 $|V|-|F|$ 条边将它们连接起来，可以构成一个匹配，这说明 $\nu(G) \geq |V| - |F| = |V| - \rho(G)$
 
 
 ---
