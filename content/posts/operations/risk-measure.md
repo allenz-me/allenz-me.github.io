@@ -11,6 +11,8 @@ tags: []
 
 在金融数学中，risk measure 用来度量一组资产的风险。经典的 MPT 使用方差作为风险的度量，
 
+
+
 令 $(\Omega, \mathcal{F}, \mathrm{P})$ 是一个概率空间，$\mathcal{L}$ 是其上所有可积的随机变量，risk measure $\rho$ 指的是 $\mathcal{L} \to [-\infty, +\infty]$ 的泛函。
 
 Risk measure 经常提到如下的几个性质：

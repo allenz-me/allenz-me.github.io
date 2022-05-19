@@ -62,7 +62,7 @@ $$
 
 举个例子，当 $n$ 很大的时候，从 ${N}(0, \mathrm{I}_n)$ 中抽两个样本点，这两个点几乎是正交的。
 
-最后是关于两个各向同随机向量距离的性质，结合上述两点，联系勾股定理不难注意到： $\mathbb{E}\| X - Y \|_2^2 = 2n$。
+最后是关于两个各向同随机向量距离的性质，结合上述两点，联系勾股定理不难注意到:  $\mathbb{E}\| X - Y \|_2^2 = 2n$。
 
 <br>
 
@@ -112,6 +112,151 @@ $$
 
 
 
-**Grothendieck’s inequality**
+### Grothendieck’s inequality
 
-考虑矩阵 $$
+令 $A = [a_{ij}] \in \mathbb{R}^{m \times n}$，$A$ 可以看做是 $(\mathbb{R}^m, \| \cdot \|_p)$ 到 $(\mathbb{R}^m, \| \cdot \|_q)$ 的一个线性算子，这里 $0 \leq p, q \leq\infty$，在这种意义下，$A$ 的 $p \to q$ 范数是：
+$$
+\| A\|_{p \to q} = \max_{\| x\|_p = 1} \|A x\|_q
+$$
+注意到 $\| A\|_{p \to q} \leq \|A\|_{\infty \to 1}$ 。
+
+一种计算 $\|A \|_{\infty \to 1}$ 的方法是解一个整数二次规划问题：
+$$
+\begin{aligned}
+\max \;& \sum_{i, j} a_{i j} x_{i} y_{j} \\
+\text {s.t. } & (x, y) \in\{-1,1\}^{m+n}
+\end{aligned}
+$$
+它可以放松为以下的半定规划：
+$$
+\begin{aligned}
+\max \;& \sum_{i, j} a_{i j}\langle x^{(i)}, y^{(j)}\rangle \\
+\text{s.t. }\, & x^{(1)}, \ldots x^{(m)}, y^{(1)}, \ldots, y^{(n)} \text{ are unit vectors in } \left(\mathbb{R}^{d},\|\cdot\|_{2}\right)
+\end{aligned}
+$$
+那么，一个随之而来的问题是，这样的近似效果能有多好？
+
+Grothendieck’s Inequality 回答了这个问题，存在常数 $C$ 使得对任意的 $A \in \mathbb{R}^{m \times n}$ 和任意的 Hilbert 空间 $H$，成立：
+$$
+\max _{\substack{\text { unit vectors } \\ x^{(i)}, y^{(j)} \in H}} \sum_{i, j} a_{i j}\langle x^{(i)}, y^{(j)}\rangle_{H} \leq C\|A\|_{\infty \rightarrow 1}
+$$
+Grothendieck’s constant 指的就是最小的满足上式的常数 $C$，其具体的值仍然是一个开放问题，但它大致介于 $\pi/2 \approx 1.57$ 到 $\pi/(2\ln (1+\sqrt2)) \approx 1.78$ 之间。
+
+**Symmetric matrices**
+
+设 $A$ 是一个对称的半正定矩阵，如果对于任何 $x_i \in \{-1, 1\}$，都有：
+$$
+\left| \sum_{i,j} a_{ij} x_i x_j \right| \leq 1
+$$
+则对任何 Hilbert 空间 $H$ 和任意单位向量 $u_i, v_j \in H$，成立：
+$$
+\left| \sum_{i, j} a_{ij} \langle u_i, v_j \rangle \right| \leq 2C
+$$
+
+#### Grothendieck’s identity
+
+令 $x$ 与 $y$ 是 $(\mathbb{R}^d, \|\cdot \|_2) \; (d \geq 2)$ 上的单位向量，$z$ 是单位球上随机一点，则：
+$$
+\mathbb{E}[\operatorname{sign}(\langle x, z\rangle) \operatorname{sign}(\langle y, z\rangle)]=\frac{2}{\pi} \arcsin (\langle x, y\rangle)
+$$
+其中 $\operatorname{sign}(x) \in \{-1, 1\}$ 。
+
+实际上，给定 $x$ 和 $y$，问题本质上是分析随机给出一个超平面，$x, y$ 位于超平面同侧或是异侧的概率。
+
+设 $\theta$ 是 $x, y$ 的夹角（锐角），则：
+$$
+\begin{aligned}
+\mathbb{E}[\operatorname{sign}(\langle x, z\rangle) \operatorname{sign}(\langle y, z\rangle)] & = \mathbb{P}(x, y\text{ lie in same half}) − \mathbb{P}(x, y \text{ lie in different halves}) \\
+& = 1 - 2 \mathbb{P}(x, y \text{ lie in different halves}) \\
+& = 1 - \frac{2\theta}{\pi} \\
+& = \frac{2}{\pi} \arcsin (\langle x, y \rangle )
+\end{aligned}
+$$
+**modiﬁed version of Grothendieck’s Identity**
+
+如果 $g \sim N(0, \mathrm{I}_n)$，$u, v$ 是单位向量，则：
+$$
+\mathbb{E} [\operatorname{sign}\langle g, u\rangle \operatorname{sign}\langle g, v\rangle] =\frac{2}{\pi} \arcsin \langle u, v\rangle
+$$
+
+
+### Semidefinite relaxation
+
+对于如下 NP-hard 的优化问题：
+$$
+\begin{aligned}
+\max \; & x^T A x \\
+\text{s.t. } & x_i \in \{-1, 1\} \;\text{ for } i = 1, \dots, n
+\end{aligned} \tag{1}
+$$
+它有等价的形式：
+$$
+\begin{aligned}
+\max \; & \langle A, xx^T\rangle \\
+\text{s.t. } & x_i \in \{-1, 1\} \;\text{ for } i = 1, \dots, n
+\end{aligned}
+$$
+用矩阵变量 $X$ 替代 $xx^T$，$x_i=\pm 1$ 推出 $X$ 的对角线元素都是1，原问题进一步的转换形式是：
+$$
+\begin{aligned}
+\max \; & \langle A, X\rangle \\
+\text{s.t. } & X_{ii}=1 \;\text{ for } i = 1, \dots, n \\
+& \text{rank}(X) = 1
+\end{aligned}
+$$
+$X$ 是一个秩一的半正定矩阵。记 $\mathrm{I}_i$ 表示对角线第 $i$ 个元素为1、其它元素为0的矩阵，则 $X_{ii}= 1 \Leftrightarrow \langle \mathrm{I}_i, X \rangle = 1$，于是得到原问题的 semidefinite form 的表达：
+$$
+\begin{aligned}
+\max \; & \langle A, X\rangle \\
+\text{s.t. } & \langle \mathrm{I}_i, X\rangle = 1  \;\text{ for } i = 1, \dots, n \\
+& X \in \mathrm{S}^n_{+}, \; \text{rank}(X)=1
+\end{aligned}
+$$
+上式与 (1) 是完全等价的。将秩为一这个条件去除，就可以得到原问题的半定松弛问题：
+$$
+\begin{aligned}
+\max \; & \langle A, X\rangle \\
+\text{s.t. } & \langle \mathrm{I}_i, X\rangle = 1  \;\text{ for } i = 1, \dots, n \\
+& X \in \mathrm{S}^n_{+}
+\end{aligned} \tag{2}
+$$
+$X$ 是半正定矩阵，**因此它可以看成是一组基向量的 Gram 矩阵**，设这组基为 $\{x_1, x_2, \dots, x_n\}$，则 $X_{ii}=1$ 意味着 $\|x_i\|_2 = 1$，则式(2)还有等价的形式：
+$$
+\begin{aligned}
+\max \; & \sum_{i, j = 1}^n a_{ij} \langle x_i, x_j \rangle \\
+\text{s.t. } & \|x_i \|_2 = 1 \;\text{ for } i = 1, \dots, n
+\end{aligned}
+$$
+
+### Guarantee of relaxation
+
+给定一个半正定矩阵 $A$，用 $\text{INT}(A)$ 表示整数规划问题 (1) 的最优值，$\text{SDP}(A)$ 表示半定松弛问题 (3) 的最优值，则：
+$$
+\text{INT}(A) \leq \text{SDP}(A) \leq 2 C \cdot \text{INT}(A)
+$$
+其中 $C$ 是 Grothendieck’s constant。可以暂时认为 $C \approx 1.78$
+
+
+
+
+
+## Application: Maximum cut for graphs
+
+对于无向图 $G=(V, E)$，将节点分成两部分，连接这两部分的边就称为一个割 (cut)。图 $G$ 的最大割，记为 $\text{MAX-CUT}(G)$ ，是割的最大值。计算最大割是 NP-hard 的。
+
+设 $A$ 是 $G$ 的邻接矩阵 (adjacency matrix)，用 $x_i \in\{-1, 1\}, i = 1, \dots, n$ 标记节点的类别，则图 $G$ 的最大割为：
+$$
+\operatorname{MAX}-\operatorname{CUT}(G)=\frac{1}{4} \max \left\{\sum_{i, j=1}^{n} A_{i j}\left(1-x_{i} x_{j}\right): x_{i}=\pm 1 \text { for all } i\right\} \text {. }
+$$
+
+
+
+
+
+
+
+
+
+
+
+

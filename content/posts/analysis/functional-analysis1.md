@@ -91,6 +91,8 @@ $$
 满足前三个条件的称为**半范数(seminorm)**，半范数可以为非零的向量赋予零长度。
 
 > 满足条件2和3的称为 sublinear function / quasi-seminorm / Banach functional
+>
+> 范数和半范数都是 sublinear function
 
 赋范线性空间记为 $(X, \| \cdot \|)$。
 

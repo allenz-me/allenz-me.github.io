@@ -127,7 +127,13 @@ G \text{ has a matching covering } U \Longleftrightarrow |N(S)| \geq |S| \quad \
 $$
 特别地，如果 $|U|=|W|$，$G$ 存在一个完美匹配。
 
+> 见：https://zhuanlan.zhihu.com/p/77563002
+
 Hall 定理的证明可以用到 König 定理。
+
+### Cardinality bipartite matching algorithm
+
+
 
 ## Matching in Non-Bipartite Graphs
 
@@ -170,7 +176,7 @@ $$
 \nu(G)=\min _{U \subseteq V} \frac{1}{2}(|V|+|U|-o(G-U))
 $$
 
-推论(Tutte’s theorem)：$G$ 存在完美匹配当且仅当 $\forall U \subseteq V, o(G-U) \leq |U|$ .
+推论(Tutte’s theorem)：$G$ 存在完美匹配当且仅当 $\forall\, U \subseteq V, o(G-U) \leq |U|$ . 这是 Hall 定理在一般图的推广。
 
 
 
@@ -196,6 +202,10 @@ $$
 (1) $U$ is a stable set $\Longleftrightarrow V \backslash U$ is a vertex cover. 
 
 (2) 给定一个最大匹配 $M$，对每一个没有匹配到的 $v \notin M$ 添加一条边连接至 $M$，再加上 $M$ 中的边，这样可以形成一个 vertex cover，这说明 $\rho(G) \leq |M| + (|V|-2|M|)=|V| - \nu(G)$； 另一方面，给定一个最小边覆盖 $|F|$，图 $(V, F)$ 由 $|V|-|F|$ 个不相交的 $G$ 的子图构成，用 $|V|-|F|$ 条边将它们连接起来，可以构成一个匹配，这说明 $\nu(G) \geq |V| - |F| = |V| - \rho(G)$
+
+**König's edge cover theorem**
+
+二分图的最大独立集数等于其最小边覆盖。
 
 
 ---
