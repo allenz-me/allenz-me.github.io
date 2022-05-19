@@ -70,7 +70,9 @@ $$
 
 + 球面上的均匀分布：$X \sim \operatorname{Unif}\left(\sqrt{n} S^{n-1}\right)$
 
-注意，该分布不包含球的内部。这是一个典型的，各分量不相关，但是不独立的随机向量。它各向同的证明要用到曲线积分。
+注意，该分布不包含球的内部。这是一个典型的，各分量不相关，但是不独立的随机向量。
+
+> 它各向同的证明要用到曲线积分。
 
 + 高维对称伯努利分布：$X \sim \operatorname{Unif}\left(\{-1,1\}^{n}\right)$
 
@@ -98,19 +100,17 @@ $$
 
 次高斯分布，本质是正态分布集中性质的推广，它的定义思想，来自正态分布的一条重要性质：投影在任意一个方向上都是正态分布，并且分布被这些投影所决定！
 
-因此，定义 $X$ 是次高斯随机向量，当且仅当对任意的 $x \in \mathrm{R}^n$，$\langle X, x \rangle$ 是次高斯随机变量，且定义其次高斯模为：
+因此，**定义 $X$ 是次高斯随机向量，当且仅当对任意的 $x \in \mathrm{R}^n$，$\langle X, x \rangle$ 是次高斯随机变量**，且定义其次高斯模为：
 
 $$
 \|X\|_{\psi_{2}}=\sup _{x \in S^{n-1}}\|\langle X, x\rangle\|_{\psi_{2}} \\
 $$
 
-如果随机向量 $X=(X_1, \dots, X_n) \in \mathbb{R}^n$ 的各个分量都是次高斯随机变量，那么它自然能成为次高斯随机向量，且有 $\| X \|_{\psi_2} \leq C \max \|X_i\|_{\psi_2}$ 。
+如果随机向量 $X=(X_1, \dots, X_n) \in \mathbb{R}^n$ 的各个分量都是次高斯随机变量，那么它自然能成为次高斯随机向量，此时有 $\| X \|_{\psi_2} \leq C \max \|X_i\|_{\psi_2}$ 。分量是 sub-gaussian $\Rightarrow$ 整体是 sub-gaussian。
 
-
+对于任意的 $n$，可以找到常数 $C$，使得 $X \sim N(0, \mathrm{I}_n)$ 的次高斯模 $\|X \|_{\psi_2} \leq C$。
 
 ## Application: Grothendieck’s inequality and semideﬁnite programming
-
-
 
 ### Grothendieck’s inequality
 
@@ -138,7 +138,7 @@ $$
 
 Grothendieck’s Inequality 回答了这个问题，存在常数 $C$ 使得对任意的 $A \in \mathbb{R}^{m \times n}$ 和任意的 Hilbert 空间 $H$，成立：
 $$
-\max _{\substack{\text { unit vectors } \\ x^{(i)}, y^{(j)} \in H}} \sum_{i, j} a_{i j}\langle x^{(i)}, y^{(j)}\rangle_{H} \leq C\|A\|_{\infty \rightarrow 1}
+\|A\|_{\infty \to 1} \leq \max _{\substack{\text { unit vectors } \\ x^{(i)}, y^{(j)} \in H}} \sum_{i, j} a_{i j}\langle x^{(i)}, y^{(j)}\rangle_{H} \leq C\|A\|_{\infty \rightarrow 1}
 $$
 Grothendieck’s constant 指的就是最小的满足上式的常数 $C$，其具体的值仍然是一个开放问题，但它大致介于 $\pi/2 \approx 1.57$ 到 $\pi/(2\ln (1+\sqrt2)) \approx 1.78$ 之间。
 
@@ -152,6 +152,8 @@ $$
 $$
 \left| \sum_{i, j} a_{ij} \langle u_i, v_j \rangle \right| \leq 2C
 $$
+
+$C$ 是 Grothendieck’s constant。
 
 #### Grothendieck’s identity
 
@@ -236,25 +238,48 @@ $$
 $$
 其中 $C$ 是 Grothendieck’s constant。可以暂时认为 $C \approx 1.78$
 
-
-
-
-
 ## Application: Maximum cut for graphs
 
 对于无向图 $G=(V, E)$，将节点分成两部分，连接这两部分的边就称为一个割 (cut)。图 $G$ 的最大割，记为 $\text{MAX-CUT}(G)$ ，是割的最大值。计算最大割是 NP-hard 的。
 
-设 $A$ 是 $G$ 的邻接矩阵 (adjacency matrix)，用 $x_i \in\{-1, 1\}, i = 1, \dots, n$ 标记节点的类别，则图 $G$ 的最大割为：
+设 $A$ 是 $G$ 的邻接矩阵 (adjacency matrix)，用 $x_i \in\{-1, 1\}, i = 1, \dots, n$ 标记节点的类别，则图 $G$ 的割为：
+$$
+\text{CUT}(G, x) = \frac{1}{4} \sum_{i, j= 1}^n A_{ij} (1 - x_i x_j)
+$$
+最大割就是：
 $$
 \operatorname{MAX}-\operatorname{CUT}(G)=\frac{1}{4} \max \left\{\sum_{i, j=1}^{n} A_{i j}\left(1-x_{i} x_{j}\right): x_{i}=\pm 1 \text { for all } i\right\} \text {. }
 $$
 
+**0.5-approximation**
+
+对 $x$ 取期望，得：
+$$
+\mathbb{E} \operatorname{CUT}(G, x)=\frac{1}{4} \sum_{i, j=1}^{n} A_{i j}=\frac{1}{2}|E|
+$$
 
 
 
 
+## Kernel trick, and tightening of Grothendieck’s inequality
+
+### Tensor
+
+张量是多维数组，定义张量 $A=[a_{i_1i_2...i_k}]^{n_1 \times n_2 \times \cdots\times n_k}$ 与 $B=[b_{i_1i_2...i_k}]^{n_1 \times n_2 \times \cdots\times n_k}$ 的内积为：
+$$
+\langle A, B \rangle = \sum_{i_1, \dots, i_k} a_{i_1 \dots i_k} b_{i_1 \dots i_k}
+$$
+这个定义与通常的矩阵内积和向量内积都是相容的。
+
+对向量 $u \in \mathbb{R}^n$，定义其 $k$ 阶张量积为：
+$$
+u^{\otimes k} = [u_{i_1} u_{i_2} \cdots u_{i_k}] \in \mathbb{R}^{n \times n \times \cdots \times n }
+$$
+当 $k=2$ 时，$u \otimes u = uu^T \in \mathbb{R}^{n \times n}$。
 
 
+
+注意到 $\langle u^{\otimes k}, v^{\otimes k} \rangle = \langle u, v\rangle^k $
 
 
 
