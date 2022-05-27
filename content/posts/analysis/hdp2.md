@@ -1,5 +1,5 @@
 ---
-title: "Concentration of sums of independent random variables"
+title: "2. Concentration of sums of independent random variables"
 date: 2021-01-01
 draft: false
 slug: hdp2

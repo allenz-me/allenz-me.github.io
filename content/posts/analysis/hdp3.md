@@ -1,5 +1,5 @@
 ---
-title: "Random vectors in high dimensions"
+title: "3. Random vectors in high dimensions"
 date: 2021-01-01
 draft: false
 slug: hdp3
@@ -76,13 +76,13 @@ $$
 
 + 高维对称伯努利分布：$X \sim \operatorname{Unif}\left(\{-1,1\}^{n}\right)$
 
-+ 标准的多元正态分布：$g \sim  N\left(0, I_{n}\right)$
++ 标准的多元正态分布：$g \sim  N\left(0, \mathrm{I}_{n}\right)$
 
 正态分布的一大特点就是不相关即独立。**另一个重要性质是，任意的多元正态分布投影在某条直线上，得到的仍然是正态分布，这是后续定义次高斯随机向量的出发点。**
 
 **Similarity of normal and spherical distributions**
 
-虽然低维的标准正态分布，给我们的感觉是，集中在原点附近的球内，但是，随着维数的增加，它的次高斯性开始显现了，本文最开始提到，$\| g\|$ 在 $n$ 很大的时候集中在半径为 $\sqrt{n}$ 的球面上。
+虽然低维的标准正态分布，给我们的感觉是，集中在原点附近的球内，但是，随着维数的增加，它的次高斯性开始显现了，本文最开始提到，$g \sim N(0, \mathrm{I}_n)$ 在 $n$ 很大的时候集中在半径为 $\sqrt{n}$ 的球面上。
 
 $$
 {N} (0, \mathrm{I}_n) \to \operatorname{Unif}\left(\sqrt{n} S^{n-1}\right)\: \text{ as }\: n \to \infty \\
@@ -91,6 +91,12 @@ $$
 <img src="../figures/hdp3/image-20220513162418407.png" alt="image-20220513162418407" style="zoom:50%;" />
 
 如上图所示，左边表示低维的标准高斯分布，右边表示高维的标准高斯分布。
+
+>也可以用另一种方式去得到
+>
+>$g \sim N(0, \mathrm{I}_n)$，则 $\|g\|_2^2 \sim \chi^2(n)$
+>
+>因为：$(\|g\|_2^2-n)/\sqrt{2n} \to N(0, 1)$，而当 $n$ 特别大的时候，标准差 $\sqrt{2n}$ 相对于均值 $n$ 来说非常小，所以 $\|g\|$ 可以看成是 $\sqrt{n}$ 的球壳上的均匀分布
 
 
 

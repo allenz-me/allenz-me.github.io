@@ -93,6 +93,8 @@ $$
 > 满足条件2和3的称为 sublinear function / quasi-seminorm / Banach functional
 >
 > 范数和半范数都是 sublinear function
+>
+> sublinear function 是 convex function
 
 赋范线性空间记为 $(X, \| \cdot \|)$。
 
