@@ -24,7 +24,27 @@ $$
 
 
 
-在一般的欧式空间上，
+Concentration of Lipschitz functions on the sphere
+
+这一章首先证明了一个定理，记 $X \sim \text{Unif}(\sqrt{n} S^{n-1})$，如果 $f$ 是 $\sqrt{n} S^{n-1}$ 上的一个 Lipschitz 函数，那么 $f(X)$ 是集中在 $\mathbb{E} f(X)$ 附近的。即证明了：
+
 $$
 \|f(X)-\mathbb{E} f(X)\|_{\psi_{2}} \leq C\|f\|_{\text {Lip }}
 $$
+
+这说明：
+
+$$
+\mathbb{P}\left(|f(X)-\mathbb{E} f(X)| \geq t\right) \leq 2 \exp \left(-\frac{c t^{2}}{\|f\|_{\text {Lip }}^{2}}\right)
+$$
+
+在这个定理证明过程中，用到了高维空间一个非常反直觉的结果。
+
+
+
+
+
+## Application: Johnson-Lindenstrauss Lemma
+
+
+
