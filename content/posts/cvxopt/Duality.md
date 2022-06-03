@@ -22,7 +22,7 @@ $$
 \end{array}
 $$
 
-记整个的可行域为$\mathcal{D}$，定义上述问题对应的**拉格朗日函数（Lagrangian）**为
+记整个的可行域为 $\mathcal{D}$，定义上述问题对应的 **拉格朗日函数（Lagrangian）** 为
 
 $$
 L(x, \lambda, \nu)=f_{0}(x)+\sum_{i=1}^{m} \lambda_{i} f_{i}(x)+\sum_{i=1}^{p} \nu_{i} h_{i}(x)
