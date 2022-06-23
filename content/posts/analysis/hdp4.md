@@ -177,5 +177,45 @@ $$
 
 
 
-
 ### Application: community detection in networks
+
+
+
+
+
+### Application: covariance estimation and clustering
+
+对于一个**零均值**的次高斯随机向量 $X$，我们想通过样本 $(X_1, X_2, \dots, X_m)$ 来估计协方差矩阵 $\Sigma = \mathbb{E} XX^T$，要达到一定的精确度，$m$ 至少应为多大呢？
+
+样本协方差矩阵是：
+$$
+\Sigma_{m}=\frac{1}{m} \sum_{i=1}^{m} X_{i} X_{i}^{\top}
+$$
+因为知道均值，所以分母是 $m$ 而不是 $m-1$；$\Sigma_m$ 是一个 unbiased estimator，即 $\mathbb{E}\, \Sigma_m = \Sigma$ .
+
+
+
+#### Covariance estimation
+
+令 $X$ 是一个次高斯随机向量，记存在 $K > 0$ 使得
+
+$$
+\|\langle X, x\rangle\|_{\psi_{2}} \leq K\|\langle X, x\rangle\|_{L^{2}} \;\;\text { for any } x \in \mathbb{R}^{n}
+$$
+
+则对任意的正整数 $m$，成立：
+
+$$
+\mathbb{E}\left\|\Sigma_{m}-\Sigma\right\| \leq C K^{2}\left(\sqrt{\frac{n}{m}}+\frac{n}{m}\right)\|\Sigma\|
+$$
+这说明，要使平均相对误差小于 $\epsilon$
+$$
+\mathbb{E}\left\|\Sigma_{m}-\Sigma\right\| \leq \varepsilon\|\Sigma\|
+$$
+$m$ 的大小应该是
+$$
+m \asymp \varepsilon^{-2} n
+$$
+
+
+#### Application: clustering of point sets
