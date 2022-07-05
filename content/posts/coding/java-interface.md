@@ -10,7 +10,7 @@ tags: ["Java"]
 
 
 
-<img src="../figures/java-interface/v2-2f459861d963c59dddd56d7466da4381_1440w.jpg" alt="" style="zoom: 80%;" />
+<img src="../../figures/java-interface/v2-2f459861d963c59dddd56d7466da4381_1440w.jpg" alt="" style="zoom: 80%;" />
 
 
 

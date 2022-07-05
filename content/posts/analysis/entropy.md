@@ -13,16 +13,16 @@ tags: ["熵"]
 
 熵，在统计学或信息论里，我们称其为信息熵；在物理学领域，一般指热力学熵。信息熵和热力学熵是统一的。熵是体系混乱度的度量，熵越大，说明这个体系越混乱。
 
-在统计学和信息论中，熵被用来度量不确定性，熵的意义是信息量的多少。对于一个随机试验（不同事件的可能的概率为$p_1,p_2, ..., p_n$），希望找到一个函数 $H$ 来度量这个随机试验的不确定性。香农认为，熵 $H$ 需要满足三个条件：
+在统计学和信息论中，熵被用来度量不确定性，熵的意义是信息量的多少。对于一个随机试验（不同事件的可能的概率为$p\_1,p\_2, ..., p\_n$），希望找到一个函数 $H$ 来度量这个随机试验的不确定性。香农认为，熵 $H$ 需要满足三个条件：
 
-1. 是 $p_i$ 的连续函数。
+1. 是 $p\_i$ 的连续函数。
 2. 对于 $n$ 个等概率结果的试验，$H$ 是 $n$ 的单调上升函数。
 3. 一个试验分成两个相继试验，未分之前的 $H$ 是既分之后的 $H$ 的加权和。（可加性）
 
 可以证明满足以上三个条件的 $H$ 具有下列形式：
 
 $$
-H=-C\sum^n_{i=1}p_i\log p_i
+H=\-C\\sum^n\_{i=1}p\_i\\log p\_i
 $$
 
 其中 $C$ 是正的常数。
@@ -31,19 +31,19 @@ $$
 
 自信息表示某一事件发生时所带来的信息量的多少，当事件发生的概率越大，则自信息越小。七月飘雪这一事件所包含的信息要高于腊月下雪。
 
-一个随机事件的自信息等于其概率的负对数（$-\log p$）。自信息满足可加性，即两个独立事件的自信息等于两个事件单独的自信息。
+一个随机事件的自信息等于其概率的负对数（$\-\\log p$）。自信息满足可加性，即两个独立事件的自信息等于两个事件单独的自信息。
 
 ## 信息熵（information entropy）
 
-自信息一般用来描述一个随机事件的信息量大小。**信息熵则是用来描述整个随机分布所带来的信息量平均值。** 离散型随机变量 $X$ 取不同值的可能概率为 $p_1,p_2, ..., p_n$，那么 $X$ 的信息熵为：
+自信息一般用来描述一个随机事件的信息量大小。**信息熵则是用来描述整个随机分布所带来的信息量平均值。** 离散型随机变量 $X$ 取不同值的可能概率为 $p\_1,p\_2, ..., p\_n$，那么 $X$ 的信息熵为：
 
 $$
-H(X)=-\sum_{x \in \mathcal{X}} p(x) \log {p(x)}= - \sum_{i=1}^n  p_i \log p_i
+H(X)=\-\\sum\_{x \\in \\mathcal{X}} p(x) \\log {p(x)}= \- \\sum\_{i=1}^n  p\_i \\log p\_i
 $$
 
 信息熵只与随机变量取值的概率有关，而与它具体的取值无关。而诸如随机变量的方差、变异系数等，是与随机变量的具体取值有关的。
 
-容易看出，$H(X)$ 在 $p_1=p_2=...=p_n=\frac{1}{n}$ 时取最大值，且其最大值等于 $\log |\mathcal{X}|$，其中$|\mathcal{X}|=n$ 是 $X$ 取值的数量。
+容易看出，$H(X)$ 在 $p\_1=p\_2=...=p\_n=\\frac{1}{n}$ 时取最大值，且其最大值等于 $\\log |\\mathcal{X}|$，其中$|\\mathcal{X}|=n$ 是 $X$ 取值的数量。
 
 随机变量的信息熵的数值，在信息论中，实际反映的是平均的二进制编码长度，也反映了信息的极限压缩程度。
 比如说，如果 $X$ 有 $4$ 种可能的取值，我们就可以用 00、01、10、11 去分别表示；如果 $X$ 有 $3$ 种可能的取值，我们就可以用 00、01、1 去分别表示，我们会发现，后者的平均编码长度更短。
@@ -54,7 +54,7 @@ $$
 离散型随机变量 $X, Y$ 的联合熵定义如下：
 
 $$
-H(X, Y)=-\sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} p(x, y) \log p(x, y)
+H(X, Y)=\-\\sum\_{x \\in \\mathcal{X}} \\sum\_{y \\in \\mathcal{Y}} p(x, y) \\log p(x, y)
 $$
 
 它反映了描述一对随机变量平均所需要的信息量。以上定义容易推广到多个随机变量的情况。事实上，这也是随机向量的熵的定义。
@@ -62,29 +62,29 @@ $$
 联合信息量小于等于独立观察信息量之和：
 
 $$
-H(X, Y) \leqslant H(X) + H(Y)
+H(X, Y) \\leqslant H(X) \+ H(Y)
 $$
 
 ## 条件熵（conditional entropy）
 
-若 $(X, Y) \sim p(x, y)$，则条件熵 $H(Y\mid X)$ 定义为：
+若 $(X, Y) \\sim p(x, y)$，则条件熵 $H(Y\\mid X)$ 定义为：
 
 $$
-\begin{aligned}
-H(Y \mid X) &=\sum_{x \in \mathcal{X}} p(x) H(Y \mid X=x) \\
-&=-\sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} p(x, y) \log p(y|x) \\
-\end{aligned}
+\\begin{aligned}
+H(Y \\mid X) &=\\sum\_{x \\in \\mathcal{X}} p(x) H(Y \\mid X=x) \\\\
+&=\-\\sum\_{x \\in \\mathcal{X}} \\sum\_{y \\in \\mathcal{Y}} p(x, y) \\log p(y|x) \\\\
+\\end{aligned}
 $$
 
-可以认为是已知随机变量 $X$ 后，$Y$ 的信息量，所以有：$H(Y \mid X) \leqslant H(Y)$。当我们知道了统计相关性的变量之后，就可以减少不确定性。
+可以认为是已知随机变量 $X$ 后，$Y$ 的信息量，所以有：$H(Y \\mid X) \\leqslant H(Y)$。当我们知道了统计相关性的变量之后，就可以减少不确定性。
 
-> 并不意味着 $H(Y \mid X=x) \leqslant H(Y)$。
+> 并不意味着 $H(Y \\mid X=x) \\leqslant H(Y)$。
 
 
 如果 $X, Y$ 统计独立，那么
 
 $$
-H(X\mid Y)=H(X), \quad H(Y\mid X) = H(Y)
+H(X\\mid Y)=H(X), \\quad H(Y\\mid X) = H(Y)
 $$
 
 这时候知道 $X$ 不会给 $Y$ 提供任何信息，知道 $Y$ 也不会给 $X$ 提供任何信息。
@@ -92,20 +92,20 @@ $$
 $(X, Y)$ 的联合熵可以看作是两个连续实验得到的信息：先观察 $X$，在已知 $X$ 的基础上观察 $Y$。于是我们能够得到如下等式：
 
 $$
-H(X, Y)=H(X) + H(Y \mid X)
+H(X, Y)=H(X) \+ H(Y \\mid X)
 $$
 
 由此我们可以得到：
 
 $$
-H(X)+H(Y) - H(X, Y) = H(Y)-H(Y\mid X) = H(X) - H(X\mid Y)
+H(X)\+H(Y) \- H(X, Y) = H(Y)\-H(Y\\mid X) = H(X) \- H(X\\mid Y)
 $$
 
 从而，联合观察 $X, Y$ 的信息量，比起独立观察 $X, Y$ 的信息量之和，少的那一部分，就是 $X, Y$ 之间相关关系带来的信息损失。应用在随机事件上，容易理解，两个相关性很强的小概率事件同时发生的信息量，要少于某个小概率时间发生信息量的两倍。
 
 > 类似地，不难解释下面的等式：
 > $$
-> H(X, Y \mid Z) = H(X \mid Z) + H(Y \mid X, Z)
+> H(X, Y \\mid Z) = H(X \\mid Z) \+ H(Y \\mid X, Z)
 > $$
 
 ## 互信息（mutual information）
@@ -113,47 +113,47 @@ $$
 定义离散型随机变量 $X$ 与 $Y$ 之间的互信息为：
 
 $$
-\begin{aligned}
-I(X, Y)=& H(X)-H(X \mid Y)=H(Y)-H(Y \mid X) \\
-=&H(X)+H(Y)-H(X, Y) \\
-=& H(X, Y)-H(X \mid Y)-H(Y \mid X)
-\end{aligned}
+\\begin{aligned}
+I(X, Y)=& H(X)\-H(X \\mid Y)=H(Y)\-H(Y \\mid X) \\\\
+=&H(X)\+H(Y)\-H(X, Y) \\\\
+=& H(X, Y)\-H(X \\mid Y)\-H(Y \\mid X)
+\\end{aligned}
 $$
 
 也可以直接定义互信息：
 
 $$
-I(X, Y) = \sum_{x \in \mathcal{X}}\sum_{y \in \mathcal{Y}} p(x, y) \log \frac{p(x, y)}{p(x)p(y)}
+I(X, Y) = \\sum\_{x \\in \\mathcal{X}}\\sum\_{y \\in \\mathcal{Y}} p(x, y) \\log \\frac{p(x, y)}{p(x)p(y)}
 $$
 
 互信息满足对称性。它表示，在知道 $Y$ 之后，$X$ 的信息量减少了多少；**换言之，$Y$ 能为 $X$ 提供多少信息量**。或者说，$X, Y$ 相关关系所蕴含的信息量。
 
 易知，若 $X, Y$ 统计独立，那么 $I(X, Y)=0$。$X, Y$ 不能为对方提供任何信息。
 
-> 决策树ID3算法的训练规则：$g(D, A)=H(D)-H(D \mid A)$，本质上就是找到一个与类别的互信息最大的特征，这个特征与类别的相关关系包含了最多的信息。
+> 决策树ID3算法的训练规则：$g(D, A)=H(D)\-H(D \\mid A)$，本质上就是找到一个与类别的互信息最大的特征，这个特征与类别的相关关系包含了最多的信息。
 
 ## 信息散度（information divergence）
 
 信息散度被用来衡量两个分布之间的相似度，最常用的、也是与香农体系相容的，是KL散度（*Kullback-Leibler divergence*），也叫相对熵（*relative entropy*）、鉴别信息（*information for discrimination*）。KL散度用于刻画使用理论分布$q(x)$拟合真实分布$p(x)$时产生的信息损失：
 
 $$
-D_{KL}(p \lVert q)=\sum_{x \in \mathcal{X}} p(x) \log \frac{p(x)}{q(x)}
+D\_{KL}(p \\lVert q)=\\sum\_{x \\in \\mathcal{X}} p(x) \\log \\frac{p(x)}{q(x)}
 $$
 
-**KL散度具有非负性。** 两个分布越接近，那么它们的KL散度值越小。如果 $p=q$，那么 $D_{KL}(p \lVert q)=0$。值得注意的是，尽管KL散度能够衡量两个分布之间的相似度，但它并不是一个分布之间*距离*，**KL散度不满足距离公理中的对称性和三角不等式**。
+**KL散度具有非负性。** 两个分布越接近，那么它们的KL散度值越小。如果 $p=q$，那么 $D\_{KL}(p \\lVert q)=0$。值得注意的是，尽管KL散度能够衡量两个分布之间的相似度，但它并不是一个分布之间*距离*，**KL散度不满足距离公理中的对称性和三角不等式**。
 
 离散型随机变量的熵与KL散度之间存在关系：
 
 $$
-H(X)=\log |\mathcal{X}| - D(p \lVert u)
+H(X)=\\log |\\mathcal{X}| \- D(p \\lVert u)
 $$
 
-其中 $\mathcal{X}$ 是 $X$ 的值域集，$u$ 是 $\mathcal{X}$ 上的等概均匀分布，并且我们知道，等概分布 $u$ 的信息熵就是 $\log|\mathcal{X}|$，这个式子背后的意义是好理解的。
+其中 $\\mathcal{X}$ 是 $X$ 的值域集，$u$ 是 $\\mathcal{X}$ 上的等概均匀分布，并且我们知道，等概分布 $u$ 的信息熵就是 $\\log|\\mathcal{X}|$，这个式子背后的意义是好理解的。
 
 互信息与KL散度满足关系：
 
 $$
-I(X, Y) = D(p(x, y) \lVert p(x)p(y))
+I(X, Y) = D(p(x, y) \\lVert p(x)p(y))
 $$
 
 它表示，假定 $X, Y$ 独立，这种假定与真实情况的差别有多大。
@@ -163,17 +163,17 @@ $$
 交叉熵表示，如果用错误的编码方式 $q(x)$ 去编码真实分布 $p(x)$ 所需要的平均编码长度：
 
 $$
-H(p, q) = - \sum_{x \in \mathcal{X}} p(x) \log q(x)
+H(p, q) = \- \\sum\_{x \\in \\mathcal{X}} p(x) \\log q(x)
 $$
 
 交叉熵常用作机器学习的损失函数，它也能够衡量两个分布的相似程度，交叉熵越小，分布越相似。
 
-> 按照我的理解，每个样本都是独立的随机变量，$X_1, X_2, ... X_n = 0 \text{ or } 1$ 是样本标签，$Y_1, Y_2, ... Y_n$ 是概率模型的输出，此时 $P(Y_i=1)=1-P(Y_i=0)=y_{pred_i}$，交叉熵损失函数就是 $\sum_{i=1}^n H(X_i, Y_i)$。
+> 按照我的理解，每个样本都是独立的随机变量，$X\_1, X\_2, ... X\_n = 0 \\text{ or } 1$ 是样本标签，$Y\_1, Y\_2, ... Y\_n$ 是概率模型的输出，此时 $P(Y\_i=1)=1\-P(Y\_i=0)=y\_{pred\_i}$，交叉熵损失函数就是 $\\sum\_{i=1}^n H(X\_i, Y\_i)$。
 
 交叉熵与KL散度之间存在关系：
 
 $$
-D_{KL}(p\lVert q) = H(p, q) - H(p)
+D\_{KL}(p\\lVert q) = H(p, q) \- H(p)
 $$
 
 因此寻找最优的拟合分布 $q$ 既是优化交叉熵也是优化信息散度。由此我们还得到了信息散度的另一种解释：用非真实分布 $q$ 得到的平均码长比真实分布 $p$ 得到的平均码长多出的比特数。
@@ -184,7 +184,7 @@ $$
 对于连续型随机变量，我们总能找到一列离散型随机变量去无限地逼近它，然后连续型随机变量的信息熵，就定义为这列离散型随机变量的极限：
 
 $$
-H(X) = - \int_{-\infty}^{+\infty}p(x) \log p(x) \mathrm{d} x
+H(X) = \- \\int\_{\-\\infty}^{\+\\infty}p(x) \\log p(x) \\mathrm{d} x
 $$
 
 > 事实上，连续型随机变量所具有的信息是无穷大的，以上仅是一种形式上的定义。
@@ -192,28 +192,28 @@ $$
 由此我们还能够类似地定义联合熵：
 
 $$
-H(X, Y) = - \iint_{\mathbf{R}^2} p(x, y) \log p(x, y) \mathrm{d} x \mathrm{d} y
+H(X, Y) = \- \\iint\_{\\mathbf{R}^2} p(x, y) \\log p(x, y) \\mathrm{d} x \\mathrm{d} y
 $$
 
 条件熵：
 
 $$
-H(X\mid Y) = -\iint _{\mathbf{R}^2}p(x, y)\log p(x| y) \mathrm{d} x \mathrm{d} y
+H(X\\mid Y) = \-\\iint \_{\\mathbf{R}^2}p(x, y)\\log p(x| y) \\mathrm{d} x \\mathrm{d} y
 $$
 
 > **注意：微分熵可能为负值。**
 
 $$
-\begin{array}{l}
-X: p(x)=\left\{\begin{array}{cc}
-\frac{1}{b-a} & a \leq x \leq b, & b-a<1 \\
+\\begin{array}{l}
+X: p(x)=\\left\\{\\begin{array}{cc}
+\\frac{1}{b\-a} & a \\leq x \\leq b, & b\-a<1 \\\\
 0 & x>b, & x<a
-\end{array}\right. \\
- H(X)=-\int_{a}^{b} \frac{1}{b-a} \log \frac{1}{b-a} d x=\log (b-a)<0
-\end{array}
+\\end{array}\\right. \\\\
+ H(X)=\-\\int\_{a}^{b} \\frac{1}{b\-a} \\log \\frac{1}{b\-a} d x=\\log (b\-a)<0
+\\end{array}
 $$
 
-对于正态分布 $\mathcal{N}(\mu, \sigma^2)$ 的随机变量 $X$，其微分熵为：$H(X)=\frac{1}{2} \log 2\pi e \sigma^2$，与均值无关。
+对于正态分布 $\\mathcal{N}(\\mu, \\sigma^2)$ 的随机变量 $X$，其微分熵为：$H(X)=\\frac{1}{2} \\log 2\\pi e \\sigma^2$，与均值无关。
 
 若连续型随机变量的均值和方差均被给定，则当其服从正态分布的时候，微分熵最大！（这一点与热力学相同）
 
@@ -223,20 +223,20 @@ $$
 
 交叉熵 $H(p, q)$ 关于 $q$ 是凸的，因此给定分布 $p$，寻找 $q$ 最小化交叉熵是凸的问题。
 
-KL散度 $D_{KL}(p\lVert q)=\sum_{i=1}^n p_i \log \frac{p_i}{q_i}$ 对 $(p, q)$ 是凸的。因此最小化与一个给定分布的KL散度这一问题是凸的。
+KL散度 $D\_{KL}(p\\lVert q)=\\sum\_{i=1}^n p\_i \\log \\frac{p\_i}{q\_i}$ 对 $(p, q)$ 是凸的。因此最小化与一个给定分布的KL散度这一问题是凸的。
 
 ## Fano 不等式
 
-假设随机变量 $X$ 和 $Y$ 分别是输入、输出信息，我们无法直接观测到 $X$，只能观察到与 $X$ 相关的随机变量 $Y$，根据随机变量 $Y$ 我们可以做出对原随机变量 $X$ 的一个估计 $\hat X=f(Y)$。
+假设随机变量 $X$ 和 $Y$ 分别是输入、输出信息，我们无法直接观测到 $X$，只能观察到与 $X$ 相关的随机变量 $Y$，根据随机变量 $Y$ 我们可以做出对原随机变量 $X$ 的一个估计 $\\hat X=f(Y)$。
 
 $$
-X\rightarrow Y \rightarrow \hat X
+X\\rightarrow Y \\rightarrow \\hat X
 $$
 
-对于任意的估计 $\hat X$，定义错误概率 $P_e=P(\hat X \neq X)$，此时Fano不等式成立：
+对于任意的估计 $\\hat X$，定义错误概率 $P\_e=P(\\hat X \\neq X)$，此时Fano不等式成立：
 
 $$
-H\left(P_{e}\right)+P_{e} \log |\mathrm{X}| \geqslant H(X \mid \hat{X}) \geqslant H(X \mid Y)
+H\\left(P\_{e}\\right)\+P\_{e} \\log |\\mathrm{X}| \\geqslant H(X \\mid \\hat{X}) \\geqslant H(X \\mid Y)
 $$
 
 Fano不等式给出了解码器错误概率的下界。

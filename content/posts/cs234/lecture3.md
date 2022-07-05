@@ -20,10 +20,10 @@ Lecture3 主要介绍当我们不知道模型的各个参数的时候，如何�
 Dynamic programming for policy evaluation
 
 $$
-V^{\pi}(s) \leftarrow \mathbb{E}_{\pi}\left[r_{t}+\gamma V_{k-1} \mid s_{t}=s\right]
+V^{\\pi}(s) \\leftarrow \\mathbb{E}\_{\\pi}\\left[r\_{t}\+\\gamma V\_{k\-1} \\mid s\_{t}=s\\right]
 $$
 
-<img src="../figures/lecture3/bts.png" alt="" style="zoom: 60%;" />
+<img src="../../figures/lecture3/bts.png" alt="" style="zoom: 60%;" />
 
 
 ## Policy Evaluation without a Model
@@ -47,17 +47,17 @@ Monte Carlo is particularly useful when a subset of states is required. One can 
 
 #### First-Visit
 
-Initialize $N(s)=0, G(s)=0 \;\; \forall s \in S$
+Initialize $N(s)=0, G(s)=0 \\;\\; \\forall s \\in S$
 Loop
 
-- Sample episode $i=s_{i, 1}, a_{i, 1}, r_{i, 1}, s_{i, 2}, a_{i, 2}, r_{i, 2}, \ldots, s_{i, T_{i}}$
-- Define $G_{i, t}=r_{i, t}+\gamma r_{i, t+1}+\gamma^{2} r_{i, t+2}+\cdots \gamma^{T_{i}-1} r_{i, T_{i}}$ as return from time
+- Sample episode $i=s\_{i, 1}, a\_{i, 1}, r\_{i, 1}, s\_{i, 2}, a\_{i, 2}, r\_{i, 2}, \\ldots, s\_{i, T\_{i}}$
+- Define $G\_{i, t}=r\_{i, t}\+\\gamma r\_{i, t\+1}\+\\gamma^{2} r\_{i, t\+2}\+\\cdots \\gamma^{T\_{i}\-1} r\_{i, T\_{i}}$ as return from time
 step $t$ onwards in $i$ th episode
 - For each time step $t$ till the end of the episode $i$
   - If this is the **first** time $t$ that state $s$ is visited in episode $i$
-    - Increment counter of total first visits: $N(s)=N(s)+1$
-    - Increment total return $G(s)=G(s)+G_{i, t}$
-    - Update estimate $V^{\pi}(s)=G(s) / N(s)$
+    - Increment counter of total first visits: $N(s)=N(s)\+1$
+    - Increment total return $G(s)=G(s)\+G\_{i, t}$
+    - Update estimate $V^{\\pi}(s)=G(s) / N(s)$
 
 **Properties**
 
@@ -71,17 +71,17 @@ By SLLN, the sequence of averages of the estimates converges to the expected val
 
 #### Every-Visit
 
-Initialize $N(s)=0, G(s)=0 \; \forall s \in S$
+Initialize $N(s)=0, G(s)=0 \\; \\forall s \\in S$
 Loop
 
-- Sample episode $i=s_{i, 1}, a_{i, 1}, r_{i, 1}, s_{i, 2}, a_{i, 2}, r_{i, 2}, \ldots, s_{i, T_{i}}$
-- Define $G_{i, t}=r_{i, t}+\gamma r_{i, t+1}+\gamma^{2} r_{i, t+2}+\cdots \gamma^{T_{i}-1} r_{i, T_{i}}$ as return from time
+- Sample episode $i=s\_{i, 1}, a\_{i, 1}, r\_{i, 1}, s\_{i, 2}, a\_{i, 2}, r\_{i, 2}, \\ldots, s\_{i, T\_{i}}$
+- Define $G\_{i, t}=r\_{i, t}\+\\gamma r\_{i, t\+1}\+\\gamma^{2} r\_{i, t\+2}\+\\cdots \\gamma^{T\_{i}\-1} r\_{i, T\_{i}}$ as return from time
 step $t$ onwards in $i$ th episode
 - For each time step $t$ till the end of the episode $i$
   - state $s$ is the state visited at time step $t$ in episodes $i$
-  - Increment counter of total visits: $N(s)=N(s)+1$
-  - Increment total return $G(s)=G(s)+G_{i, t}$
-  - Update estimate $V^{\pi}(s)=G(s) / N(s)$
+  - Increment counter of total visits: $N(s)=N(s)\+1$
+  - Increment total return $G(s)=G(s)\+G\_{i, t}$
+  - Update estimate $V^{\\pi}(s)=G(s) / N(s)$
 
 **Properties**
 
@@ -95,15 +95,15 @@ step $t$ onwards in $i$ th episode
 
 A more computationally efficient way is:
 $$
-V^{\pi}(s)=V^{\pi}(s) \frac{N(s)-1}{N(s)}+\frac{G_{i, t}}{N(s)}=V^{\pi}(s)+\frac{1}{N(s)}\left(G_{i, t}-V^{\pi}(s)\right)
+V^{\\pi}(s)=V^{\\pi}(s) \\frac{N(s)\-1}{N(s)}\+\\frac{G\_{i, t}}{N(s)}=V^{\\pi}(s)\+\\frac{1}{N(s)}\\left(G\_{i, t}\-V^{\\pi}(s)\\right)
 $$
 
 
 $$
-V^{\pi}(s)=V^{\pi}(s)+\alpha\left(G_{i, t}-V^{\pi}(s)\right)
+V^{\\pi}(s)=V^{\\pi}(s)\+\\alpha\\left(G\_{i, t}\-V^{\\pi}(s)\\right)
 $$
 
-Incremental MC with $\alpha>\displaystyle\frac{1}{N\left(s\right)}$ could help in non-stationary domains.
+Incremental MC with $\\alpha>\\displaystyle\\frac{1}{N\\left(s\\right)}$ could help in non-stationary domains.
 
 
 
@@ -128,31 +128,31 @@ Specify that the episodes start in a state–action pair, and that every pair ha
 
 ### MC off-policy evaluation
 
-Aim: estimate *target policy* $\pi$ given episodes generated under *behavior policy* $b$
+Aim: estimate *target policy* $\\pi$ given episodes generated under *behavior policy* $b$
 
 Requirement
 $$
-\pi(a \mid s)>0 \Longrightarrow b(a\mid s) > 0  \tag{coverage}
+\\pi(a \\mid s)>0 \\Longrightarrow b(a\\mid s) > 0  \\tag{coverage}
 $$
 *Importance-sampling ratio*
 $$
-\rho_{t: T-1} \doteq \frac{\prod_{k=t}^{T-1} \pi\left(A_{k} \mid S_{k}\right) p\left(S_{k+1} \mid S_{k}, A_{k}\right)}{\prod_{k=t}^{T-1} b\left(A_{k} \mid S_{k}\right) p\left(S_{k+1} \mid S_{k}, A_{k}\right)}=\prod_{k=t}^{T-1} \frac{\pi\left(A_{k} \mid S_{k}\right)}{b\left(A_{k} \mid S_{k}\right)}
+\\rho\_{t: T\-1} \\doteq \\frac{\\prod\_{k=t}^{T\-1} \\pi\\left(A\_{k} \\mid S\_{k}\\right) p\\left(S\_{k\+1} \\mid S\_{k}, A\_{k}\\right)}{\\prod\_{k=t}^{T\-1} b\\left(A\_{k} \\mid S\_{k}\\right) p\\left(S\_{k\+1} \\mid S\_{k}, A\_{k}\\right)}=\\prod\_{k=t}^{T\-1} \\frac{\\pi\\left(A\_{k} \\mid S\_{k}\\right)}{b\\left(A\_{k} \\mid S\_{k}\\right)}
 $$
 Given episodes from $b$
 $$
-\mathbb{E}\left[\rho_{t: T-1} G_{t} \mid S_{t}=s\right]=v_{\pi}(s)
+\\mathbb{E}\\left[\\rho\_{t: T\-1} G\_{t} \\mid S\_{t}=s\\right]=v\_{\\pi}(s)
 $$
 Unbiased and consistent.
 
 + Ordinary importance sampling — uausally unbiased; **may not converge**
 
   $$
-  V(s) \doteq \frac{\sum_{t \in \mathcal{T}(s)} \rho_{t: T(t)-1} G_{t}}{|\mathcal{T}(s)|}
+  V(s) \\doteq \\frac{\\sum\_{t \\in \\mathcal{T}(s)} \\rho\_{t: T(t)\-1} G\_{t}}{|\\mathcal{T}(s)|}
   $$
 
 + Weighted importance sampling — biased but lower variance
   $$
-  V(s) \doteq \frac{\sum_{t \in \mathcal{T}(s)} \rho_{t: T(t)-1} G_{t}}{\sum_{t \in \mathcal{T}(s)} \rho_{t: T(t)-1}}
+  V(s) \\doteq \\frac{\\sum\_{t \\in \\mathcal{T}(s)} \\rho\_{t: T(t)\-1} G\_{t}}{\\sum\_{t \\in \\mathcal{T}(s)} \\rho\_{t: T(t)\-1}}
   $$
 
 The estimates of ordinary importance sampling will typically have inﬁnite variance, and thus unsatisfactory convergence properties, whenever the scaled returns have inﬁnite variance.
@@ -166,19 +166,19 @@ The estimates of ordinary importance sampling will typically have inﬁnite vari
 Incremental MC
 
 $$
-V^{\pi}(s)=V^{\pi}(s)+\alpha\left(G_{i, t}-V^{\pi}(s)\right)
+V^{\\pi}(s)=V^{\\pi}(s)\+\\alpha\\left(G\_{i, t}\-V^{\\pi}(s)\\right)
 $$
-Replace $G_{i,t}$ by bootstraping $r_t + \gamma V^\pi(s_{t+1})$ .
+Replace $G\_{i,t}$ by bootstraping $r\_t \+ \\gamma V^\\pi(s\_{t\+1})$ .
 $$
-V^{\pi}\left(s_{t}\right)=V^{\pi}\left(s_{t}\right)+\alpha(\underbrace{\left[r_{t}+\gamma V^{\pi}\left(s_{t+1}\right)\right]}_{\text {TD target }}-V^{\pi}\left(s_{t}\right))
+V^{\\pi}\\left(s\_{t}\\right)=V^{\\pi}\\left(s\_{t}\\right)\+\\alpha(\\underbrace{\\left[r\_{t}\+\\gamma V^{\\pi}\\left(s\_{t\+1}\\right)\\right]}\_{\\text {TD target }}\-V^{\\pi}\\left(s\_{t}\\right))
 $$
 
 + TD error
   $$
-  \delta_{t}=r_{t}+\gamma V^{\pi}\left(s_{t+1}\right)-V^{\pi}\left(s_{t}\right)
+  \\delta\_{t}=r\_{t}\+\\gamma V^{\\pi}\\left(s\_{t\+1}\\right)\-V^{\\pi}\\left(s\_{t}\\right)
   $$
 
-+ Can immediately update value estimate after $\left(s, a, r, s^{\prime}\right)$ tuple
++ Can immediately update value estimate after $\\left(s, a, r, s^{\\prime}\\right)$ tuple
 
 + Don't need episodic setting
 
@@ -191,21 +191,21 @@ TD methods are often more efficient than Monte Carlo methods.
 
 **Conplex convergence property**
 
-+ TD(0) converges in the mean for a small constant $\alpha$
-+ TD(0) converges a.s. if $\alpha$ decreases accordingly
++ TD(0) converges in the mean for a small constant $\\alpha$
++ TD(0) converges a.s. if $\\alpha$ decreases accordingly
 + TD(0) does not always converge with function approximation
 
 
 
-**TD(0) converges to DP policy $V^\pi$ for the MDP with the maximum likelihood model estimates** if there is available only a ﬁnite amount of experience.
+**TD(0) converges to DP policy $V^\\pi$ for the MDP with the maximum likelihood model estimates** if there is available only a ﬁnite amount of experience.
 
 
 > Maximum likelihood Markov decision process model
 > $$
-\begin{gathered}
- \hat{P}\left(s^{\prime} \mid s, a\right)=\frac{1}{N(s, a)} \sum_{k=1}^{K} \sum_{t=1}^{L_{k}-1} \mathbb{1}\left(s_{k, t}=s, a_{k, t}=a, s_{k, t+1}=s^{\prime}\right) \\
- \hat{r}(s, a)=\frac{1}{N(s, a)} \sum_{k=1}^{K} \sum_{t=1}^{L_{k}-1} \mathbb{1}\left(s_{k, t}=s, a_{k, t}=a\right) r_{t, k}
-\end{gathered}
+\\begin{gathered}
+ \\hat{P}\\left(s^{\\prime} \\mid s, a\\right)=\\frac{1}{N(s, a)} \\sum\_{k=1}^{K} \\sum\_{t=1}^{L\_{k}\-1} \\mathbb{1}\\left(s\_{k, t}=s, a\_{k, t}=a, s\_{k, t\+1}=s^{\\prime}\\right) \\\\
+ \\hat{r}(s, a)=\\frac{1}{N(s, a)} \\sum\_{k=1}^{K} \\sum\_{t=1}^{L\_{k}\-1} \\mathbb{1}\\left(s\_{k, t}=s, a\_{k, t}=a\\right) r\_{t, k}
+\\end{gathered}
 > $$
 
 **TD exploits Markov structure.** As in the AB example

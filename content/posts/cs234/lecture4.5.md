@@ -15,35 +15,35 @@ tags: []
 
 The idea of $n$-step TD
 
-<img src="../figures/lecture4.5/image-20220212161120843.png" alt="image-20220212161120843" style="zoom:67%;" />
+<img src="../../figures/lecture4.5/image-20220212161120843.png" alt="image-20220212161120843" style="zoom:67%;" />
 
 
 
 Monte Carlo target
 $$
-G_{t} \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\cdots+\gamma^{T-t-1} R_{T}
+G\_{t} \\doteq R\_{t\+1}\+\\gamma R\_{t\+2}\+\\gamma^{2} R\_{t\+3}\+\\cdots\+\\gamma^{T\-t\-1} R\_{T}
 $$
 
 
 1-step TD target
 $$
-G_{t: t+1} \doteq R_{t+1}+\gamma V_{t}\left(S_{t+1}\right)
+G\_{t: t\+1} \\doteq R\_{t\+1}\+\\gamma V\_{t}\\left(S\_{t\+1}\\right)
 $$
 2-step TD target
 $$
-G_{t: t+2} \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} V_{t+1}\left(S_{t+2}\right)
+G\_{t: t\+2} \\doteq R\_{t\+1}\+\\gamma R\_{t\+2}\+\\gamma^{2} V\_{t\+1}\\left(S\_{t\+2}\\right)
 $$
 n-step TD target
 $$
-G_{t: t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} V_{t+n-1}\left(S_{t+n}\right)
+G\_{t: t\+n} \\doteq R\_{t\+1}\+\\gamma R\_{t\+2}\+\\cdots\+\\gamma^{n\-1} R\_{t\+n}\+\\gamma^{n} V\_{t\+n\-1}\\left(S\_{t\+n}\\right)
 $$
 State-value learning algorithm for using n-step returns is
 $$
-V_{t+n}\left(S_{t}\right) \doteq V_{t+n-1}\left(S_{t}\right)+\alpha\left[G_{t: t+n}-V_{t+n-1}\left(S_{t}\right)\right], \quad 0 \leq t<T
+V\_{t\+n}\\left(S\_{t}\\right) \\doteq V\_{t\+n\-1}\\left(S\_{t}\\right)\+\\alpha\\left[G\_{t: t\+n}\-V\_{t\+n\-1}\\left(S\_{t}\\right)\\right], \\quad 0 \\leq t<T
 $$
 
 
-<img src="../figures/lecture4.5/image-20220212162104250.png" alt="image-20220212162104250" style="zoom:67%;" />
+<img src="../../figures/lecture4.5/image-20220212162104250.png" alt="image-20220212162104250" style="zoom:67%;" />
 
 
 
@@ -55,11 +55,11 @@ The n-step TD methods thus form a family of sound methods, with one-step TD meth
 
 
 $$
-G_{t: t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} Q_{t+n-1}\left(S_{t+n}, A_{t+n}\right), n \geq 1,0 \leq t<T-n
+G\_{t: t\+n} \\doteq R\_{t\+1}\+\\gamma R\_{t\+2}\+\\cdots\+\\gamma^{n\-1} R\_{t\+n}\+\\gamma^{n} Q\_{t\+n\-1}\\left(S\_{t\+n}, A\_{t\+n}\\right), n \\geq 1,0 \\leq t<T\-n
 $$
 
 $$
-Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha\left[G_{t: t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right], \quad 0 \leq t<T
+Q\_{t\+n}\\left(S\_{t}, A\_{t}\\right) \\doteq Q\_{t\+n\-1}\\left(S\_{t}, A\_{t}\\right)\+\\alpha\\left[G\_{t: t\+n}\-Q\_{t\+n\-1}\\left(S\_{t}, A\_{t}\\right)\\right], \\quad 0 \\leq t<T
 $$
 
 

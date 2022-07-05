@@ -10,11 +10,11 @@ tags: ["Java"]
 
 在 C++ 中，没有超过 `long long` 以上的大整数类了，而 Java 就有大整数类
 
-普通的 `int` 类型能表示的整数的绝对值上限是$2^{31} \simeq 10^{(\log_{10}2) \times 31} \simeq 10^{0.3 \times 31}$，其数量级在$10^{9}$
+普通的 `int` 类型能表示的整数的绝对值上限是$2^{31} \\simeq 10^{(\\log\_{10}2) \\times 31} \\simeq 10^{0.3 \\times 31}$，其数量级在$10^{9}$
 
-`long` 类型是 $2^{63} \simeq 10^{0.3\times 63}$，数量级不超过 $10^{19}$
+`long` 类型是 $2^{63} \\simeq 10^{0.3\\times 63}$，数量级不超过 $10^{19}$
 
-> 比如对于Fibonacci数列，其增长速度是 $(\frac{1+\sqrt 5}{2})^n \simeq 1.618^n$，在 $n\ge \frac{19}{\log_{10}{1.618}}\simeq 91$ 时是无法用 `long` 类型来保存的
+> 比如对于Fibonacci数列，其增长速度是 $(\\frac{1\+\\sqrt 5}{2})^n \\simeq 1.618^n$，在 $n\\ge \\frac{19}{\\log\_{10}{1.618}}\\simeq 91$ 时是无法用 `long` 类型来保存的
 
 由此可见，学习 Java 的大整数类 `java.math.BigInteger` 是非常有必要的！
 

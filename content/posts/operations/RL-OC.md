@@ -15,29 +15,29 @@ tags: []
 
 A deterministic DP problem involves a discrete-time dynamic system of the form
 $$
-x_{k+1} = f_k(x_k, u_k), \quad k = 0, 1, \dots, N-1
+x\_{k\+1} = f\_k(x\_k, u\_k), \\quad k = 0, 1, \\dots, N\-1
 $$
 where
 
 + $k$ is the time index
-+ $x_k$ is the state of the system
-+ $u_k$ is the control or decision, to be selected from some given set $U_k(x_k)$
-+ $f_k$ is a function of $(x_k, u_k)$ that describes the mechanism by which the state is updated from time $k$ to time $k+1$
++ $x\_k$ is the state of the system
++ $u\_k$ is the control or decision, to be selected from some given set $U\_k(x\_k)$
++ $f\_k$ is a function of $(x\_k, u\_k)$ that describes the mechanism by which the state is updated from time $k$ to time $k\+1$
 + $N$ is the horizon
 
-A cost incurred at time $k$, denoted by $g_k(x_k, u_k)$, accumulates over time. For a given initial state $x_0$, **the total costs of a control sequence** $\{u_0, \dots, u_{N-1}\}$ is
+A cost incurred at time $k$, denoted by $g\_k(x\_k, u\_k)$, accumulates over time. For a given initial state $x\_0$, **the total costs of a control sequence** $\\{u\_0, \\dots, u\_{N\-1}\\}$ is
 $$
-J\left(x_{0} ; u_{0}, \ldots, u_{N-1}\right)=g_{N}\left(x_{N}\right)+\sum_{k=0}^{N-1} g_{k}\left(x_{k}, u_{k}\right)
+J\\left(x\_{0} ; u\_{0}, \\ldots, u\_{N\-1}\\right)=g\_{N}\\left(x\_{N}\\right)\+\\sum\_{k=0}^{N\-1} g\_{k}\\left(x\_{k}, u\_{k}\\right)
 $$
-where $g_N(x_N)$ is a terminal cost incurred at the end of the process.
+where $g\_N(x\_N)$ is a terminal cost incurred at the end of the process.
 
-We want to minimize the total cost over all sequences $\{u_0, \dots, u_{N-1}\}$ that satisfy the control constraints, thereby obtaining the optimal value
+We want to minimize the total cost over all sequences $\\{u\_0, \\dots, u\_{N\-1}\\}$ that satisfy the control constraints, thereby obtaining the optimal value
 $$
-J^{*}\left(x_{0}\right)=\min _{\substack{u_{k} \in U_{k}\left(x_{k}\right) \\ k=0, \ldots, N-1}} J\left(x_{0} ; u_{0}, \ldots, u_{N-1}\right)
+J^{\ast}\\left(x\_{0}\\right)=\\min \_{\\substack{u\_{k} \\in U\_{k}\\left(x\_{k}\\right) \\\\ k=0, \\ldots, N\-1}} J\\left(x\_{0} ; u\_{0}, \\ldots, u\_{N\-1}\\right)
 $$
 The picture below illustrates the main elements of the problem.
 
-<img src="../figures/RL-OC/image-20220701143017425.png" alt="image-20220701143017425" style="zoom:50%;" />
+<img src="../../figures/RL-OC/image-20220701143017425.png" alt="image-20220701143017425" style="zoom:50%;" />
 
 
 
@@ -47,11 +47,11 @@ The DP algorithm rests on a simple idea, the *principle of optimality*.
 
 ##### Principle of Optimality
 
-Let $\left\{u_{0}^{*}, \ldots, u_{N-1}^{*}\right\}$ be an optimal control sequence, which together with $x_{0}$ determines the corresponding state sequence $\left\{x_{1}^{*}, \ldots, x_{N}^{*}\right\}$ via the system equation. Consider the subproblem whereby we start at $x_{k}^{*}$ at time $k$ and wish to minimize the "cost-to-go" from time $k$ to time $N$
+Let $\\left\\{u\_{0}^{\ast}, \\ldots, u\_{N\-1}^{\ast}\\right\\}$ be an optimal control sequence, which together with $x\_{0}$ determines the corresponding state sequence $\\left\\{x\_{1}^{\ast}, \\ldots, x\_{N}^{\ast}\\right\\}$ via the system equation. Consider the subproblem whereby we start at $x\_{k}^{\ast}$ at time $k$ and wish to minimize the "cost-to-go" from time $k$ to time $N$
 $$
-g_{k}\left(x_{k}^{*}, u_{k}\right)+\sum_{m=k+1}^{N-1} g_{m}\left(x_{m}, u_{m}\right)+g_{N}\left(x_{N}\right)
+g\_{k}\\left(x\_{k}^{\ast}, u\_{k}\\right)\+\\sum\_{m=k\+1}^{N\-1} g\_{m}\\left(x\_{m}, u\_{m}\\right)\+g\_{N}\\left(x\_{N}\\right)
 $$
-over $\left\{u_{k}, \ldots, u_{N-1}\right\}$ with $u_{m} \in U_{m}\left(x_{m}\right), m=k, \ldots, N-1$. Then the truncated optimal control sequence $\left\{u_{k}^{*}, \ldots, u_{N-1}^{*}\right\}$ is optimal for this subproblem.
+over $\\left\\{u\_{k}, \\ldots, u\_{N\-1}\\right\\}$ with $u\_{m} \\in U\_{m}\\left(x\_{m}\\right), m=k, \\ldots, N\-1$. Then the truncated optimal control sequence $\\left\\{u\_{k}^{\ast}, \\ldots, u\_{N\-1}^{\ast}\\right\\}$ is optimal for this subproblem.
 
 Stated succinctly, the principle of optimality says that *the tail of an optimal sequence is optimal for the tail subproblem*.
 
@@ -59,15 +59,15 @@ Stated succinctly, the principle of optimality says that *the tail of an optimal
 
 Start with
 $$
-J_N^\ast (x_N) = g_N(x_N), \quad \text{ for all } x_N
+J\_N^\\ast (x\_N) = g\_N(x\_N), \\quad \\text{ for all } x\_N
 $$
-and for $k=0, \dots, N-1$, let
+and for $k=0, \\dots, N\-1$, let
 $$
-J_{k}^{*}\left(x_{k}\right)=\min _{u_{k} \in U_{k}\left(x_{k}\right)}\left[g_{k}\left(x_{k}, u_{k}\right)+J_{k+1}^{*}\left(f_{k}\left(x_{k}, u_{k}\right)\right)\right], \quad \text { for all } x_{k}
+J\_{k}^{\ast}\\left(x\_{k}\\right)=\\min \_{u\_{k} \\in U\_{k}\\left(x\_{k}\\right)}\\left[g\_{k}\\left(x\_{k}, u\_{k}\\right)\+J\_{k\+1}^{\ast}\\left(f\_{k}\\left(x\_{k}, u\_{k}\\right)\\right)\\right], \\quad \\text { for all } x\_{k}
 $$
-The algorithm constructs functions $J_N^\ast(x_N), J_{N-1}^\ast(x_{N-1}), \dots, J_0^\ast(x_0)$ sequentially, starting from $J_N^\ast$, and proceeding backwards to $J_{N-1}^\ast, J_{N-2}^\ast, \dots$ .
+The algorithm constructs functions $J\_N^\\ast(x\_N), J\_{N\-1}^\\ast(x\_{N\-1}), \\dots, J\_0^\\ast(x\_0)$ sequentially, starting from $J\_N^\\ast$, and proceeding backwards to $J\_{N\-1}^\\ast, J\_{N\-2}^\\ast, \\dots$ .
 
-$J_k^\ast(x_k)$ is the *optimal cost-to-go* at state $x_k$ and time $k$ . We refer $J_k^\ast$ as the *optimal cost-to-go function*.
+$J\_k^\\ast(x\_k)$ is the *optimal cost-to-go* at state $x\_k$ and time $k$ . We refer $J\_k^\\ast$ as the *optimal cost-to-go function*.
 
 
 
@@ -75,24 +75,24 @@ $J_k^\ast(x_k)$ is the *optimal cost-to-go* at state $x_k$ and time $k$ . We ref
 
 Set
 $$
-u_{0}^{*} \in \underset{u_{0} \in U_{0}{\left(x_{0}\right)} }{\arg\min}\left[g_{0}\left(x_{0}, u_{0}\right)+J_{1}^{*}\left(f_{0}\left(x_{0}, u_{0}\right)\right)\right]
+u\_{0}^{\ast} \\in \\underset{u\_{0} \\in U\_{0}{\\left(x\_{0}\\right)} }{\\arg\\min}\\left[g\_{0}\\left(x\_{0}, u\_{0}\\right)\+J\_{1}^{\ast}\\left(f\_{0}\\left(x\_{0}, u\_{0}\\right)\\right)\\right]
 $$
 and
 $$
-x_{1}^{*}=f_{0}\left(x_{0}, u_{0}^{*}\right) .
+x\_{1}^{\ast}=f\_{0}\\left(x\_{0}, u\_{0}^{\ast}\\right) .
 $$
-Sequentially, going forward, for $k=1,2, \ldots, N-1$, set
+Sequentially, going forward, for $k=1,2, \\ldots, N\-1$, set
 $$
-u_{k}^{*} \in \underset{u_{k} \in U_{k}\left(x_{k}^{*}\right)}{\arg\min}\left[g_{k}\left(x_{k}^{*}, u_{k}\right)+J_{k+1}^{*}\left(f_{k}\left(x_{k}^{*}, u_{k}\right)\right)\right],
+u\_{k}^{\ast} \\in \\underset{u\_{k} \\in U\_{k}\\left(x\_{k}^{\ast}\\right)}{\\arg\\min}\\left[g\_{k}\\left(x\_{k}^{\ast}, u\_{k}\\right)\+J\_{k\+1}^{\ast}\\left(f\_{k}\\left(x\_{k}^{\ast}, u\_{k}\\right)\\right)\\right],
 $$
 and
 $$
-x_{k+1}^{*}=f_{k}\left(x_{k}^{*}, u_{k}^{*}\right) .
+x\_{k\+1}^{\ast}=f\_{k}\\left(x\_{k}^{\ast}, u\_{k}^{\ast}\\right) .
 $$
 
 #### Approximation in Value Space
 
-In practice, exact DP is often prohibitively time-consuming, because the number of possible $x_k$ and $k$ can be very large. An alternative by *approximation in value space* constructs a suboptimal solution $\{\tilde{u}_0, \dots, \tilde{u}_{N-1}\}$ in place of the optimal $\{u_0^\ast, \dots, u_{N-1}^\ast\}$ based on using $\tilde{J}_k$ in place of $J_k^\ast$ in the DP procedure.
+In practice, exact DP is often prohibitively time-consuming, because the number of possible $x\_k$ and $k$ can be very large. An alternative by *approximation in value space* constructs a suboptimal solution $\\{\\tilde{u}\_0, \\dots, \\tilde{u}\_{N\-1}\\}$ in place of the optimal $\\{u\_0^\\ast, \\dots, u\_{N\-1}^\\ast\\}$ based on using $\\tilde{J}\_k$ in place of $J\_k^\\ast$ in the DP procedure.
 
 
 
@@ -102,7 +102,7 @@ In practice, exact DP is often prohibitively time-consuming, because the number 
 
 
 $$
-x_{k+1}=f_{k}\left(x_{k}, u_{k}, w_{k}\right), \quad k=0,1, \ldots, N-1
+x\_{k\+1}=f\_{k}\\left(x\_{k}, u\_{k}, w\_{k}\\right), \\quad k=0,1, \\ldots, N\-1
 $$
 
 
@@ -110,7 +110,7 @@ $$
 
 In a 
 
-<img src="../figures/RL-OC/image-20220627154726731.png" alt="image-20220627154726731" style="zoom:50%;" />
+<img src="../../figures/RL-OC/image-20220627154726731.png" alt="image-20220627154726731" style="zoom:50%;" />
 
 
 

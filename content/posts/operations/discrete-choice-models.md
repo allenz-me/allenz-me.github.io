@@ -19,7 +19,7 @@ tags: ["Choice Model"]
 
 ### Luce Model
 
-记 $q_i(S)$ 为选择 item $i \in S$ 的概率
+记 $q\_i(S)$ 为选择 item $i \\in S$ 的概率
 
 **Regularity Condition**
 
@@ -27,7 +27,7 @@ the choice probability for any product in the offer set decreases as the offer s
 
 **choice axiom**
 $$
-q_i(S) = q_{S^\prime}(S) \cdot q_i (S^\prime) \quad \forall i \in S^\prime \subseteq S
+q\_i(S) = q\_{S^\\prime}(S) \\cdot q\_i (S^\\prime) \\quad \\forall i \\in S^\\prime \\subseteq S
 $$
 选择公理把选择一件商品分成了两步。
 
@@ -35,7 +35,7 @@ $$
 Luce 证明了满足 choice axiom 的 $q$ 一定有如下形式：
 
 $$
-q_{i}(S)= \frac{a_{i}}{\sum_{j \in S} a_{j}}
+q\_{i}(S)= \\frac{a\_{i}}{\\sum\_{j \\in S} a\_{j}}
 $$
 
 上式也满足正则性条件。
@@ -45,23 +45,23 @@ $$
 Random Utility Maximization Framework 假设顾客会选择效用最高的商品，效用是随机的：
 
 $$
-U_i = u_i + \xi_i
+U\_i = u\_i \+ \\xi\_i
 $$
 
-其中 $u_i$ 是常数，$\xi_i$ 是 i.i.d. 参数为 $\mu$ 的 Gumbel 随机变量。
+其中 $u\_i$ 是常数，$\\xi\_i$ 是 i.i.d. 参数为 $\\mu$ 的 Gumbel 随机变量。
 
-> $F_{\xi_i}(x)=\mathrm{P}\left(\xi_{i} \leq x\right)=\exp (-\exp (-(x / \mu+\gamma)))$，其中 $\gamma$ 是欧拉常数。
+> $F\_{\\xi\_i}(x)=\\mathrm{P}\\left(\\xi\_{i} \\leq x\\right)=\\exp (\-\\exp (\-(x / \\mu\+\\gamma)))$，其中 $\\gamma$ 是欧拉常数。
 
 这时候就有：
 
 $$
-q_{i}(S)=\operatorname{Pr}\left(U_{i} \geq U_{j}, \forall j \in S, j \neq i\right), \text { for any } i \in S
+q\_{i}(S)=\\operatorname{Pr}\\left(U\_{i} \\geq U\_{j}, \\forall j \\in S, j \\neq i\\right), \\text { for any } i \\in S
 $$
 
 在这样一套理论框架下，Holman and Marley 给出了 multinominal logit 模型
 
 $$
-q_{i}(S)=\frac{\exp \left(u_{i} / \mu\right)}{\sum_{j \in S} \exp \left(u_{j} / \mu\right)}, \text { for any } i \in S
+q\_{i}(S)=\\frac{\\exp \\left(u\_{i} / \\mu\\right)}{\\sum\_{j \\in S} \\exp \\left(u\_{j} / \\mu\\right)}, \\text { for any } i \\in S
 $$
 
 容易看出 MNL 模型和 Luce 模型的等价性。
@@ -102,16 +102,16 @@ NL 将商品的相关性加入到 MNL 中。
 
 价格影响顾客选择商品的概率，假定效用关于价格是线性的：
 $$
-u_i = \alpha_i - \beta_i p_i
+u\_i = \\alpha\_i \- \\beta\_i p\_i
 $$
-并令 no-purchase option $a_0=1$，这时候的选择模型：
+并令 no-purchase option $a\_0=1$，这时候的选择模型：
 $$
-q_{i}\left(S^{+}, \mathbf{p}\right)=\frac{\exp \left(\alpha_{i}-\beta_{i} p_{i}\right)}{1+\sum_{j \in S} \exp \left(\alpha_{j}-\beta_{j} p_{j}\right)}, \quad \forall i \in S,  \quad (S^+ = S \cup \{0\})\quad
+q\_{i}\\left(S^{\+}, \\mathbf{p}\\right)=\\frac{\\exp \\left(\\alpha\_{i}\-\\beta\_{i} p\_{i}\\right)}{1\+\\sum\_{j \\in S} \\exp \\left(\\alpha\_{j}\-\\beta\_{j} p\_{j}\\right)}, \\quad \\forall i \\in S,  \\quad (S^\+ = S \\cup \\{0\\})\\quad
 $$
 以最大化期望收益为目标，多产品定价优化问题可表示为：
 
 $$
-\max _{\mathbf{p}} R(S, \mathbf{p}):=\sum_{i \in S}\left(p_{i}-c_{i}\right) \cdot q_{i}\left(S^{+}, \mathbf{p}\right)
+\\max \_{\\mathbf{p}} R(S, \\mathbf{p}):=\\sum\_{i \\in S}\\left(p\_{i}\-c\_{i}\\right) \\cdot q\_{i}\\left(S^{\+}, \\mathbf{p}\\right)
 $$
 
 
@@ -123,12 +123,12 @@ $$
 
 这时候的优化目标变为：
 $$
-\max _{S \subseteq N} R(S):=\sum_{i \in S}\left(p_{i}-c_{i}\right) \cdot q_{i}\left(S^{+}\right)
+\\max \_{S \\subseteq N} R(S):=\\sum\_{i \\in S}\\left(p\_{i}\-c\_{i}\\right) \\cdot q\_{i}\\left(S^{\+}\\right)
 $$
 
 **Revenue-Ordered Assortment**
 
-假定商品索引按利润排序，即 $p_{1}-c_{1} \geq p_{2}-c_{2} \geq \cdots \geq p_{n}-c_{n}$，则 $S_i = \{1, 2, \dots, i\}, i = 1, \dots n$ 被称为 *revenue-ordered assortment*
+假定商品索引按利润排序，即 $p\_{1}\-c\_{1} \\geq p\_{2}\-c\_{2} \\geq \\cdots \\geq p\_{n}\-c\_{n}$，则 $S\_i = \\{1, 2, \\dots, i\\}, i = 1, \\dots n$ 被称为 *revenue-ordered assortment*
 
 
 
@@ -138,10 +138,10 @@ $$
 
 当可以展示的商品数量是有限的的情况下，问题变成：
 $$
-\begin{array}{ll}
-\max\limits_{S \subseteq N} & R(S):=\displaystyle\sum_{i \in S}\left(p_{i}-c_{i}\right) \cdot \frac{a_{i}}{1+\sum_{j \in S} a_{j}} \\
-\text { s.t. } & |S| \leq C
-\end{array}
+\\begin{array}{ll}
+\\max\\limits\_{S \\subseteq N} & R(S):=\\displaystyle\\sum\_{i \\in S}\\left(p\_{i}\-c\_{i}\\right) \\cdot \\frac{a\_{i}}{1\+\\sum\_{j \\in S} a\_{j}} \\\\
+\\text { s.t. } & |S| \\leq C
+\\end{array}
 $$
 
 

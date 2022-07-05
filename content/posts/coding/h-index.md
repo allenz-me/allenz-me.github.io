@@ -12,7 +12,7 @@ tags: []
 
 一名科研人员的 h 指数是指 ta 的 (n 篇论文中) 总共有 h 篇论文分别被引用了至少 h 次。且其余的 n - h 篇论文每篇被引用次数不超过 h 次。
 
-如果 n 篇论文已经排序好，那么使用二分法能达到 $O(\log n)$ 的时间复杂度。
+如果 n 篇论文已经排序好，那么使用二分法能达到 $O(\\log n)$ 的时间复杂度。
 
 ```python
 def hIndex(self, citations: List[int]) -> int:
@@ -39,7 +39,7 @@ def hIndex(self, citations: List[int]) -> int:
     return res
 ```
 
-如果未排序，排序后再二分的复杂度是 $O(n \log n)$。
+如果未排序，排序后再二分的复杂度是 $O(n \\log n)$。
 
 也可直接使用桶排序，发表 n 篇文章，h 指数最高能达到 n，因此维护一个 n + 1 大小的桶再线性扫描即可。
 
